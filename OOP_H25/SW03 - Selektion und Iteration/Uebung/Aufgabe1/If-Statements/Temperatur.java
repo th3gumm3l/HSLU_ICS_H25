@@ -21,7 +21,7 @@ public class Temperatur
     /**
      * Get-Setter
      */
-    public float GetTempInCelsius(){
+    public float getTempInCelsius(){
         return tempInCelsius;
     }
     

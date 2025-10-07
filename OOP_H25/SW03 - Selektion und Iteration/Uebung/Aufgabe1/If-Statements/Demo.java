@@ -1,10 +1,6 @@
 public class Demo
 {
-    public Demo (){
-        
-    }
-    
-    private int Max(int a, int b){
+    public int Max(int a, int b){
         if (a < b){
             return b;
         }
@@ -13,7 +9,7 @@ public class Demo
         }
     }
     
-    private int Max(int a, int b, int c) {
+    public int Max(int a, int b, int c) {
         int result = a;
         if (result < b){
             result = b; 

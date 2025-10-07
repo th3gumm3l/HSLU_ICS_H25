@@ -1,12 +1,12 @@
 public class Demo
 {
-    public void IterationOfNumForLoop(){
+    public void iterationOfNumForLoop(){
         for (int i = 0; i < 11; i++){
             System.out.println(i);
         }
     }
     
-    public void IterationOfNumWhileLoop(){
+    public void iterationOfNumWhileLoop(){
         int i = 0;
         
         while (i < 11){
@@ -15,7 +15,7 @@ public class Demo
         }
     }
     
-    public void IterationOfNumDoWhileLoop(){
+    public void iterationOfNumDoWhileLoop(){
         int i = 0;
         
         do {
@@ -24,7 +24,7 @@ public class Demo
         } while (i < 11);
     }
     
-    public void IterationOfNumWhileLoopFloat(){
+    public void iterationOfNumWhileLoopFloat(){
         float i = 0.9f;
         int counter = 0;
         
@@ -37,7 +37,7 @@ public class Demo
         System.out.println(counter);
     }
     
-    public void IterationOfNumForLoopFloat(){
+    public void iterationOfNumForLoopFloat(){
         float i = 0.9f;
         int ausgabe = 0;
         
@@ -54,19 +54,17 @@ public class Demo
         
         for (int row = 0; row < height; row++) {
             if (row == 0 || row == height - 1) {
-                // Erste und letzte Zeile komplett #
                 for (int col = 0; col < width; col++) {
                     System.out.print("#");
                 }
             } else {
-                // Mittlere Zeilen: # + Leerzeichen + #
                 System.out.print("#");
                 for (int col = 0; col < width - 2; col++) {
                     System.out.print(" ");
                 }
                 System.out.print("#");
             }
-            System.out.println(); // Zeilenumbruch
+            System.out.println();
         }
     }
     
