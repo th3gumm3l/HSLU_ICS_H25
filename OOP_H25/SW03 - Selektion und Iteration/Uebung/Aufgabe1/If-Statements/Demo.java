@@ -1,15 +1,13 @@
 public class Demo
 {
-    public int Max(int a, int b){
-        if (a < b){
-            return b;
-        }
-        else {
+    public int max(int a, int b){
+        if (a > b){
             return a;
         }
+        return b;
     }
     
-    public int Max(int a, int b, int c) {
+    public int max(int a, int b, int c) {
         int result = a;
         if (result < b){
             result = b; 

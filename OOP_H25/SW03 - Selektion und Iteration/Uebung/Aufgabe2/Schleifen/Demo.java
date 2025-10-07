@@ -1,7 +1,7 @@
 public class Demo
 {
     public void iterationOfNumForLoop(){
-        for (int i = 0; i < 11; i++){
+        for (int i = 0; i <= 10; i++){
             System.out.println(i);
         }
     }
@@ -9,7 +9,7 @@ public class Demo
     public void iterationOfNumWhileLoop(){
         int i = 0;
         
-        while (i < 11){
+        while (i <= 10){
             System.out.println(i);
             i++;
         }
@@ -51,13 +51,13 @@ public class Demo
     }
     
     public void printBox(final int width, final int height){
-        
         for (int row = 0; row < height; row++) {
             if (row == 0 || row == height - 1) {
                 for (int col = 0; col < width; col++) {
                     System.out.print("#");
                 }
-            } else {
+            } 
+            else {
                 System.out.print("#");
                 for (int col = 0; col < width - 2; col++) {
                     System.out.print(" ");
@@ -67,5 +67,4 @@ public class Demo
             System.out.println();
         }
     }
-    
 }
