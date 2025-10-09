@@ -1,14 +1,14 @@
 Project documentation
 <---- javadoc command: ---->
-javadoc
+C:\Program Files\BlueJ\jdk\bin\javadoc.exe
 -sourcepath
-/Users/timbernhard/Documents/GitHub/HSLU_ICS_H25/OOP_H25/SW04 - Schnittstellen und Datenkapselung/Uebung/Aufgabe1/JavaDoc
+C:\Users\timbe\Documents\GitHubDesktop\HSLU_ICS_H25\OOP_H25\SW04 - Schnittstellen und Datenkapselung\Uebung\Aufgabe1\JavaDoc
 -source
 21
 -classpath
-/Applications/BlueJ.app/Contents/Java/bluejcore.jar:/Applications/BlueJ.app/Contents/Java/javafx-graphics-23.0.2-mac-aarch64.jar:/Applications/BlueJ.app/Contents/Java/javafx-base-23.0.2-mac-aarch64.jar:/Applications/BlueJ.app/Contents/Java/javafx-web-23.0.2-mac-aarch64.jar:/Applications/BlueJ.app/Contents/Java/javafx-controls-23.0.2-mac-aarch64.jar:/Applications/BlueJ.app/Contents/Java/javafx-swing-23.0.2-mac-aarch64.jar:/Applications/BlueJ.app/Contents/Java/javafx-fxml-23.0.2-mac-aarch64.jar:/Applications/BlueJ.app/Contents/Java/javafx-media-23.0.2-mac-aarch64.jar:/Applications/BlueJ.app/Contents/Java/junit-4.12.jar:/Applications/BlueJ.app/Contents/Java/junit-jupiter-params-5.5.2.jar:/Applications/BlueJ.app/Contents/Java/junit-jupiter-api-5.5.2.jar:/Applications/BlueJ.app/Contents/Java/junit-jupiter-engine-5.5.2.jar:/Applications/BlueJ.app/Contents/Java/junit-platform-suite-api-1.5.2.jar:/Applications/BlueJ.app/Contents/Java/junit-vintage-engine-5.5.2.jar:/Applications/BlueJ.app/Contents/Java/junit-jupiter-5.5.2.jar:/Applications/BlueJ.app/Contents/Java/junit-platform-engine-1.5.2.jar:/Applications/BlueJ.app/Contents/Java/junit-platform-launcher-1.5.2.jar:/Applications/BlueJ.app/Contents/Java/junit-platform-commons-1.5.2.jar:/Applications/BlueJ.app/Contents/Java/hamcrest-core-1.3.jar:/Applications/BlueJ.app/Contents/Java/opentest4j-1.2.0.jar:/Applications/BlueJ.app/Contents/Java/lang-stride.jar:/Applications/BlueJ.app/Contents/Java/javafx/javafx.base.jar:/Applications/BlueJ.app/Contents/Java/javafx/javafx.controls.jar:/Applications/BlueJ.app/Contents/Java/javafx/javafx.fxml.jar:/Applications/BlueJ.app/Contents/Java/javafx/javafx.graphics.jar:/Applications/BlueJ.app/Contents/Java/javafx/javafx.media.jar:/Applications/BlueJ.app/Contents/Java/javafx/javafx.properties.jar:/Applications/BlueJ.app/Contents/Java/javafx/javafx.swing.jar:/Applications/BlueJ.app/Contents/Java/javafx/javafx.web.jar:/Users/timbernhard/Documents/GitHub/HSLU_ICS_H25/OOP_H25/SW04 - Schnittstellen und Datenkapselung/Uebung/Aufgabe1/JavaDoc
+C:\Program Files\BlueJ\lib\bluejcore.jar;C:\Program Files\BlueJ\lib\javafx-base-23.0.2-win.jar;C:\Program Files\BlueJ\lib\javafx-controls-23.0.2-win.jar;C:\Program Files\BlueJ\lib\javafx-fxml-23.0.2-win.jar;C:\Program Files\BlueJ\lib\javafx-graphics-23.0.2-win.jar;C:\Program Files\BlueJ\lib\javafx-media-23.0.2-win.jar;C:\Program Files\BlueJ\lib\javafx-swing-23.0.2-win.jar;C:\Program Files\BlueJ\lib\javafx-web-23.0.2-win.jar;C:\Program Files\BlueJ\lib\junit-4.12.jar;C:\Program Files\BlueJ\lib\junit-jupiter-5.5.2.jar;C:\Program Files\BlueJ\lib\junit-jupiter-api-5.5.2.jar;C:\Program Files\BlueJ\lib\junit-jupiter-engine-5.5.2.jar;C:\Program Files\BlueJ\lib\junit-jupiter-params-5.5.2.jar;C:\Program Files\BlueJ\lib\junit-platform-commons-1.5.2.jar;C:\Program Files\BlueJ\lib\junit-platform-engine-1.5.2.jar;C:\Program Files\BlueJ\lib\junit-platform-launcher-1.5.2.jar;C:\Program Files\BlueJ\lib\junit-platform-suite-api-1.5.2.jar;C:\Program Files\BlueJ\lib\junit-vintage-engine-5.5.2.jar;C:\Program Files\BlueJ\lib\hamcrest-core-1.3.jar;C:\Program Files\BlueJ\lib\opentest4j-1.2.0.jar;C:\Program Files\BlueJ\lib\lang-stride.jar;C:\Program Files\BlueJ\lib\javafx\javafx.base.jar;C:\Program Files\BlueJ\lib\javafx\javafx.controls.jar;C:\Program Files\BlueJ\lib\javafx\javafx.fxml.jar;C:\Program Files\BlueJ\lib\javafx\javafx.graphics.jar;C:\Program Files\BlueJ\lib\javafx\javafx.media.jar;C:\Program Files\BlueJ\lib\javafx\javafx.properties.jar;C:\Program Files\BlueJ\lib\javafx\javafx.swing.jar;C:\Program Files\BlueJ\lib\javafx\javafx.web.jar;C:\Users\timbe\Documents\GitHubDesktop\HSLU_ICS_H25\OOP_H25\SW04 - Schnittstellen und Datenkapselung\Uebung\Aufgabe1\JavaDoc
 -d
-/Users/timbernhard/Documents/GitHub/HSLU_ICS_H25/OOP_H25/SW04 - Schnittstellen und Datenkapselung/Uebung/Aufgabe1/JavaDoc/doc
+C:\Users\timbe\Documents\GitHubDesktop\HSLU_ICS_H25\OOP_H25\SW04 - Schnittstellen und Datenkapselung\Uebung\Aufgabe1\JavaDoc\doc
 -encoding
 UTF-8
 -charset
@@ -24,6 +24,135 @@ JavaDoc
 -Xdoclint:none
 -link
 https://docs.oracle.com/en/java/javase/21/docs/api/
+C:\Users\timbe\Documents\GitHubDesktop\HSLU_ICS_H25\OOP_H25\SW04 - Schnittstellen und Datenkapselung\Uebung\Aufgabe1\JavaDoc/Temperatur.java
+C:\Users\timbe\Documents\GitHubDesktop\HSLU_ICS_H25\OOP_H25\SW04 - Schnittstellen und Datenkapselung\Uebung\Aufgabe1\JavaDoc/Demo.java
+C:\Users\timbe\Documents\GitHubDesktop\HSLU_ICS_H25\OOP_H25\SW04 - Schnittstellen und Datenkapselung\Uebung\Aufgabe1\JavaDoc/Element.java
+C:\Users\timbe\Documents\GitHubDesktop\HSLU_ICS_H25\OOP_H25\SW04 - Schnittstellen und Datenkapselung\Uebung\Aufgabe1\JavaDoc/Point.java
+C:\Users\timbe\Documents\GitHubDesktop\HSLU_ICS_H25\OOP_H25\SW04 - Schnittstellen und Datenkapselung\Uebung\Aufgabe1\JavaDoc/TestPoint.java
 <---- end of javadoc command ---->
-Fehler: Keine Module, Packages oder Klassen angegeben.
-1 Fehler
+Quelldatei C:\Users\timbe\Documents\GitHubDesktop\HSLU_ICS_H25\OOP_H25\SW04 - Schnittstellen und Datenkapselung\Uebung\Aufgabe1\JavaDoc\Temperatur.java wird geladen...
+Quelldatei C:\Users\timbe\Documents\GitHubDesktop\HSLU_ICS_H25\OOP_H25\SW04 - Schnittstellen und Datenkapselung\Uebung\Aufgabe1\JavaDoc\Demo.java wird geladen...
+Quelldatei C:\Users\timbe\Documents\GitHubDesktop\HSLU_ICS_H25\OOP_H25\SW04 - Schnittstellen und Datenkapselung\Uebung\Aufgabe1\JavaDoc\Element.java wird geladen...
+Quelldatei C:\Users\timbe\Documents\GitHubDesktop\HSLU_ICS_H25\OOP_H25\SW04 - Schnittstellen und Datenkapselung\Uebung\Aufgabe1\JavaDoc\Point.java wird geladen...
+Quelldatei C:\Users\timbe\Documents\GitHubDesktop\HSLU_ICS_H25\OOP_H25\SW04 - Schnittstellen und Datenkapselung\Uebung\Aufgabe1\JavaDoc\TestPoint.java wird geladen...
+Javadoc-Informationen werden erstellt...
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+  Grund: Klassendatei für org.apiguardian.api.API$Status nicht gefunden
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Warnung: Unbekannte Enum-Konstante Status.STABLE
+Index für alle Packages und Klassen wird erstellt...
+Standard-Doclet-Version 21.0.6+7-LTS
+Baum für alle Packages und Klassen wird erstellt...
+C:\Users\timbe\Documents\GitHubDesktop\HSLU_ICS_H25\OOP_H25\SW04 - Schnittstellen und Datenkapselung\Uebung\Aufgabe1\JavaDoc\doc\Demo.html wird generiert...
+C:\Users\timbe\Documents\GitHubDesktop\HSLU_ICS_H25\OOP_H25\SW04 - Schnittstellen und Datenkapselung\Uebung\Aufgabe1\JavaDoc\doc\Element.html wird generiert...
+C:\Users\timbe\Documents\GitHubDesktop\HSLU_ICS_H25\OOP_H25\SW04 - Schnittstellen und Datenkapselung\Uebung\Aufgabe1\JavaDoc\doc\Point.html wird generiert...
+C:\Users\timbe\Documents\GitHubDesktop\HSLU_ICS_H25\OOP_H25\SW04 - Schnittstellen und Datenkapselung\Uebung\Aufgabe1\JavaDoc\doc\Temperatur.html wird generiert...
+C:\Users\timbe\Documents\GitHubDesktop\HSLU_ICS_H25\OOP_H25\SW04 - Schnittstellen und Datenkapselung\Uebung\Aufgabe1\JavaDoc\doc\TestPoint.html wird generiert...
+C:\Users\timbe\Documents\GitHubDesktop\HSLU_ICS_H25\OOP_H25\SW04 - Schnittstellen und Datenkapselung\Uebung\Aufgabe1\JavaDoc\doc\package-summary.html wird generiert...
+C:\Users\timbe\Documents\GitHubDesktop\HSLU_ICS_H25\OOP_H25\SW04 - Schnittstellen und Datenkapselung\Uebung\Aufgabe1\JavaDoc\doc\package-tree.html wird generiert...
+C:\Users\timbe\Documents\GitHubDesktop\HSLU_ICS_H25\OOP_H25\SW04 - Schnittstellen und Datenkapselung\Uebung\Aufgabe1\JavaDoc\doc\overview-tree.html wird generiert...
+Index für alle Klassen wird erstellt...
+C:\Users\timbe\Documents\GitHubDesktop\HSLU_ICS_H25\OOP_H25\SW04 - Schnittstellen und Datenkapselung\Uebung\Aufgabe1\JavaDoc\doc\allclasses-index.html wird generiert...
+C:\Users\timbe\Documents\GitHubDesktop\HSLU_ICS_H25\OOP_H25\SW04 - Schnittstellen und Datenkapselung\Uebung\Aufgabe1\JavaDoc\doc\allpackages-index.html wird generiert...
+C:\Users\timbe\Documents\GitHubDesktop\HSLU_ICS_H25\OOP_H25\SW04 - Schnittstellen und Datenkapselung\Uebung\Aufgabe1\JavaDoc\doc\index-all.html wird generiert...
+C:\Users\timbe\Documents\GitHubDesktop\HSLU_ICS_H25\OOP_H25\SW04 - Schnittstellen und Datenkapselung\Uebung\Aufgabe1\JavaDoc\doc\search.html wird generiert...
+C:\Users\timbe\Documents\GitHubDesktop\HSLU_ICS_H25\OOP_H25\SW04 - Schnittstellen und Datenkapselung\Uebung\Aufgabe1\JavaDoc\doc\index.html wird generiert...
+C:\Users\timbe\Documents\GitHubDesktop\HSLU_ICS_H25\OOP_H25\SW04 - Schnittstellen und Datenkapselung\Uebung\Aufgabe1\JavaDoc\doc\help-doc.html wird generiert...
+100 Warnungen
