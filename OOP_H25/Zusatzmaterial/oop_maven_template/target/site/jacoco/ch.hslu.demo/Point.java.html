@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang=""><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Point.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">oop_maven_template</a> &gt; <a href="index.source.html" class="el_package">ch.hslu.demo</a> &gt; <span class="el_source">Point.java</span></div><h1>Point.java</h1><pre class="source lang-java linenums">/*
+ * Copyright 2025 Roland Gisler, HSLU Informatik, Switzerland
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package ch.hslu.demo;
+
+import java.util.Objects;
+
+/**
+ * Modell eines Punktes im 2D-Raum.
+ * Klasse ist Immutable implementiert.
+ */
+public final class Point {
+
+    /**
+     * Punkt ist keinem Quadranten zugeordnet.
+     */
+    private static final int NO_QUADRANT = 0;
+
+    /**
+     * Quadrant 1. Positiv x, Positiv y.
+     */
+    private static final int QUADRANT_1 = 1;
+
+    /**
+     * Quadrant 1. Negativ x, Positiv y.
+     */
+    private static final int QUADRANT_2 = 2;
+
+    /**
+     * Quadrant 1. Negativ x, Negativ y.
+     */
+    private static final int QUADRANT_3 = 3;
+
+    /**
+     * Quadrant 4. Positiv x, Negativ y.
+     */
+    private static final int QUADRANT_4 = 4;
+
+    private final int x;
+    private final int y;
+
+    /**
+     * Konstruktor für Punkt mit Koordinaten.
+     * @param x x-Koordinate.
+     * @param y y-Koordinate.
+     */
+<span class="fc" id="L59">    public Point(final int x, final int y) {</span>
+<span class="fc" id="L60">        this.x = x;</span>
+<span class="fc" id="L61">        this.y = y;</span>
+<span class="fc" id="L62">    }</span>
+
+    /**
+     * Liefert den Quadranten des Punktes.
+     * Liegen die Koordinaten auf den Achsen oder
+     * auf dem Nullpunkt, liefert die Funktion den Wert 0 zurück.
+     * @return Nummer des Quadranten.
+     */
+    public int getQuadrant() {
+<span class="fc" id="L71">        int quadrant = NO_QUADRANT;</span>
+<span class="fc bfc" id="L72" title="All 4 branches covered.">        if (this.x != 0 &amp;&amp; this.y != 0) {</span>
+<span class="fc bfc" id="L73" title="All 2 branches covered.">            if (this.x &gt; 0) {</span>
+<span class="fc bfc" id="L74" title="All 2 branches covered.">                if (this.y &gt; 0) {</span>
+<span class="fc" id="L75">                    quadrant = QUADRANT_1;</span>
+                } else {
+<span class="fc" id="L77">                    quadrant = QUADRANT_4;</span>
+                }
+            } else {
+<span class="fc bfc" id="L80" title="All 2 branches covered.">                if (this.y &gt; 0) {</span>
+<span class="fc" id="L81">                    quadrant = QUADRANT_2;</span>
+                } else {
+<span class="fc" id="L83">                    quadrant = QUADRANT_3;</span>
+                }
+            }
+        }
+<span class="fc" id="L87">        return quadrant;</span>
+    }
+
+    /**
+     * Liefert x-Koordinate zurück.
+     * @return x-Koordinate des Punktes.
+     */
+    public int getX() {
+<span class="fc" id="L95">        return this.x;</span>
+    }
+
+    /**
+     * Liefert y-Koordinate zurück.
+     * @return y-Koordinate des Punktes.
+     */
+    public int getY() {
+<span class="fc" id="L103">        return this.y;</span>
+    }
+
+    /**
+     * Zwei Punkte mit identischen Koordinaten sind gleich.
+     * {@inheritDoc}.
+     */
+    @Override
+    public boolean equals(final Object obj) {
+<span class="fc bfc" id="L112" title="All 8 branches covered.">        return this == obj || obj instanceof Point p &amp;&amp; this.x == p.x &amp;&amp; this.y == p.y;</span>
+    }
+
+    /**
+     * Liefert Hashcode auf Basis von x- und y-Koordinate.
+     * {@inheritDoc}.
+     */
+    @Override
+    public int hashCode() {
+<span class="fc" id="L121">        return Objects.hash(this.x, this.y);</span>
+    }
+
+    /**
+     * Liefert eine String-Repräsentation des Punktes.
+     * {@inheritDoc}.
+     */
+    @Override
+    public String toString() {
+<span class="fc" id="L130">        return String.format(&quot;Point[x=%d,y=%d]&quot;, this.x, this.y);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

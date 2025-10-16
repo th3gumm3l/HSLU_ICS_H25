@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd-cpd xmlns="https://pmd-code.org/schema/cpd-report"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         pmdVersion="7.17.0"
+         timestamp="2025-10-16T16:39:51.8416191+02:00"
+         version="1.0.0"
+         xsi:schemaLocation="https://pmd-code.org/schema/cpd-report https://pmd.github.io/schema/cpd-report_1_0_0.xsd">
+   <file path="C:\Users\timbe\Documents\GitHubDesktop\HSLU_ICS_H25\OOP_H25\IntelliJ\oop_maven_aufgaben\src\main\java\ch\hslu\demo\DemoApp.java"
+         totalNumberOfTokens="84"/>
+   <file path="C:\Users\timbe\Documents\GitHubDesktop\HSLU_ICS_H25\OOP_H25\IntelliJ\oop_maven_aufgaben\src\main\java\ch\hslu\demo\Point.java"
+         totalNumberOfTokens="257"/>
+   <file path="C:\Users\timbe\Documents\GitHubDesktop\HSLU_ICS_H25\OOP_H25\IntelliJ\oop_maven_aufgaben\src\main\java\ch\hslu\demo\package-info.java"
+         totalNumberOfTokens="0"/>
+   <file path="C:\Users\timbe\Documents\GitHubDesktop\HSLU_ICS_H25\OOP_H25\IntelliJ\oop_maven_aufgaben\src\test\java\ch\hslu\demo\DemoAppIT.java"
+         totalNumberOfTokens="65"/>
+   <file path="C:\Users\timbe\Documents\GitHubDesktop\HSLU_ICS_H25\OOP_H25\IntelliJ\oop_maven_aufgaben\src\test\java\ch\hslu\demo\PointTest.java"
+         totalNumberOfTokens="380"/>
+</pmd-cpd>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="ch.hslu.demo.PointTest" time="0.675" tests="14" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="21"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.class.path" value="C:\Users\timbe\.m2\repository\org\apache\maven\surefire\surefire-booter\3.5.4\surefire-booter-3.5.4.jar;C:\Users\timbe\.m2\repository\org\apache\maven\surefire\surefire-api\3.5.4\surefire-api-3.5.4.jar;C:\Users\timbe\.m2\repository\org\apache\maven\surefire\surefire-extensions-spi\3.5.4\surefire-extensions-spi-3.5.4.jar;C:\Users\timbe\.m2\repository\org\apache\maven\surefire\surefire-shared-utils\3.5.4\surefire-shared-utils-3.5.4.jar;C:\Users\timbe\.m2\repository\org\apache\maven\surefire\surefire-logger-api\3.5.4\surefire-logger-api-3.5.4.jar;C:\Users\timbe\Documents\GitHubDesktop\HSLU_ICS_H25\OOP_H25\IntelliJ\oop_maven_aufgaben\target\test-classes;C:\Users\timbe\Documents\GitHubDesktop\HSLU_ICS_H25\OOP_H25\IntelliJ\oop_maven_aufgaben\target\classes;C:\Users\timbe\.m2\repository\org\slf4j\slf4j-api\2.0.17\slf4j-api-2.0.17.jar;C:\Users\timbe\.m2\repository\ch\qos\logback\logback-classic\1.5.19\logback-classic-1.5.19.jar;C:\Users\timbe\.m2\repository\ch\qos\logback\logback-core\1.5.19\logback-core-1.5.19.jar;C:\Users\timbe\.m2\repository\org\jspecify\jspecify\1.0.0\jspecify-1.0.0.jar;C:\Users\timbe\.m2\repository\org\junit\jupiter\junit-jupiter\6.0.0\junit-jupiter-6.0.0.jar;C:\Users\timbe\.m2\repository\org\junit\jupiter\junit-jupiter-api\6.0.0\junit-jupiter-api-6.0.0.jar;C:\Users\timbe\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\timbe\.m2\repository\org\junit\platform\junit-platform-commons\6.0.0\junit-platform-commons-6.0.0.jar;C:\Users\timbe\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\timbe\.m2\repository\org\junit\jupiter\junit-jupiter-params\6.0.0\junit-jupiter-params-6.0.0.jar;C:\Users\timbe\.m2\repository\org\junit\jupiter\junit-jupiter-engine\6.0.0\junit-jupiter-engine-6.0.0.jar;C:\Users\timbe\.m2\repository\org\junit\platform\junit-platform-engine\6.0.0\junit-platform-engine-6.0.0.jar;C:\Users\timbe\.m2\repository\org\assertj\assertj-core\3.27.6\assertj-core-3.27.6.jar;C:\Users\timbe\.m2\repository\net\bytebuddy\byte-buddy\1.17.8\byte-buddy-1.17.8.jar;C:\Users\timbe\.m2\repository\nl\jqno\equalsverifier\equalsverifier\4.2\equalsverifier-4.2.jar;C:\Users\timbe\.m2\repository\org\objenesis\objenesis\3.4\objenesis-3.4.jar;C:\Users\timbe\.m2\repository\io\github\hakky54\consolecaptor\1.0.4\consolecaptor-1.0.4.jar;C:\Users\timbe\.m2\repository\org\apache\maven\surefire\surefire-junit-platform\3.5.4\surefire-junit-platform-3.5.4.jar;C:\Users\timbe\.m2\repository\org\apache\maven\surefire\common-java5\3.5.4\common-java5-3.5.4.jar;C:\Users\timbe\.m2\repository\org\junit\platform\junit-platform-launcher\6.0.0\junit-platform-launcher-6.0.0.jar"/>
+    <property name="java.vm.vendor" value="Microsoft"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://www.microsoft.com"/>
+    <property name="user.timezone" value="Europe/Zurich"/>
+    <property name="os.name" value="Windows 11"/>
+    <property name="java.vm.specification.version" value="21"/>
+    <property name="user.country" value="CH"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.boot.library.path" value="C:\Users\timbe\.jdks\ms-21.0.8\bin"/>
+    <property name="sun.java.command" value="org.apache.maven.surefire.booter.ForkedBooter C:\Users\timbe\AppData\Local\Temp\surefire1150233458088710374 2025-10-16T16-39-47_335-jvmRun1 surefire-20251016163947520_1tmp surefire_0-20251016163947520_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="C:\Users\timbe\Documents\GitHubDesktop\HSLU_ICS_H25\OOP_H25\IntelliJ\oop_maven_aufgaben\target\test-classes;C:\Users\timbe\Documents\GitHubDesktop\HSLU_ICS_H25\OOP_H25\IntelliJ\oop_maven_aufgaben\target\classes;C:\Users\timbe\.m2\repository\org\slf4j\slf4j-api\2.0.17\slf4j-api-2.0.17.jar;C:\Users\timbe\.m2\repository\ch\qos\logback\logback-classic\1.5.19\logback-classic-1.5.19.jar;C:\Users\timbe\.m2\repository\ch\qos\logback\logback-core\1.5.19\logback-core-1.5.19.jar;C:\Users\timbe\.m2\repository\org\jspecify\jspecify\1.0.0\jspecify-1.0.0.jar;C:\Users\timbe\.m2\repository\org\junit\jupiter\junit-jupiter\6.0.0\junit-jupiter-6.0.0.jar;C:\Users\timbe\.m2\repository\org\junit\jupiter\junit-jupiter-api\6.0.0\junit-jupiter-api-6.0.0.jar;C:\Users\timbe\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\timbe\.m2\repository\org\junit\platform\junit-platform-commons\6.0.0\junit-platform-commons-6.0.0.jar;C:\Users\timbe\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\timbe\.m2\repository\org\junit\jupiter\junit-jupiter-params\6.0.0\junit-jupiter-params-6.0.0.jar;C:\Users\timbe\.m2\repository\org\junit\jupiter\junit-jupiter-engine\6.0.0\junit-jupiter-engine-6.0.0.jar;C:\Users\timbe\.m2\repository\org\junit\platform\junit-platform-engine\6.0.0\junit-platform-engine-6.0.0.jar;C:\Users\timbe\.m2\repository\org\assertj\assertj-core\3.27.6\assertj-core-3.27.6.jar;C:\Users\timbe\.m2\repository\net\bytebuddy\byte-buddy\1.17.8\byte-buddy-1.17.8.jar;C:\Users\timbe\.m2\repository\nl\jqno\equalsverifier\equalsverifier\4.2\equalsverifier-4.2.jar;C:\Users\timbe\.m2\repository\org\objenesis\objenesis\3.4\objenesis-3.4.jar;C:\Users\timbe\.m2\repository\io\github\hakky54\consolecaptor\1.0.4\consolecaptor-1.0.4.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\timbe"/>
+    <property name="user.language" value="de"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2025-07-15"/>
+    <property name="java.home" value="C:\Users\timbe\.jdks\ms-21.0.8"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Users\timbe\Documents\GitHubDesktop\HSLU_ICS_H25\OOP_H25\IntelliJ\oop_maven_aufgaben"/>
+    <property name="style.color" value="always"/>
+    <property name="java.vm.compressedOopsMode" value="32-bit"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="21.0.8+9-LTS"/>
+    <property name="user.name" value="timbe"/>
+    <property name="stdout.encoding" value="Cp1252"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="java.vendor.version" value="Microsoft-11933218"/>
+    <property name="maven.ext.class.path" value="C:\Users\timbe\AppData\Local\Programs\IntelliJ IDEA Ultimate\plugins\maven\lib\maven-event-listener.jar"/>
+    <property name="localRepository" value="C:\Users\timbe\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://github.com/microsoft/openjdk/issues"/>
+    <property name="java.io.tmpdir" value="C:\Users\timbe\AppData\Local\Temp\"/>
+    <property name="idea.version" value="2025.2.3"/>
+    <property name="java.version" value="21.0.8"/>
+    <property name="user.dir" value="C:\Users\timbe\Documents\GitHubDesktop\HSLU_ICS_H25\OOP_H25\IntelliJ\oop_maven_aufgaben"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="jansi.passthrough" value="true"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="native.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\Users\timbe\.jdks\ms-21.0.8\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\ProgramData\chocolatey\bin;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\Program Files\NVIDIA Corporation\NVIDIA App\NvDLISR;C:\Program Files\Tailscale\;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\PowerShell\7\;C:\Program Files\Git\cmd;C:\Users\timbe\AppData\Local\Programs\Python\Python313\Scripts\;C:\Users\timbe\AppData\Local\Programs\Python\Python313\;C:\Users\timbe\AppData\Local\Microsoft\WindowsApps;C:\Users\timbe\.dotnet\tools;D:\Visual Studio Code\Microsoft VS Code\bin;C:\Program Files\Azure Data Studio\bin;C:\Program Files (x86)\Nmap;C:\Users\timbe\AppData\Local\GitHubDesktop\bin;C:\Users\timbe\AppData\Local\JetBrains\Toolbox\scripts;;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="Cp1252"/>
+    <property name="java.vendor" value="Microsoft"/>
+    <property name="java.vm.version" value="21.0.8+9-LTS"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="maven.repo.local" value="C:\Users\timbe\.m2\repository"/>
+    <property name="java.class.version" value="65.0"/>
+  </properties>
+  <testcase name="testEqualsContract" classname="ch.hslu.demo.PointTest" time="0.457"/>
+  <testcase name="testEqualsEqual" classname="ch.hslu.demo.PointTest" time="0.008"/>
+  <testcase name="testGetX" classname="ch.hslu.demo.PointTest" time="0.001"/>
+  <testcase name="testGetY" classname="ch.hslu.demo.PointTest" time="0.001"/>
+  <testcase name="testToString" classname="ch.hslu.demo.PointTest" time="0.152"/>
+  <testcase name="testGetQuadrant1" classname="ch.hslu.demo.PointTest" time="0.0"/>
+  <testcase name="testGetQuadrant2" classname="ch.hslu.demo.PointTest" time="0.001"/>
+  <testcase name="testGetQuadrant3" classname="ch.hslu.demo.PointTest" time="0.001"/>
+  <testcase name="testGetQuadrant4" classname="ch.hslu.demo.PointTest" time="0.001"/>
+  <testcase name="testEqualsSame" classname="ch.hslu.demo.PointTest" time="0.001"/>
+  <testcase name="testEqualsNotEqual" classname="ch.hslu.demo.PointTest" time="0.002"/>
+  <testcase name="testGetQuadrantXAchse" classname="ch.hslu.demo.PointTest" time="0.003"/>
+  <testcase name="testGetQuadrantYAchse" classname="ch.hslu.demo.PointTest" time="0.001"/>
+  <testcase name="testGetQuadrantNullpunkt" classname="ch.hslu.demo.PointTest" time="0.001"/>
+</testsuite>

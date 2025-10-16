@@ -20,7 +20,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ch.hslu</groupId>
-    <artifactId>oop_maven_grundlagen</artifactId>
+    <artifactId>oop_maven_aufgaben</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
