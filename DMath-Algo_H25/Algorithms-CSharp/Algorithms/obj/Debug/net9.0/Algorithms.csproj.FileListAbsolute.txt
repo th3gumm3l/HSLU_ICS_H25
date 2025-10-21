@@ -1,0 +1,15 @@
+/Users/timbernhard/Documents/GitHub/HSLU_ICS_H25/DMath-Algo_H25/SW06 Rekursive Algorithmen/Algorithms/Algorithms/bin/Debug/net9.0/Algorithms
+/Users/timbernhard/Documents/GitHub/HSLU_ICS_H25/DMath-Algo_H25/SW06 Rekursive Algorithmen/Algorithms/Algorithms/bin/Debug/net9.0/Algorithms.deps.json
+/Users/timbernhard/Documents/GitHub/HSLU_ICS_H25/DMath-Algo_H25/SW06 Rekursive Algorithmen/Algorithms/Algorithms/bin/Debug/net9.0/Algorithms.runtimeconfig.json
+/Users/timbernhard/Documents/GitHub/HSLU_ICS_H25/DMath-Algo_H25/SW06 Rekursive Algorithmen/Algorithms/Algorithms/bin/Debug/net9.0/Algorithms.dll
+/Users/timbernhard/Documents/GitHub/HSLU_ICS_H25/DMath-Algo_H25/SW06 Rekursive Algorithmen/Algorithms/Algorithms/bin/Debug/net9.0/Algorithms.pdb
+/Users/timbernhard/Documents/GitHub/HSLU_ICS_H25/DMath-Algo_H25/SW06 Rekursive Algorithmen/Algorithms/Algorithms/obj/Debug/net9.0/Algorithms.GeneratedMSBuildEditorConfig.editorconfig
+/Users/timbernhard/Documents/GitHub/HSLU_ICS_H25/DMath-Algo_H25/SW06 Rekursive Algorithmen/Algorithms/Algorithms/obj/Debug/net9.0/Algorithms.AssemblyInfoInputs.cache
+/Users/timbernhard/Documents/GitHub/HSLU_ICS_H25/DMath-Algo_H25/SW06 Rekursive Algorithmen/Algorithms/Algorithms/obj/Debug/net9.0/Algorithms.AssemblyInfo.cs
+/Users/timbernhard/Documents/GitHub/HSLU_ICS_H25/DMath-Algo_H25/SW06 Rekursive Algorithmen/Algorithms/Algorithms/obj/Debug/net9.0/Algorithms.csproj.CoreCompileInputs.cache
+/Users/timbernhard/Documents/GitHub/HSLU_ICS_H25/DMath-Algo_H25/SW06 Rekursive Algorithmen/Algorithms/Algorithms/obj/Debug/net9.0/Algorithms.sourcelink.json
+/Users/timbernhard/Documents/GitHub/HSLU_ICS_H25/DMath-Algo_H25/SW06 Rekursive Algorithmen/Algorithms/Algorithms/obj/Debug/net9.0/Algorithms.dll
+/Users/timbernhard/Documents/GitHub/HSLU_ICS_H25/DMath-Algo_H25/SW06 Rekursive Algorithmen/Algorithms/Algorithms/obj/Debug/net9.0/refint/Algorithms.dll
+/Users/timbernhard/Documents/GitHub/HSLU_ICS_H25/DMath-Algo_H25/SW06 Rekursive Algorithmen/Algorithms/Algorithms/obj/Debug/net9.0/Algorithms.pdb
+/Users/timbernhard/Documents/GitHub/HSLU_ICS_H25/DMath-Algo_H25/SW06 Rekursive Algorithmen/Algorithms/Algorithms/obj/Debug/net9.0/Algorithms.genruntimeconfig.cache
+/Users/timbernhard/Documents/GitHub/HSLU_ICS_H25/DMath-Algo_H25/SW06 Rekursive Algorithmen/Algorithms/Algorithms/obj/Debug/net9.0/ref/Algorithms.dll
