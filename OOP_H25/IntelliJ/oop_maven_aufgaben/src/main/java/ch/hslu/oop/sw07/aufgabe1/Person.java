@@ -32,36 +32,14 @@ public final class Person {
                 '}';
     }
 
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) {
-//            return true;
-//        }
-//        if (o == null || getClass() != o.getClass()) {
-//            return false;
-//        }
-//        Person person = (Person) o;
-//        return ID == person.ID &&
-//                Objects.equals(lastName, person.lastName) &&
-//                Objects.equals(firstName, person.firstName);
-//    }
-
     @Override
-    public boolean equals(final Object object) {
-        if (object == this) {
-            return true;
-        }
-        if (!(object instanceof Person person)) {
-            return false;
-        }
-        return (person.ID == this.ID)
-                && Objects.equals(person.firstName, this.firstName)
-                && Objects.equals(person.lastName, this.lastName);
+    public boolean equals(Object o) {
+        if (!(o instanceof Person person)) return false;
+        return getID() == person.getID();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ID, lastName, firstName);
+        return Objects.hashCode(getID());
     }
-
 }

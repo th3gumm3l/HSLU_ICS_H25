@@ -16,43 +16,30 @@ class PersonTest {
     }
 
     @Test
-    void testEqualsTrueUndFalse() {
+    public void equalsContract() {
+        EqualsVerifier.forClass(Person.class)
+                .withOnlyTheseFields("ID")
+                .verify();
+    }
+
+    @Test
+    void testEqualsIdentity() {
+        Person p1 = new Person(1L, "Meier", "Hans");
+        Person p2 = p1;
+        assertTrue(p1.equals(p2));
+    }
+
+    @Test
+    void testEqualsValue(){
         Person p1 = new Person(1L, "Meier", "Hans");
         Person p2 = new Person(1L, "Meier", "Hans");
-        Person p3 = new Person(2L, "Müller", "Anna");
-
-        // Achtung: Wenn equals() noch nicht überschrieben ist, ist das Ergebnis:
-        // p1.equals(p2) => false (weil verschiedene Objekte, trotz gleicher Daten)
-        // p1.equals(p1) => true (weil dieselbe Referenz)
-        // Nach der Implementierung von equals() (in Aufgabe 1g) wird p1.equals(p2) true liefern.
-
-        System.out.println("p1 == p2: " + (p1 == p2));          // false
-        System.out.println("p1.equals(p2): " + p1.equals(p2));  // zunächst false, später true
-        System.out.println("p1.equals(p3): " + p1.equals(p3));  // immer false
-
-        // Erwartetes Verhalten *nach* der Implementierung:
-        assertTrue(p1.equals(p2));   // gleiche ID → gleich
-        assertFalse(p1.equals(p3));  // verschiedene ID → ungleich
+        assertTrue(p1.equals(p2));
     }
 
     @Test
-    void testHashCodeKonsistentMitEquals() {
+    void testEqualsFalse(){
         Person p1 = new Person(1L, "Meier", "Hans");
-        Person p2 = new Person(1L, "Meier", "Hans"); // gleiche ID → equals() == true
-        Person p3 = new Person(2L, "Müller", "Anna"); // andere ID → equals() == false
-
-        // gleich lautende Objekte müssen denselben Hashcode haben
-        assertEquals(p1, p2);
-        assertEquals(p1.hashCode(), p2.hashCode());
-
-        // ungleiche Objekte sollen möglichst unterschiedlichen Hashcode haben
-        assertNotEquals(p1, p3);
-        // kein Muss, aber meistens erwünscht:
-        assertNotEquals(p1.hashCode(), p3.hashCode());
-    }
-
-    @Test
-    public void equalsContract() {
-        EqualsVerifier.forClass(Person.class).verify();
+        Person p2 = new Person(2L, "Meier", "Hans");
+        assertFalse(p1.equals(p2));
     }
 }

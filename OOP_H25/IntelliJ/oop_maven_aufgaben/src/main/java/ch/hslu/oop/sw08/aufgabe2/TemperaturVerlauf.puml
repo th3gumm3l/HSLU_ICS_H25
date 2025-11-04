@@ -1,0 +1,12 @@
+@startuml
+
+skinparam classAttributeIconSize 0
+
+class TemperaturVerlauf {
+    - temperaturen : List<Temperatur>
+    + add() : Temperatur
+    + clear() : void
+    + getCount() : int
+}
+
+@enduml

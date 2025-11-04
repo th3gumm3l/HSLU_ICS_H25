@@ -30,10 +30,8 @@ public final class Person implements Comparable<Person> {
         if (object == this) {
             return true;
         }
-        if (!(object instanceof Person person)) {
-            return false;
-        }
-        return ID == person.ID;
+        return (object instanceof Person person)
+                && (ID == person.ID);
     }
 
     @Override
@@ -52,19 +50,6 @@ public final class Person implements Comparable<Person> {
 
     @Override
     public int compareTo(Person other) {
-        // Zuerst Nachname vergleichen
-        int cmp = this.lastName.compareToIgnoreCase(other.lastName);
-        if (cmp != 0) {
-            return cmp;
-        }
-
-        // Dann Vorname
-        cmp = this.firstName.compareToIgnoreCase(other.firstName);
-        if (cmp != 0) {
-            return cmp;
-        }
-
-        // Falls gleich: ID vergleichen
         return Long.compare(this.ID, other.ID);
     }
 }
