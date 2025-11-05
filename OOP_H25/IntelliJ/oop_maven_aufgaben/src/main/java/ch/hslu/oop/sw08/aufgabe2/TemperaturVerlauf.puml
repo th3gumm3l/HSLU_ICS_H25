@@ -4,7 +4,7 @@ skinparam classAttributeIconSize 0
 
 class TemperaturVerlauf {
     - temperaturen : List<Temperatur>
-    + add() : Temperatur
+    + add(Temperatur temperatur) : void
     + clear() : void
     + getCount() : int
 }
