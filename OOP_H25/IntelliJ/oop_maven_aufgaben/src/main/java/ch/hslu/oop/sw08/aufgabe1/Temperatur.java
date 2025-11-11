@@ -10,7 +10,7 @@ import java.util.Objects;
  */
 public final class Temperatur implements Comparable<Temperatur> {
     private float kelvin;
-    private final static float KELVIN_OFFSET = 273.15f;
+    private final static float KELVIN_OFFSET = 273.15f; //static -> Ist im Speicher nur einmal vorhanden
 
     public Temperatur(float kelvin) {
         this.kelvin = kelvin;
@@ -29,7 +29,7 @@ public final class Temperatur implements Comparable<Temperatur> {
     }
 
     public float getCelsius() {
-        return this.kelvin - KELVIN_OFFSET;
+        return convertKelvinToCelsius(kelvin);
     }
 
     public void setCelsius(float celsius) {
@@ -57,6 +57,9 @@ public final class Temperatur implements Comparable<Temperatur> {
         return Float.compare(this.kelvin, temperatur.kelvin);
     }
 
+    /*
+    Hilfsfunktionen
+     */
     public static float convertKelvinToCelsius(float kelvin) {
         return roundResult(kelvin - KELVIN_OFFSET);
     }
