@@ -2,6 +2,12 @@ package ch.hslu.oop.sw08.aufgabe1;
 
 import java.util.Objects;
 
+/**
+ * Beschreibt die Temperatur in ihren Basiseigenschaften und Methoden
+ *
+ * @author Tim Bernhard
+ * @version 1
+ */
 public final class Temperatur implements Comparable<Temperatur> {
     private float kelvin;
     private final static float KELVIN_OFFSET = 273.15f;

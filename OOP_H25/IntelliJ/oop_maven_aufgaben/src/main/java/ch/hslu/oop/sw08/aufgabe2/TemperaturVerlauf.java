@@ -8,6 +8,8 @@ import java.util.Objects;
 
 /**
  * Klasse um die Temperatur-Verläufe von Temperatur Objekten zu "speichern"
+ * @author Tim Bernhard
+ * @version 1
  */
 public class TemperaturVerlauf {
     private final List<Temperatur> temperaturen;

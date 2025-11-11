@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Implementiert Tests für die Klasse Element
+ */
 class ElementTest {
 
     private Element element;

@@ -2,6 +2,12 @@ package ch.hslu.oop.sw08.aufgabe3;
 
 import ch.hslu.oop.sw08.aufgabe1.Temperatur;
 
+/**
+ * Beschreibt ein physikalisches Element in seinen Basiseigenschaften
+ *
+ * @author Tim Bernhard
+ * @version 1
+ */
 public class Element {
     private final String elementName;
     private final float siedepunkt;
