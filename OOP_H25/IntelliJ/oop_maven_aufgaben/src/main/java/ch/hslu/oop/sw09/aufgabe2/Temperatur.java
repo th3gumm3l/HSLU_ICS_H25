@@ -1,4 +1,4 @@
-package ch.hslu.oop.sw08.aufgabe1;
+package ch.hslu.oop.sw09.aufgabe2;
 
 import java.util.Objects;
 
@@ -12,28 +12,31 @@ public final class Temperatur implements Comparable<Temperatur> {
     private float kelvin;
     private final static float KELVIN_OFFSET = 273.15f;
 
-    public Temperatur(float kelvin) {
-        setKelvin(kelvin);
+    private Temperatur(float kelvin) {
+        if (kelvin < 0.0f) {
+            throw new IllegalArgumentException("Temperaturwert darf nicht negativ sein.");
+        }
+        this.kelvin = roundResult(kelvin);
     }
 
-    public Temperatur(Temperatur temperatur) {
+    private Temperatur(Temperatur temperatur) {
         this.kelvin = temperatur.kelvin;
+    }
+
+    public static Temperatur createFromCelsius(final float celsius){
+        return new Temperatur(convertCelsiusToKelvin(celsius));
+    }
+
+    public static Temperatur createFromKelvin(final float kelvin){
+        return new Temperatur(kelvin);
     }
 
     public float getKelvin() {
         return kelvin;
     }
 
-    public void setKelvin(float kelvin) {
-        this.kelvin = kelvin;
-    }
-
     public float getCelsius() {
         return convertKelvinToCelsius(kelvin);
-    }
-
-    public void setCelsius(float celsius) {
-        this.kelvin = convertCelsiusToKelvin(celsius);
     }
 
     @Override
