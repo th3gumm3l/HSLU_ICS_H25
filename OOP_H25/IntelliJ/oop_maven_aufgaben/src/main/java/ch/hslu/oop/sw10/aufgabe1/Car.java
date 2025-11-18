@@ -52,7 +52,7 @@ public class Car implements Switchable, PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent event) {
-        LOGGER.info("Auto hat eine Statusänderung registriert: "
+        LOGGER.info( getModel() + " hat eine Statusänderung registriert: "
                 + event.getPropertyName() + " von " + event.getOldValue() + " zu " + event.getNewValue());
     }
 }
