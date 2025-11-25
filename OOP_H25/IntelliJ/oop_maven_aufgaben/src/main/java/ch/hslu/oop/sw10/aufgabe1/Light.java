@@ -2,6 +2,7 @@ package ch.hslu.oop.sw10.aufgabe1;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Light implements Switchable {
@@ -32,11 +33,15 @@ public class Light implements Switchable {
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
-        listeners.add(listener);
+        if (this.listeners == null) {
+            this.listeners = new ArrayList<>();
+        }
     }
 
     public void removePropertyChangeListener(PropertyChangeListener listener) {
-        listeners.remove(listener);
+        if (this.listeners != null) {
+            this.listeners.remove(listener);
+        }
     }
 
     protected void firePropertyChangeEvent(PropertyChangeEvent pcEvent) {

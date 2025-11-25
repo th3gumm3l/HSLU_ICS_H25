@@ -51,15 +51,19 @@ public class Engine implements Switchable {
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
-        listeners.add(listener);
+        if (this.listeners != null) {
+            this.listeners.add(listener);
+        }
     }
 
     public void removePropertyChangeListener(PropertyChangeListener listener) {
-        listeners.remove(listener);
+        if (this.listeners != null) {
+            this.listeners.remove(listener);
+        }
     }
 
     protected void firePropertyChangeEvent(PropertyChangeEvent pcEvent) {
-        for (PropertyChangeListener listener : listeners) {
+        for (PropertyChangeListener listener : this.listeners) {
             listener.propertyChange(pcEvent);
         }
     }
