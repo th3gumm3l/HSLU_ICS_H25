@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import java.io.*;
 
 public class MainSw11 {
-    private static final Logger logger = LoggerFactory.getLogger(MainSw11.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MainSw11.class);
 
     public static void main(String[] args) {
         int number = 12345;
@@ -14,18 +14,18 @@ public class MainSw11 {
         writeIntToFile(number, fileName);
         int intResult = readIntFromFile(fileName);
         float floatResult = readIntFromFileAsFloat(fileName);
-        logger.info("Der Int ist: {}", intResult);
-        logger.info("Der Float ist: {}", floatResult);
+        LOGGER.info("Der Int ist: {}", intResult);
+        LOGGER.info("Der Float ist: {}", floatResult);
     }
 
     private static void writeIntToFile(int input, String fileName) {
         try (FileOutputStream fos = new FileOutputStream(fileName);
         DataOutputStream dos = new DataOutputStream(fos)){
             dos.writeInt(input);
-            logger.info("Der Integer {} wurde erfolgreich in '{}' geschrieben.", input, fileName);
+            LOGGER.info("Der Integer {} wurde erfolgreich in '{}' geschrieben.", input, fileName);
         }
         catch (IOException e) {
-            logger.error("Fehler beim Lesen/Schreiben der Datei:", e);
+            LOGGER.error("Fehler beim Lesen/Schreiben der Datei:", e);
         }
     }
 
@@ -35,7 +35,7 @@ public class MainSw11 {
             return dis.readInt();
         }
         catch (IOException e) {
-            logger.error("Fehler beim Lesen/Schreiben der Datei:", e);
+            LOGGER.error("Fehler beim Lesen/Schreiben der Datei:", e);
         }
         return 0;
     }
@@ -46,7 +46,7 @@ public class MainSw11 {
             return dis.readFloat();
         }
         catch (IOException e) {
-            logger.error("Fehler beim Lesen/Schreiben der Datei:", e);
+            LOGGER.error("Fehler beim Lesen/Schreiben der Datei:", e);
         }
         return 0;
     }
