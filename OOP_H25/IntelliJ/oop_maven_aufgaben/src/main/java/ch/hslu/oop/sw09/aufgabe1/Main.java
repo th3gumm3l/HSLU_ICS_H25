@@ -6,22 +6,31 @@ import org.slf4j.LoggerFactory;
 import java.util.Scanner;
 
 public class Main {
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
+
     public static void main(String[] args) {
         String input;
-        Logger logger = LoggerFactory.getLogger(Main.class);
         Scanner scanner = new Scanner(System.in);
         do {
-            System.out.println("Bitte Temperatur eingeben (oder 'exit' zum Beenden): ");
+            System.out.print("Bitte Temperatur eingeben (oder 'exit' zum Beenden): ");
             input = scanner.next();
-            if (isNumeric(input) && !input.equals("exit")) {
-                System.out.println(input);
-                logger.info(input);
+
+            logger.debug("Eingabe erhalten: {}", input);
+
+            if ("exit".equalsIgnoreCase(input)) {
+                logger.info("Exit-Befehl erhalten, Beenden wird gestartet");
+                break;
             }
-            else {
+
+            if (isNumeric(input)) {
+                System.out.println("Eingegebene Temperatur: " + input);
+                logger.info("Gültige Temperatur eingegeben: {}", input);
+            } else {
                 System.out.println("Keine gültige Nummer");
-                logger.info("Keine gültige Nummer");
+                logger.warn("Ungültige Eingabe: {}", input);
             }
-        } while (!"exit".equals(input));
+        } while (true);
+
         System.out.println("Programm beendet.");
         logger.info("Programm beendet.");
     }
@@ -31,6 +40,7 @@ public class Main {
             Float.parseFloat(str);
             return true;
         } catch (NumberFormatException e) {
+            logger.error("Fehler beim Parsen der Eingabe '{}' als Zahl", str, e);
             return false;
         }
     }

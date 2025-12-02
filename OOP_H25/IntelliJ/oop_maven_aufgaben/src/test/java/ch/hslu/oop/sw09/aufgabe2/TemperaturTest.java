@@ -1,6 +1,5 @@
-package ch.hslu.oop.sw09.aufgabe1;
+package ch.hslu.oop.sw09.aufgabe2;
 
-import ch.hslu.oop.sw09.aufgabe2.Temperatur;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
