@@ -22,7 +22,7 @@ public class TemperaturVerlauf {
         this.temperaturen.add(temperatur);
     }
 
-    public void  clear() {
+    public void clear() {
         this.temperaturen.clear();
     }
 
