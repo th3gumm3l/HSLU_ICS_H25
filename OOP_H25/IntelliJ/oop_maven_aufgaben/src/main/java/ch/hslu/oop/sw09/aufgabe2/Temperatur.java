@@ -1,9 +1,5 @@
 package ch.hslu.oop.sw09.aufgabe2;
 
-import ch.hslu.oop.sw09.aufgabe1.Main;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.util.Objects;
 
 /**

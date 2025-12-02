@@ -1,6 +1,6 @@
 package ch.hslu.oop.sw08.aufgabe2;
 
-import  ch.hslu.oop.sw08.aufgabe1.Temperatur;
+import ch.hslu.oop.sw08.aufgabe1.Temperatur;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
