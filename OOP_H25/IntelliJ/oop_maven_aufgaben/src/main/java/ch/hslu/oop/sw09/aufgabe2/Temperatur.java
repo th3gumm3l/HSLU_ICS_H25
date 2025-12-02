@@ -16,6 +16,10 @@ public final class Temperatur implements Comparable<Temperatur> {
     private float kelvin;
     private final static float KELVIN_OFFSET = 273.15f;
 
+    /**
+     * Aufgabe h
+     * @param kelvin
+     */
     private Temperatur(float kelvin) {
         if (kelvin < 0.0f) {
             throw new IllegalArgumentException("Temperaturwert darf nicht negativ sein.");
@@ -23,15 +27,35 @@ public final class Temperatur implements Comparable<Temperatur> {
         this.kelvin = roundResult(kelvin);
     }
 
+    /**
+     * Aufgabe e
+     * @param temperatur
+     */
     private Temperatur(Temperatur temperatur) {
         this.kelvin = temperatur.kelvin;
     }
 
+    /**
+     * Aufgabe c
+     * @param celsius
+     * @return gibt ein Objekt zurück der Klasse Temperatur
+     */
     public static Temperatur createFromCelsius(final float celsius){
+        if  (celsius < -KELVIN_OFFSET) {
+            throw new IllegalArgumentException("Temperaturwert darf nicht negativ sein.");
+        }
         return new Temperatur(convertCelsiusToKelvin(celsius));
     }
 
+    /**
+     * Aufgabe d
+     * @param kelvin
+     * @return gibt ein Objekt zurück der Klasse Temperatur
+     */
     public static Temperatur createFromKelvin(final float kelvin){
+        if (kelvin < 0.0f) {
+            throw new IllegalArgumentException("Temperaturwert darf nicht negativ sein.");
+        }
         return new Temperatur(kelvin);
     }
 
