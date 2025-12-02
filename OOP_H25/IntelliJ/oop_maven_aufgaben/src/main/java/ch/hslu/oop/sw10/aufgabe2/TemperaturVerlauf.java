@@ -25,6 +25,9 @@ public class TemperaturVerlauf {
     }
 
     public void add(Temperatur t) {
+        if (t.getKelvin() < 0.0f) {
+            throw new IllegalArgumentException("Temperaturwert darf nicht negativ sein.");
+        }
         this.temperaturen.add(t);
 
         boolean isNewMin = min == null || t.compareTo(min) < 0;
@@ -56,16 +59,16 @@ public class TemperaturVerlauf {
         return temperaturen.size();
     }
 
-    public Temperatur getMaxTemperatur() {
-        return max;
-    }
+    public Temperatur getMaxTemperatur() { return max; }
 
     public Temperatur getMinTemperatur() {
         return min;
     }
 
     public float getAvgTemperatur() {
-        if (temperaturen.isEmpty()) return Float.NaN;
+        if (temperaturen.isEmpty()){
+            return Float.NaN;
+        }
         float sum = 0f;
         for (Temperatur t : temperaturen) sum += t.getKelvin();
         return sum / temperaturen.size();
