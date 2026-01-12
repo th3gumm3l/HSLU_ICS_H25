@@ -11,7 +11,7 @@ public class Light implements Switchable {
 
     public Light(){
         this.turnedOn = false;
-        this.lumen = 0;
+        setLumen(0);
     }
 
     /*
@@ -37,7 +37,7 @@ public class Light implements Switchable {
     public void switchOn() {
         if (isSwitchedOff()){
             this.turnedOn = true;
-            this.lumen = 8000;
+            setLumen(8000);
             final PropertyChangeEvent pcEvent =
                     new PropertyChangeEvent(this, "Status", State.OFF, State.ON);
             this.firePropertyChangeEvent(pcEvent);
@@ -48,7 +48,7 @@ public class Light implements Switchable {
     public void switchOff() {
         if (isSwitchedOn()){
             this.turnedOn = false;
-            this.lumen = 0;
+            setLumen(0);
             final PropertyChangeEvent pcEvent =
                     new PropertyChangeEvent(this, "Status", State.ON, State.OFF);
             this.firePropertyChangeEvent(pcEvent);
@@ -63,5 +63,13 @@ public class Light implements Switchable {
     @Override
     public boolean isSwitchedOff() {
         return !this.turnedOn;
+    }
+
+    public int getLumen() {
+        return lumen;
+    }
+
+    public void setLumen(int lumen) {
+        this.lumen = lumen;
     }
 }

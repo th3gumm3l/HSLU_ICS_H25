@@ -14,7 +14,7 @@ public class Engine implements Switchable {
      */
     public Engine() {
         this.turnedOn = false;
-        this.rpm = 0;
+        setRPM(0);
     }
 
     /*

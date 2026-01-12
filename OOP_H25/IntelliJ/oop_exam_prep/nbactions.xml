@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+    <action>
+        <actionName>CUSTOM-install</actionName>
+        <displayName>Clean, Compile, Test and Package</displayName>
+        <goals>
+            <goal>clean package</goal>
+        </goals>
+    </action>
+</actions>
