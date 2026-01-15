@@ -1,97 +1,91 @@
 package ch.hslu.exam.aufgabe5;
 
-import ch.hslu.exam.aufgabe2.RaumStatus;
-
-import java.beans.PropertyChangeEvent;
-import java.util.ArrayList;
+import java.util.TreeMap;
+import java.util.Map;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.Optional;
+import java.util.ArrayList;
 import java.util.List;
 
 public class RaumVerwaltung {
-    private List<Raum> raumListe;
+
+    private final Map<Integer, Raum> raeume;
+    private final List<RaumListener> listeners;
 
     public RaumVerwaltung() {
-        raumListe = new ArrayList<>();
-        raumListe.add(new Raum(602, 6));
-        raumListe.add(new Raum(603, 12));
-        raumListe.add(new Raum(600, 18));
-        raumListe.add(new Raum(605, 24));
-        raumListe.add(new Raum(610, 12));
+        this.raeume = new TreeMap<>();
+        this.listeners = new ArrayList<>();
+        // Testdaten (SW12)
+        addRaum(new Raum(600, 10));
+        addRaum(new Raum(602, 20));
+        addRaum(new Raum(605, 30));
     }
 
-    public Raum bucheRaum(final int anzahlPers){
-        if (anzahlPers < 1){
-            throw new IllegalArgumentException("Zu kleine Zahl mitgegeben");
+    /**
+     * Fügt einen Raum hinzu.
+     * Nur innerhalb des Packages sichtbar (für Tests und später Konstruktor-Initialisierung).
+     */
+    void addRaum(Raum raum) {
+        raeume.put(raum.getRaumnummer(), raum);
+    }
+
+    public void addRaumListener(RaumListener listener) {
+        listeners.add(listener);
+    }
+
+    private void fireRaumEvent(Raum raum, int anzahlPersonen, String type) {
+        RaumEvent event = new RaumEvent(this, raum, anzahlPersonen, type);
+        for (RaumListener listener : listeners) {
+            listener.onRaumEvent(event);
         }
+    }
 
-        for (Raum raum : raumListe) {
-            boolean istFrei = raum.isFrei();
-            boolean genugPlatz = raum.getKapazitaet() >= anzahlPers;
+    public Raum getRaum(int raumnummer) {
+        return raeume.get(raumnummer);
+    }
 
-            if (istFrei && genugPlatz){
-                raum.setStatus(RaumStatus.BELEGT);
-                return raum;
+    /**
+     * Gibt alle Räume zurück (unveränderlich).
+     */
+    public Collection<Raum> getAllRaeume() {
+        return Collections.unmodifiableCollection(raeume.values());
+    }
+
+    /**
+     * Reserviert den besten passenden freien Raum (Best-Fit).
+     * @param anzahlPersonen Benötigte Plätze
+     * @return Reservierter Raum oder empty, falls keiner gefunden.
+     */
+    public Optional<Raum> reservieren(int anzahlPersonen) {
+        Raum bestMatch = null;
+
+        for (Raum r : raeume.values()) {
+            if (r.isFrei() && r.getKapazitaet() >= anzahlPersonen) {
+                if (bestMatch == null || r.getKapazitaet() < bestMatch.getKapazitaet()) {
+                    bestMatch = r;
+                }
             }
         }
 
-        return null;
-    }
-
-    private void addRaum(Raum raum) {
-        if (getRaumWithNumber(raum.getRaumNummer()) != null) {
-            throw new IllegalStateException("Raum ist bereits verwaltet");
-        }
-        this.raumListe.add(raum);
-
-        Collections.sort(this.raumListe);
-    }
-
-    private int getRaumNumber(int number) {
-        for (Raum raum : this.raumListe) {
-            if (raum.getRaumNummer() == number) {
-                return raum.getRaumNummer();
-            }
+        if (bestMatch != null) {
+            bestMatch.setStatus(RaumStatus.BELEGT);
+            fireRaumEvent(bestMatch, anzahlPersonen, "RESERVIERT");
+            return Optional.of(bestMatch);
         }
 
-        throw new IllegalStateException("Raum ist bereits verwaltet");
+        return Optional.empty();
     }
 
-    public Raum getRaumWithNumber(int number) {
-        for (Raum raum : this.raumListe) {
-            if (raum.getRaumNummer() == number) {
-                return raum;
-            }
+    /**
+     * Gibt einen Raum wieder frei.
+     * @param raumnummer Nummer des Raums
+     */
+    public void freigeben(int raumnummer) {
+        Raum r = raeume.get(raumnummer);
+        if (r != null) {
+            r.setStatus(RaumStatus.FREI);
+            fireRaumEvent(r, r.getKapazitaet(), "FREIGEGEBEN");
         }
-
-        return null;
-    }
-
-    public List<Raum> getRaumListe() {
-        for (Raum raum : this.raumListe) {
-            System.out.println(raum);
-        }
-        return Collections.unmodifiableList(this.raumListe);
-    }
-
-    public boolean raumFreigeben(final int raumNummer) {
-        // 1. Raum suchen
-        final Raum raum = this.getRaumWithNumber(raumNummer);
-
-        // 2. Prüfung: Existiert der Raum UND ist er aktuell belegt?
-        if (raum != null && raum.getStatus() == RaumStatus.BELEGT) {
-            // 3. Status ändern (möglich, da wir im selben Package sind)
-            raum.setStatus(RaumStatus.FREI);
-            return true;
-        }
-
-        // Raum nicht gefunden oder war nicht belegt (z.B. schon frei oder gesperrt)
-        return false;
-    }
-
-    @Override
-    public String toString() {
-        return "RaumVerwaltung{" +
-                "raumListe=" + raumListe +
-                '}';
     }
 }

@@ -1,87 +1,64 @@
 package ch.hslu.exam.aufgabe5;
 
-import ch.hslu.exam.aufgabe2.RaumStatus;
-
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
-public final class Raum implements Comparable<Raum> {
-    private final int raumNummer;
+public final class Raum {
+
+    private final int raumnummer;
     private final int kapazitaet;
     private RaumStatus status;
 
-    Raum(int raumNummer, int kapazitaet) {
-        if (raumNummer < 100 || raumNummer > 999) {
-            throw new IllegalArgumentException("Die Raumnummer ist ausserhalb des Bereichs (100-999)");
+    Raum(final int raumnummer, final int kapazitaet) {
+        if (raumnummer < 100 || raumnummer > 999) {
+            throw new IllegalArgumentException("Raumnummer muss zwischen 100 und 999 liegen. Gegeben: " + raumnummer);
         }
         if (kapazitaet <= 2) {
-            throw new IllegalArgumentException("Die Kapazität ist zu klein");
+            throw new IllegalArgumentException("Kapazität muss grösser als 2 sein. Gegeben: " + kapazitaet);
         }
-        this.raumNummer = raumNummer;
+        this.raumnummer = raumnummer;
         this.kapazitaet = kapazitaet;
         this.status = RaumStatus.FREI;
     }
 
-    public int getRaumNummer() {
-        return raumNummer;
+    public int getRaumnummer() {
+        return raumnummer;
     }
+
     public int getKapazitaet() {
         return kapazitaet;
     }
 
-    public RaumStatus getStatus() { return status; }
-    void setStatus(RaumStatus status) { this.status = status; }
+    public RaumStatus getStatus() {
+        return status;
+    }
+
+    void setStatus(final RaumStatus status) {
+        this.status = status;
+    }
 
     public boolean isFrei() {
-        if (status == RaumStatus.FREI) {
-            return true;
-        }
-        return false;
+        return this.status == RaumStatus.FREI;
     }
-
-    /* Event-Handling */
-    private final List<PropertyChangeListener> changeListeners = new ArrayList<>();
-
-    public void addPropertyChangeListener(final PropertyChangeListener listener) {
-        this.changeListeners.add(listener);
-    }
-
-    public void removePropertyChangeListener(final PropertyChangeListener listener) {
-        this.changeListeners.remove(listener);
-    }
-
-    private void firePropertyChangeEvent(final PropertyChangeEvent pcEvent) {
-        for (final PropertyChangeListener listener : this.changeListeners) {
-            listener.propertyChange(pcEvent);
-        }
-    }
-
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof Raum raum)) return false;
-        return getRaumNummer() == raum.getRaumNummer();
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Raum raum = (Raum) o;
+        return raumnummer == raum.raumnummer;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.raumNummer);
-    }
-
-    @Override
-    public int compareTo(final Raum other) {
-        return Integer.compare(this.raumNummer, other.raumNummer);
+        return Objects.hash(raumnummer);
     }
 
     @Override
     public String toString() {
         return "Raum{" +
-                "raumNummer=" + raumNummer +
-                ", kapazitaet=" + kapazitaet +
-                ", status=" + status +
+                "Nr=" + raumnummer +
+                ", Kap=" + kapazitaet +
+                ", Status=" + status +
                 '}';
     }
 }
