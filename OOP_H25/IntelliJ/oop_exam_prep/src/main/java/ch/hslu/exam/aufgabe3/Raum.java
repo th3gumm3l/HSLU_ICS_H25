@@ -39,9 +39,15 @@ public final class Raum implements Comparable<Raum> {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (!(o instanceof Raum raum)) return false;
-        return getRaumNummer() == raum.getRaumNummer();
+    public boolean equals(final Object object) {
+        if (object == this) {
+            return true;
+        }
+        if (!(object instanceof Raum raum)) {
+            return false;
+        }
+        final Raum other = (Raum) object;
+        return (other.raumNummer == this.raumNummer);
     }
 
     @Override
