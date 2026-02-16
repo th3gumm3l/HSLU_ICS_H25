@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+
+# MongoDB data
+data/
+*.wt
+mongod.lock
+WiredTiger*
+storage.bson
+_mdb_catalog.wt
+diagnostic.data/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Environment
+.env
+.env.local
+
+# Logs
+*.log
+npm-debug.log*
+
+# Build output
+dist/
+build/
