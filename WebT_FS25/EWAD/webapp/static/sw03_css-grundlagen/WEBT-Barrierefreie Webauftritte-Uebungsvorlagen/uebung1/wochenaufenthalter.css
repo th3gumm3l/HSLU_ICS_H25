@@ -1,0 +1,96 @@
+        /* Ganzes Dokument */
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        /* Headerbereich */
+        div.top {
+            display: grid;
+            grid-template-columns: 25% 75%;
+            font-style: bold;
+            color: #FFFFFF;
+            background-color:royalblue;
+            padding: 1vh 1vh 1vw 1vw;
+        }
+        div.topImage {
+            background-image: url(landschaft.jpg);
+            background-size: cover;
+            height: 10vh;
+        }
+        nav a {
+            text-decoration: none;
+            color: white;
+        }
+        nav a:hover {
+            color: orange;
+        }
+
+        /* Formularbereich */
+        .bold {
+            font-weight: bold;
+        }
+        div.titel {
+            font-size: 1.5em;
+            margin: 1vh 1vh 1vw 1vw;
+        }
+        div.text {
+            margin: 1vh 1vh 1vw 1vw;
+        }
+        div.wichtig {
+            background-color: rgb(189,215,238);
+            color: rgb(44,112,174);
+            border: 1px solid;
+            margin: 1vh 1vh 1vw 1vw;
+            padding: 1vh 1vh 1vw 1vw;
+        }
+        div.form{
+            margin: 1vh 1vh 1vw 1vw;
+        }
+        div.formInfo {
+            font-weight: bold;
+        }
+        div.personalien {
+            display:grid;
+            grid-template-columns: 160px 180px 5px 100px 180px;
+            grid-row-gap: 5px;
+            grid-template-areas: "nameLabel            nameInput            .              vornameLabel   vornameInput"
+                                 "strasseLabel         strasseInput         .              nrLabel        nrInput"
+                                 "plzLabel             plzInput             .              ortLabel       ortInput"
+                                 "dauerLabel           dauerLabel           dauerLabel     dauerLabel     dauerLabel"
+                                 "vonLabel             vonInput             .              bisLabel       bisInput"
+                                 "dokumenteLabel       dokumenteLabel       dokumenteLabel dokumenteLabel dokumenteLabel"
+                                 "heimatscheinLabel    heimatscheinInput    .              .              ."
+                                 "wohnungsausweisLabel wohnungsausweisInput .              .              ."
+                                 "krankenkasseLabel    krankenkasseInput    .              .              .";
+        }
+
+        /* Personalien */
+        #nameLabel    { grid-area: nameLabel; }
+        #nameInput    { grid-area: nameInput; }
+        #vornameLabel { grid-area: vornameLabel; }
+        #vornameInput { grid-area: vornameInput; }
+        #strasseLabel { grid-area: strasseLabel; }
+        #strasseInput { grid-area: strasseInput; }
+        #nrLabel      { grid-area: nrLabel; }
+        #nrInput      { grid-area: nrInput; }
+        #plzLabel     { grid-area: plzLabel; }
+        #plzInput     { grid-area: plzInput; }
+        #ortLabel     { grid-area: ortLabel; }
+        #ortInput     { grid-area: ortInput; }
+
+        /* Dauer des Wochenaufenthalts */
+        #dauer    { grid-area: dauerLabel; }
+        #bisLabel { grid-area: bisLabel; }
+        #bisInput { grid-area: bisInput; }
+        #vonLabel { grid-area: vonLabel; }
+        #vonInput { grid-area: vonInput; }
+
+        /* Dokumente */
+        #dokumente            { grid-area: dokumenteLabel; }
+        #heimatscheinLabel    { grid-area: heimatscheinLabel; }
+        #heimatscheinInput    { grid-area: heimatscheinInput; }
+        #wohnungsausweisLabel { grid-area: wohnungsausweisLabel; }
+        #wohnungsausweisInput { grid-area: wohnungsausweisInput; }
+        #krankenkasseLabel    { grid-area: krankenkasseLabel; }
+        #krankenkasseInput    { grid-area: krankenkasseInput; }
+        

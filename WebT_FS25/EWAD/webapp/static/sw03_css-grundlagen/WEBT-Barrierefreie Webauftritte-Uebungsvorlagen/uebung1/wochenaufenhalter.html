@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Gemeinde ABC | Formular</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+  <link href="wochenaufenthalter.css" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <div class="top">
+      <img src="gemeinde_abc_schriftzug.svg">
+      <nav>
+        <a href="...">Aktuelles</a>
+        <a href="...">Gemeindepräsentation</a>
+        <a href="...">Dienstleistungen</a>
+        <a href="...">Kontakt</a>
+        <a href="...">Impressum</a>
+      </nav>
+    </div>
+    <div class="topImage"></div>
+  </header>
+  <main>
+    <a href="...">Zurück zur Dienstleistungsübersicht</a>
+    <div class="titel">
+      Anmeldung als Wochenaufenthalter
+    </div>
+
+    <div class="text">
+      In unserem Online-Schalter können Sie sich unabhängig von der Schalteröffnungszeiten als Wochenaufenthalter
+      anmelden.
+      Die Anmeldung muss spätestens 14 Tage nach Zuzug erfolgen.
+      Füllen Sie dafür das unterstehende Formular aus und schicken Sie es ab.
+    </div>
+
+    <div class="wichtig">
+      <span class="bold">Wichtig: Vergessen Sie nicht folgende Dokumente:<br></span>
+      &#8680; Heimatschein (ist in der Regel bei der Wegzugsgemeinde hinterlegt)<br>
+      &#8680; Wohnungsausweis oder Mietvertrag<br>
+      &#8680; Krankenkassenkarte<br>
+    </div>
+
+    <div class="form">
+      <div class="formInfo">Personalien:</div>
+      <form id="myform" action="https://www.w3schools.com/action_page.php">
+        <div class="personalien">
+          <div id="nameLabel">Name:</div>
+          <div id="nameInput"> <input name="name"> </div>
+
+          <div id="vornameLabel">Vorname:</div>
+          <div id="vornameInput"><input name="vorname"> </div>
+
+          <div id="plzLabel">PLZ</div>
+          <div id="plzInput"> <input name="plz" size=4> </div>
+
+          <div id="ortLabel">Ort</div>
+          <div id="ortInput">
+            <input name="ort">
+          </div>
+
+          <div id="strasseLabel">Strasse:</div>
+          <div id="strasseInput">
+            <input name="strasse">
+          </div>
+
+          <div id="nrLabel">Nr.:</div>
+          <div id="nrInput">
+            <input name="hausnr" size=3>
+          </div>
+
+          <div id="dauer" class="formInfo">Dauer des Wochenaufenthalts:</div>
+
+          <div id="vonLabel">Von:</div>
+          <div id="vonInput">
+            <input name="von" type="date">
+          </div>
+
+          <div id="bisLabel">Bis:</div>
+          <div id="bisInput">
+            <input name="bis" type="date">
+          </div>
+
+          <div id="dokumente" class="formInfo">Dokumente:</div>
+
+          <div id="heimatscheinLabel">Heimatschein:</div>
+          <div id="heimatscheinInput">
+            <input name="heimattschein" type="file">
+          </div>
+
+          <div id="wohnungsausweisLabel">Wohnungsausweis / Mietvertrag:</div>
+          <div id="wohnungsausweisInput">
+            <input name="wohnung" type="file">
+          </div>
+
+          <div id="krankenkasseLabel">Krankenkassenkarte:</div>
+          <div id="krankenkasseInput">
+            <input name="bis" type="file">
+          </div>
+
+        </div>
+
+        <input id="send" type="submit" value="Abschicken">
+        <input id="reset" type="reset" value="Abbrechen">
+      </form>
+    </div>
+  </main>
+</body>
+
+</html>

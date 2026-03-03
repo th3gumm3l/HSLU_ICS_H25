@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <title>Transition DEMO</title>
+        <link href="webt.css" rel="stylesheet">
+        <style>
+            #block {
+                width:100px;
+                height:100px;
+                background-color: blue;
+            }
+            #block:hover {
+                width:200px;
+                background-color: orange;
+                
+                transition: width 3s linear, background-color 3s linear;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Beispiel: Transition</h1>
+        <div id="block"></div>
+    </body>
+</html>

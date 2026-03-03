@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link href="webt.css" rel="stylesheet">
+        <style>
+            :root {
+                --padding-value: 20px;
+            }
+
+            table {
+                border-collapse:collapse;
+                border: 1px solid lightgrey;                
+            }
+            table td {
+                border: 1px solid lightgrey;
+                box-sizing: border-box;
+                padding: 10px;
+            }
+
+            p[class] {
+                display: table-cell;
+                border: 1px solid darkgrey;
+                padding: 0;
+            }
+            p.top-padding {
+                padding-top: var(--padding-value);
+            }
+            p.left-padding {
+                padding-left: var(--padding-value);
+            }
+            p.block-start-padding {
+                padding-block-start: var(--padding-value);
+            }
+            p.inline-start-padding {
+                padding-inline-start: var(--padding-value);
+            }
+            
+            .vlr {
+                writing-mode: vertical-lr;
+            }
+            .vrl {
+                writing-mode: vertical-rl;
+            }
+            .slr {
+                writing-mode: sideways-lr;
+            }
+            .srl {
+                writing-mode: sideways-rl;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Normal reading/writing direction</h1>
+        <p>
+            When using the standard reading direction "left-to-right", then "top-to-bottom", then the CSS-
+            properties <code>padding-top</code> and <code>padding-block-start</code> are equivalent. The
+            same is valid for <code>padding-left</code> and <code>padding-inline-start</code>.
+        </p>
+
+        <h2>Padding at the "top"</h2>
+        <table>
+            <tr>
+                <td><p>Using <code>padding-top</code></p></td>
+                <td><p>Using <code>padding-block-start</code></p></td>
+            </tr>
+            <tr>
+                <td><p class="top-padding">Paragraph</p></td>
+                <td><p class="block-start-padding">Paragraph</p></td>
+            </tr>
+        </table>
+
+        <h2>Padding on the "left"</h2>
+        <table>
+            <tr>
+                <td><p>Using <code>padding-left</code></p></td>
+                <td><p>Using <code>padding-inline-start</code></p></td>
+            </tr>
+            <tr>
+                <td><p class="left-padding">Paragraph</p></td>
+                <td><p class="inline-start-padding">Paragraph</p></td>
+            </tr>
+        </table>
+
+        <h1>Changed reading/writing direction</h1>
+        <p>
+            Some languages use a different reading/writing direction. Such examples are Arabic,
+            Hebrew, Chinese, Japanese, Korean or Mongolian. A more extensive list of languages
+            using right-to-left script can be found under 
+            <a href="https://www.w3.org/International/questions/qa-scripts.en">Languages using
+            right-to-left scripts</a>. To change these directions, there are a couple of
+            different HTML and CSS settings that affect this behavior. Some of them are explained
+            below.
+        </p>
+
+        <h2>Padding on the "left"</h2>
+        <p>
+            In the following example for Arabic script we can use the HTML attribute
+            <code>dir</code> on the body or a specific element. See the W3C article about
+            <a href="https://www.w3.org/International/questions/qa-html-dir">Structural markup
+            and right-to-left text in HTML</a> for more details about the <code>dir</code>
+            attribute. In the below example, we set <code>&lt;td dir="rtl"&gt;</code> on the
+            table cell containing the Arabic text to make it read right to left.
+        </p>
+        <p>
+            Now we can see that <code>padding-left</code> still inserts the space on the left
+            of the text but <code>padding-inline-start</code> puts it on the right.
+        </p>
+        <table>
+            <tr>
+                <td><p>Using <code>padding-left</code></p></td>
+                <td><p>Using <code>padding-inline-start</code></p></td>
+            </tr>
+            <tr>
+                <td dir="rtl"><p class="left-padding">نص المثال</p></td>
+                <td dir="rtl"><p class="inline-start-padding">نص المثال</p></td>
+            </tr>
+        </table>
+
+        <h2>Changing direction even more</h2>
+        <p>
+            It is even possible to change to vertical reading as used in Chinese, Japanese, 
+            Korean or Mongolian. This can be done through the CSS property
+            <code>writing-mode</code> (see also the
+            <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/writing-mode">MDN
+            reference about the property</a> for more details).
+        </p>
+        <p>
+            In the following examples, all paragraphs have <code>writing-mode: vertical-lr</code>
+            set.
+        </p>
+
+        <table>
+            <tr>
+                <td colspan="2">Using <code>writing-mode: vertical-lr</code></td>
+                <td colspan="2">Using <code>writing-mode: vertical-rl</code></td>
+            </tr>
+            <tr>
+                <td><p>Using <code>padding-top</code></p></td>
+                <td><p>Using <code>padding-block-start</code></p></td>
+                <td><p>Using <code>padding-top</code></p></td>
+                <td><p>Using <code>padding-block-start</code></p></td>
+            </tr>
+            <tr>
+                <td><p class="top-padding vlr">Paragraph</p></td>
+                <td><p class="block-start-padding vlr">Paragraph</p></td>
+                <td><p class="top-padding vrl">Paragraph</p></td>
+                <td><p class="block-start-padding vrl">Paragraph</p></td>
+            </tr>
+        </table>
+
+        <p>
+            The property <code>writing-mode</code> also distinguishes between <code>vertical</code>
+            and <code>sideways</code> modes. The difference between these two has to do with the
+            rotation of certain characters and only becomes apparent when using Japanese/Chinese
+            characters. An extensive discussion can be found in the W3C article about 
+            <a href="https://www.w3.org/International/articles/vertical-text/">Styling vertical 
+            Chinese, Japanese, Korean and Mongolian text</a>.
+        </p>
+
+        <table>
+            <tr>
+                <td colspan="4"><b><code>vertical</code>-modes</b><br/> Chinese/Japanese characters are not rotated</td>
+                <td colspan="4"><b><code>sideways</code>-modes</b><br/> Chinese/Japanese characters are also rotated</td>
+            </tr>
+            <tr>
+                <td colspan="2">Using <code>writing-mode: vertical-lr</code></td>
+                <td colspan="2">Using <code>writing-mode: vertical-rl</code></td>
+                <td colspan="2">Using <code>writing-mode: sideways-lr</code></td>
+                <td colspan="2">Using <code>writing-mode: sideways-rl</code></td>
+            </tr>
+            <tr>
+                <td><p>Using <code>padding-top</code></p></td>
+                <td><p>Using <code>padding-block-start</code></p></td>
+                <td><p>Using <code>padding-top</code></p></td>
+                <td><p>Using <code>padding-block-start</code></p></td>
+                <td><p>Using <code>padding-top</code></p></td>
+                <td><p>Using <code>padding-block-start</code></p></td>
+                <td><p>Using <code>padding-top</code></p></td>
+                <td><p>Using <code>padding-block-start</code></p></td>
+            </tr>
+            <tr>
+                <td><p class="top-padding vlr">広げましょう Text</p></td>
+                <td><p class="block-start-padding vlr">広げましょう Text</p></td>
+                <td><p class="top-padding vrl">広げましょう Text</p></td>
+                <td><p class="block-start-padding vrl">広げましょう Text</p></td>
+                <td><p class="top-padding slr">広げましょう Text</p></td>
+                <td><p class="block-start-padding slr">広げましょう Text</p></td>
+                <td><p class="top-padding srl">広げましょう Text</p></td>
+                <td><p class="block-start-padding srl">広げましょう Text</p></td>
+            </tr>
+        </table>
+
+    </body>
+</html>

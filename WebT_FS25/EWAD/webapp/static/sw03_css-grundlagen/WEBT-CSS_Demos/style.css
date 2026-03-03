@@ -1,0 +1,18 @@
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif
+}
+
+input {
+    border: 2px solid grey
+}
+
+.unsafe {
+    background-color: red;
+}
+
+button {
+    background-color: dodgerblue;
+    padding: 5px;
+    color: white;
+    border: none;
+}

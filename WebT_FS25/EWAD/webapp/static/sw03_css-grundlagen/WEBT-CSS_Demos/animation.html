@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <title>Animation DEMO</title>
+        <link href="webt.css" rel="stylesheet">
+        <style>
+            #image {
+                width:1em;
+                height:1em;
+                animation:spin 4s linear infinite;
+            }
+            @keyframes spin { 100% { transform:rotate(360deg); } }
+        </style>
+    </head>
+    <body>
+        <h1>Beispiel: Animation</h1>
+        <div>
+            <p><img id="image" src="cogwheel.svg" alt="cogwheel">  Waiting for the things to come...</p>
+        </div>
+    </body>
+</html>
+
+
+
