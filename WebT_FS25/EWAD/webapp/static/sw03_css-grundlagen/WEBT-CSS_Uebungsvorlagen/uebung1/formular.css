@@ -28,6 +28,7 @@ input, textarea {
 	border: 1px solid #92CC47;
 	margin: 0 0 0 10px;
 	padding: 10px 10px 10px 10px;
+	cursor: pointer;
 }
 
 input:focus, textarea:focus {
@@ -37,11 +38,23 @@ input:focus, textarea:focus {
 }
 
 /* TODO: fieldset */
-
+fieldset {
+	border: 1px solid #92CC47;
+}
 
 /* TODO: legend */
-
+legend {
+	font-weight: bold;
+	font-size: 110%;
+	text-transform: uppercase;
+	color: #FFFFFF;
+	background-color: #92CC47;
+	padding: 5px 10px 5px 10px;
+	margin: 10px 0 0 0;
+}
 
 /* TODO: text inputs and submit button */
-
+button {
+	cursor: pointer;
+}
 
