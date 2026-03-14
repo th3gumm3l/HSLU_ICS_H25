@@ -5,8 +5,14 @@
     <title>Übung 4: Objekte</title>
     <script>
         function constructBook(titleParam, authorParam, priceParam) {
-           // TODO: complete function
-
+            return {
+                title: titleParam,
+                author: authorParam,
+                price: priceParam,
+                print() {
+                    console.log(titleParam + ' von ' + authorParam + ';' + ' Preis: ' + priceParam + ' CHF');
+                }
+            };
         }
     </script>
 </head>
