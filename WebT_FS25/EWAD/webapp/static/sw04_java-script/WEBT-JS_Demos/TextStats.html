@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Beispiel: Text Statistics (Libraries Demo)</title>
+    <meta charset="utf8">
+    <link href="webt.css" rel="stylesheet">
+    <script src="TextStatsLib.js"></script>
+    <script>
+        function updateStatistics() {
+            let output = document.getElementById('output');
+            let text = document.getElementById('text');
+            output.innerHTML = 'text contains '
+                             + charCount(text.value) + ' characters / '
+                             + wordCount(text.value) + ' words / '
+                             + lineCount(text.value) + ' lines'
+        }
+    </script>
+</head>
+
+<body>
+    <header>
+        <h1>Beispiel: Text Statistics (Libraries Demo)</h1>
+    </header>
+    <main>
+        <label for="text">Enter text:</label><br>
+        <textarea id="text" rows="10" cols="80"></textarea>
+        <p>Statistics: <span id="output">not available</span></p>
+        <button onclick="updateStatistics()">Click</button>
+    </main>
+</body>
+
+</html>

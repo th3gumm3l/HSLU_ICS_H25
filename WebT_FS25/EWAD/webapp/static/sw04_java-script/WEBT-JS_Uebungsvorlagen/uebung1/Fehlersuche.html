@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf8">
+    <title>Übung 1: Auf Fehlersuche</title>
+    <script>
+    function ggt(a, b) {
+        while (b != 0) {
+            let t = b;
+            b = a % b;
+            a = t;
+        }
+        return a;
+    }
+    </script>
+</head>
+
+<body>
+    <p>Die Ausgabe erfolgt im Console-Log: F12</p>
+    <script>
+    let result = ggt(36,8));
+    console.log(result);
+    </script>
+</body>
+    
+</html>

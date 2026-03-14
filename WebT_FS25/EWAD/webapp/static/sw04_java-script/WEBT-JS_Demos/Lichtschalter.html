@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Lichtschalter</title>
+    <link href="webt.css" rel="stylesheet">
+</head>
+<body>
+    <img id="lichtschalter" src="light_off.png"></img><br>
+    <button onclick="lichtschalter();">Lichtschalter</button>
+    <script>
+        let licht = false;
+        function lichtschalter() {
+            let img = document.getElementById('lichtschalter');
+            if (licht) {
+                img.src = "light_off.png";
+            } else {
+                img.src = "light_on.png";
+            }
+            licht = !licht;
+        }
+    </script>
+</body>
+
+</html>

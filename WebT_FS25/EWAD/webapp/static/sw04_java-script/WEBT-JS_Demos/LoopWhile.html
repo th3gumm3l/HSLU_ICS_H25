@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>While-Schleife</title>
+    <meta charset="utf8">
+    <link href="webt.css" rel="stylesheet">
+</head>
+<body>
+    <p>Ausgabe in Konsole (F12)</p>
+    <script>
+        // Eingabe
+        let input = prompt('Zahl eingeben');
+        let bits = 0;
+
+        // Bestimme Anzahl Bits
+        while (input != 0) {
+            input = Math.floor(input / 2);
+            ++bits;
+        }
+
+        // Ausgabe
+        console.log('Anzahl der Bits: ' + bits);
+    </script>
+</body>
+
+</html>

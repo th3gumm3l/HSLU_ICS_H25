@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf8">
+    <title>Übung 4: Objekte</title>
+    <script>
+        function constructBook(titleParam, authorParam, priceParam) {
+           // TODO: complete function
+
+        }
+    </script>
+</head>
+
+<body>
+    <p>Die Ausgabe erfolgt im Console-Log: F12</p>
+    <script>
+        let books = [
+            constructBook('JavaScript: Das umfassende Handbuch', 'Philip Ackermann', 49.90),
+            constructBook('Einstieg in JavaScript: Dynamische Webseiten erstellen', 'Thomas Theis', 29.90),
+            constructBook('Objektorientierte Programmierung mit JavaScript', 'Jörg Bewersdorff', 24.95),
+            constructBook('JavaScript: Aller Anfang ist leicht', 'Marco Emrich und Christin Marit', 24.90),
+        ];
+
+        for(let i = 0; i < books.length; ++i) {
+            console.log(books[i].print());
+        }
+    </script>
+</body>
+
+</html>

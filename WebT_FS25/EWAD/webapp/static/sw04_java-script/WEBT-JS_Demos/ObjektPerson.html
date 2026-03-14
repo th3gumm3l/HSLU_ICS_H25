@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Objekt Demo (Person)</title>
+    <meta charset="utf8">
+    <link href="webt.css" rel="stylesheet">
+</head>
+<body>
+    <p>Ausgabe in Konsole (F12)</p>
+    <script>
+        let person = {
+			firstName: 'Hans',
+			name:      'Meier',
+			age:       22,
+			fullName: function() {
+                          return this.firstName + ' ' + this.name;
+                      }
+		};
+        console.log(person.firstName + ' ist ' + person.age + ' Jahre alt');
+		
+        // Hinzufügen (Zugriff auf nicht existierendes Property)
+        person.location = 'Rotkreuz';
+		console.log(person.firstName + ' wohnt in ' + person.location + ' (location hinzugefügt)');
+		
+        // Ändern (Zugriff auf existierendes Property)
+        person.age = 34;
+		console.log(person.firstName + ' ist ' + person.age + ' Jahre alt (age geändert)');
+		
+        // Löschen
+        delete person.age;
+		console.log(person.firstName + ' ist ' + person.age + ' Jahre alt (age gelöscht)');
+		
+		// Verwendung von Methode
+		console.log(person.fullName() + ' (Methodenzugriff)');
+    </script>
+</body>
+
+</html>
