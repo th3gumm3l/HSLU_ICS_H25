@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="utf-8">
+    <title>Übung 3: Gesamtwiderstandsberechnung</title>
+    <script>
+		function calculateResistance(r1, r2, wiring) {
+			// TODO: reuse function from week 5
+		}
+
+		function calculate() {
+			// TODO: query information from form (r1, r2 und wiring)
+
+	        // TODO: call function calculateResistance with information of form
+
+			// TODO: output the total resistance in span with id output
+		}
+
+        // TODO: implement validation functions for R1, R2, Wiring
+
+        function clearValidationErrors() {
+            document.getElementById('errorR1').innerText = '';
+			document.getElementById('errorR2').innerText = '';
+            document.getElementById('errorWiring').innerText = '';
+        }
+
+        function hasValidationErrors() {            
+            return document.getElementById('errorR1').innerText != ''
+                || document.getElementById('errorR2').innerText != ''
+                || document.getElementById('errorWiring').innerText != '';
+        }
+		
+        function validateAndCalculate() {
+            clearValidationErrors();
+			// TODO: call validation functions for R1, R2, Wiring
+            if (!hasValidationErrors()) {                
+                calculate();              
+            }
+        }
+    </script>
+</head>
+<body>
+
+<h2>Berechnung Gesamtwiderstand</h2>
+	<main>
+		<fieldset>
+			<legend><strong>Widerstände</strong></legend>
+			<label for="r1">R1:</label>
+			<br>
+			<input id="r1" type="number">
+			<br>
+			<p id="errorR1" class=".error"></p>
+			<label for="r2">R2:</label>
+			<br>
+			<input id="r2" type="number">
+			<p id="errorR2" class=".error"></p>
+		</fieldset>
+		<fieldset>
+			<legend><strong>Schaltung</strong></legend>
+			<label for="serial">Seriell:</label><br>
+			<input id="serial" type="radio" name="wiring" value="serial">
+			<br>
+			<label for="parallel">Parallel:</label><br>
+			<input id="parallel" type="radio" name="wiring" value="parallel">
+			<p id="errorWiring" class=".error"></p>
+		</fieldset>
+
+        <fieldset>
+            <legend><strong>Berechnung</strong></legend>
+            <p>Gesamtwiderstand: <span id="output"></span></p>
+
+        </fieldset>
+		<fieldset>
+			<legend><strong>Berechnen</strong></legend>
+			<button type="button" onclick="validateAndCalculate()">Berechne Gesamtwiderstand</button>
+		</fieldset>
+	</main>
+</body>
+
+</html>

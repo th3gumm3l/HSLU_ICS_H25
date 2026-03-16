@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf8">
+    <title>Beispiel: Kontaktformular</title>
+    <link href="webt.css" rel="stylesheet">
+    <style>.error { color: red; } </style>
+    <script>                
+        function validateName() {
+            let name = document.getElementById('name');
+            let errorName = document.getElementById('errorName');
+            if (name.value.length < 5 || name.value.length > 30) {
+                errorName.innerText = "length of name must be between 5 and 30 characters";
+            }
+        }
+        
+        function validateEmail() {
+            let email = document.getElementById('email');
+            let errorEmail = document.getElementById('errorEmail');
+            if (!email.checkValidity()) {
+                errorEmail.innerText = email.validationMessage;
+            }
+        }
+
+        function clearValidationErrors() {
+            document.getElementById('errorEmail').innerText = '';
+            document.getElementById('errorName').innerText = '';
+        }
+
+        function hasValidationErrors() {            
+            return document.getElementById('errorEmail').innerText != ''
+                || document.getElementById('errorName').innerText != ''
+        }
+
+        function submit() {
+            clearValidationErrors();
+            validateName();
+            validateEmail();
+            if (!hasValidationErrors()) {                
+                // sendData();                
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <header>
+        <h1>Beispiel: Kontaktformular</h1>
+    </header>    
+    <main>
+        <p>Please enter a name and a valid email address to get in touch with us.</p>        
+        <label for="name">Name:</label><input id="name" name="name"/>
+        <p id="errorName" class="error"></p>
+        <label for="email">Email:</label><input id="email" name="email" type="email" required/>
+        <p id="errorEmail" class="error"></p>
+        <button onclick="submit()">Senden</button>
+    </main>
+</body>
+
+</html>

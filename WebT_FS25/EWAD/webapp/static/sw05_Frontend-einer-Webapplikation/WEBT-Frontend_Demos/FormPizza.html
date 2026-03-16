@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf8" />
+    <title>Beispiel: Pizzashop - Reaktives Formular mit Validierung</title>
+    <link href="webt.css" rel="stylesheet">
+    <style>.error { color: red; } </style>
+    <script>
+        let MAX = 3;
+        function changed(id) {
+            // verify quantity
+            let quantityFeld = document.getElementById('quantity' + id);
+            let quantity = parseInt(quantityFeld.value);
+            if (quantity < 0 || isNaN(quantity)) {
+                quantity = 0;
+                quantityFeld.value = 0;
+            }
+
+            // total per pizza
+            let preisFeld = document.getElementById('price' + id);
+            let preis = quantity * parseFloat(preisFeld.innerText);
+            let totalFeld = document.getElementById('total' + id);
+            totalFeld.innerText = preis.toFixed(2);
+
+            // grand total
+            let grand = 0;
+            for (let i = 1; i <= MAX; ++i) {
+                grand += parseFloat(document.getElementById('total' + i).innerText);
+            }
+            document.getElementById('grandtotal').innerText = grand.toFixed(2);
+        }
+
+        function validateEmail() {
+            let email = document.getElementById('email');
+            let errorEmail = document.getElementById('errorEmail');
+            if (!email.checkValidity()) {
+                errorEmail.innerText = email.validationMessage;
+            }
+        }
+
+        function validateOrder() {
+            // count number of pizzas
+            let pizzas = 0;
+            for (let i = 1; i <= MAX; ++i) {
+                pizzas += parseInt(document.getElementById('quantity' + i).value) || 0;
+            }
+            // error no pizzas ordered
+            if (pizzas < 1) {
+                let errorOrder = document.getElementById('errorOrder');
+                errorOrder.innerText = 'Please order at least one pizza!';
+            }
+        }
+
+        function clearValidationErrors() {
+            document.getElementById('errorEmail').innerText = '';
+            document.getElementById('errorOrder').innerText = '';
+        }
+
+        function hasValidationErrors() {
+            return document.getElementById('errorEmail').innerText != ''
+                || document.getElementById('errorOrder').innerText != '';
+        }
+
+        function order() {
+            clearValidationErrors();
+            validateEmail();
+            validateOrder();
+            if (!hasValidationErrors()) {
+                // sendOrder() [not implemented]
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Beispiel: Reaktives Formular zur Pizzabestellung</h1>
+    <main>
+        <label for="email">Email:</label>
+        <input id="email" type="email" required size="32"/>
+        <p id="errorEmail" class="error"></p>
+        <table>
+            <tr>
+                <th>Anzahl</th>
+                <th>Pizza</th>
+                <th>Preis</th>
+                <th>Total</th>
+            </tr>
+            <tr>
+                <td>
+                    <input id="quantity1" size="3" type="number" oninput="changed(1)" />
+                </td>
+                <td>Margherita</td>
+                <td id="price1">7.50</td>
+                <td id="total1">0.00</td>
+            </tr>
+            <tr>
+                <td>
+                    <input id="quantity2" size="3" type="number" oninput="changed(2)" />
+                </td>
+                <td>Tonno</td>
+                <td id="price2">9.50</td>
+                <td id="total2">0.00</td>
+            </tr>
+            <tr>
+                <td>
+                    <input id="quantity3" size="3" type="number" oninput="changed(3)" />
+                </td>
+                <td>Fantasia</td>
+                <td id="price3">11.00</td>
+                <td id="total3">0.00</td>
+            </tr>
+            <tr>
+                <td></td>
+                <th>Total</th>
+                <td></td>
+                <td id="grandtotal">0.00</td>
+            </tr>
+        </table>
+        <p id="errorOrder" class="error"></p>
+        <button onclick="order()">Bestellen</button>
+    </main>
+</body>
+
+</html>

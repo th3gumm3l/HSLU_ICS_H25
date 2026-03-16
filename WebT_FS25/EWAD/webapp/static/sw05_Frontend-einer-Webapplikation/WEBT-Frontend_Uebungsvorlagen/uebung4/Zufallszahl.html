@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Übung 4: Zufallszahl</title>
+    <meta charset="utf8">
+    <style>
+        .red { color:red; }
+        .green { color:green; }
+    </style>
+
+    <script>
+    function showRandomNumber(min, max) {
+	    let x = (Math.random() * (max - min)) + min;
+	    
+	    // TODO: complete code according to task description
+
+    }
+    </script>
+</head>
+
+<body>
+    <p id="zufallszahl">bisher noch keine Zufallszahl vorliegend.</p>
+    <button type="button" onclick="showRandomNumber(1,100)">Berechne Zufallszahl</button>
+</body>
+
+</html>

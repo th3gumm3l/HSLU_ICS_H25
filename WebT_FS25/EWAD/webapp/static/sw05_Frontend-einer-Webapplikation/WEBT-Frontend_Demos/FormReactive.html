@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf8">
+    <title>Beispiel: Reaktives Formular</title>
+    <link href="webt.css" rel="stylesheet">
+    <script>
+        function updateLength() {
+            let name = document.getElementById('name');
+            let length = document.getElementById('length');
+            length.innerText = name.value.length + ' / 40';
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Beispiel: Reaktives Formular</h1>
+    <label for="name">Name:</label>
+    <input id="name" oninput="updateLength()"/>
+    <span id="length"></span>
+    <button>Send</button>
+</body>
+
+</html>
