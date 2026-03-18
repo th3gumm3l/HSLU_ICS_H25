@@ -4,17 +4,24 @@
 <head>
     <title>Übung 2: Events</title>
     <meta charset="utf8">
+    <script>
+        function onClick() {
+            let output = document.getElementById('output');
+            output.innerHTML = 'Button pressed';
+        }
+
+    </script>
 </head>
 
 <body>
     <header>
-        <h1>Events-Übung</h1>
+        <h1 ondblclick="alert('Doppelklick auf die Überschrift!')">Events-Übung</h1>
     </header>
     <section>
         <p>Bitte geben Sie Ihre Mitteilung ein:</p>
         <label for="notice">Mitteilung:</label>
-        <input id="notice">
-        <button>Abschicken</button>
+        <input id="notice" onfocus="alert('Input-Feld wurde fokussiert!')" />
+        <button onclick="onClick()" onmouseover="alert('Maus über dem Button!')">Abschicken</button>
     </section>
 </body>
 
