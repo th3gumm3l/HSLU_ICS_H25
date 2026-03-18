@@ -6,18 +6,56 @@
     <title>Übung 3: Gesamtwiderstandsberechnung</title>
     <script>
 		function calculateResistance(r1, r2, wiring) {
-			// TODO: reuse function from week 5
+			let result = 0;
+
+			if (wiring === "serial"){
+				result = r1 + r2;
+			}
+			else if (wiring === "parallel"){
+				result = (r1 * r2)/(r1 + r2);
+			}
+			return result;
 		}
 
 		function calculate() {
-			// TODO: query information from form (r1, r2 und wiring)
+			let r1 = parseFloat(document.getElementById('r1').value);
+			let r2 = parseFloat(document.getElementById('r2').value);
 
-	        // TODO: call function calculateResistance with information of form
+			let wiring = '';
+			if (document.getElementById('serial').checked) {
+				wiring = 'serial';
+			} else if (document.getElementById('parallel').checked) {
+				wiring = 'parallel';
+			}
 
-			// TODO: output the total resistance in span with id output
+			let result = calculateResistance(r1, r2, wiring);
+
+			document.getElementById('output').innerText = result;
 		}
 
-        // TODO: implement validation functions for R1, R2, Wiring
+		function validateR1() {
+			let val = document.getElementById('r1').value;
+			if (val === '' || isNaN(val)) {
+				document.getElementById('errorR1').innerText = 'Bitte einen gültigen Wert für R1 eingeben.';
+			} else if (parseFloat(val) < 0) {
+				document.getElementById('errorR1').innerText = 'R1 darf nicht negativ sein.';
+			}
+		}
+
+		function validateR2() {
+			let val = document.getElementById('r2').value;
+			if (val === '' || isNaN(val)) {
+				document.getElementById('errorR2').innerText = 'Bitte einen gültigen Wert für R2 eingeben.';
+			} else if (parseFloat(val) < 0) {
+				document.getElementById('errorR2').innerText = 'R2 darf nicht negativ sein.';
+			}
+		}
+
+		function validateWiring() {
+			if (!document.getElementById('serial').checked && !document.getElementById('parallel').checked) {
+				document.getElementById('errorWiring').innerText = 'Bitte eine Schaltung auswählen.';
+			}
+		}
 
         function clearValidationErrors() {
             document.getElementById('errorR1').innerText = '';
@@ -26,14 +64,16 @@
         }
 
         function hasValidationErrors() {            
-            return document.getElementById('errorR1').innerText != ''
-                || document.getElementById('errorR2').innerText != ''
-                || document.getElementById('errorWiring').innerText != '';
+            return document.getElementById('errorR1').innerText !== ''
+                || document.getElementById('errorR2').innerText !== ''
+                || document.getElementById('errorWiring').innerText !== '';
         }
 		
         function validateAndCalculate() {
             clearValidationErrors();
-			// TODO: call validation functions for R1, R2, Wiring
+			validateR1();
+			validateR2();
+			validateWiring();
             if (!hasValidationErrors()) {                
                 calculate();              
             }
