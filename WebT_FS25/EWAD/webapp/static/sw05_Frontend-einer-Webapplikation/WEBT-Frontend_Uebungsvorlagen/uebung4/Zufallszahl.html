@@ -13,8 +13,15 @@
     function showRandomNumber(min, max) {
 	    let x = (Math.random() * (max - min)) + min;
 	    
-	    // TODO: complete code according to task description
+	    let zahl = Math.round(x);
+	    let el = document.getElementById('zufallszahl');
+	    el.innerText = zahl;
 
+	    if (zahl < 50) {
+	        el.className = 'green';
+	    } else {
+	        el.className = 'red';
+	    }
     }
     </script>
 </head>
