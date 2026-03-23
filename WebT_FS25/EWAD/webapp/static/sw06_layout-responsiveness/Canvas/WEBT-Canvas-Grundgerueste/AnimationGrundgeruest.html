@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf8">
+    <title>Animation</title>
+    <script>
+        let timeUntilNextFrame = 1000 / 50; // 50 Bilder pro Sekunde        
+        function animate() {
+
+            // Setzte Timer für das nächste Bild
+            setTimeout(animate, timeUntilNextFrame);
+
+            let canvas = document.getElementById("canvas");
+            let c = canvas.getContext('2d');
+
+            // Positionen der Bildelemente anpassen
+            update();
+
+            // Canvas löschen
+            c.clearRect(0, 0, 800, 100);
+
+            // Bild zeichnen
+            draw(c);
+        }
+        // Die Position ist global gespeichert:
+        // Jeder Event startet einen neuen Funktionsaufruf und beendet den aktu-ellen.
+        // Die Position kann also nicht im Scope der Funktion gespeichert werden.
+        let position = { x: -100, y: 50 };
+
+        function update() {
+            // Bewegung nach links
+            position.x = position.x + 2;
+
+            // Zurücksetzten bei Verlassen des Canvas
+            if (position.x > 299) { position.x = -100 };
+        }
+
+        function draw(c) {
+            c.beginPath();
+            c.fillStyle = "blue";
+            c.font = "24pt Helvetica";
+            c.fillText("Animation", position.x, position.y);
+        }
+    </script>
+</head>
+
+<body onload="animate()">
+    <canvas id="canvas" width="300" height="300"></canvas>
+</body>
+
+</html>

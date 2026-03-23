@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <title>Beispiel: Interactive Block</title>
+    <link href="webt.css" rel="stylesheet">
+    <style>
+        body {
+            width:100vw;
+            height:100vh;
+            margin:0px;
+            padding:0px;
+            overflow: hidden;
+        }
+        #block {
+            background-color: rgb(68, 114, 196);
+            width: 100px; height: 100px;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+        }
+    </style>
+    <script>
+        let lastPos = null;
+        function setLastPos(event) {
+            lastPos = {
+                x: event.clientX,
+                y: event.clientY
+            }
+        }
+        function clearLastPos() {
+            lastPos = null;
+        }
+        function moveBlock(event) {
+            if (lastPos) {
+                let deltaX = lastPos.x - event.clientX;
+                let deltaY = lastPos.y - event.clientY;
+                block.style.left = (block.style.left.replace('px', '') - deltaX) + "px";
+                block.style.top  = (block.style.top.replace('px', '')  - deltaY) + "px";
+                setLastPos(event);
+            }
+        }
+        
+    </script>
+</head>
+
+<body onmousemove="moveBlock(event)" onmouseup="clearLastPos()">
+    <h1>Beispiel: Interactive Block</h1>
+    <div id="block" onmousedown="setLastPos(event)"></div>
+</body>
+
+</html>

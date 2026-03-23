@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf8">
+    <title>Übung 3: Bahnhofsuhr</title>
+    <script>
+        // Mittelpunkt der Uhr
+        let centerX = 200;
+        let centerY = 200;
+
+        // Aktuelle Zeit
+        let time = Date.now();
+
+        // Polar zu kartesischen Koordinaten (X)
+        function polarX(laenge, position) {
+            return Math.cos(position * 2 * Math.PI - 0.5 * Math.PI) * laenge + centerX;
+        }
+        // Polar zu kartesischen Koordinaten (Y)
+        function polarY(laenge, position) {
+            return Math.sin(position * 2 * Math.PI - 0.5 * Math.PI) * laenge + centerY;
+        }
+
+        // Zeichne die Markierungen (Stunden, Minuten)
+        function drawMarkers(c, number, width, from, to) {
+            for (let i = 0; i < number; ++i) {
+                c.beginPath();
+                c.moveTo(polarX(from, i / number), polarY(from, i / number));
+                c.lineTo(polarX(to, i / number), polarY(to, i / number));
+                c.strokeStyle = "black";
+                c.lineWidth = width;
+                c.stroke();
+            }
+        }
+
+        // Zeichne einen Zeiger
+        function drawPointer(c, pos, width, from, to) {
+            c.beginPath();
+            c.moveTo(polarX(from, pos), polarY(from, pos));
+            c.lineTo(polarX(to, pos), polarY(to, pos));
+            c.strokeStyle = "black";
+            c.lineWidth = width;
+            c.stroke();
+        }
+
+        function draw() {
+            // Abfrage des Canvas und des Contexts
+            let canvas = document.getElementById('uhr');
+            let c = canvas.getContext('2d');
+
+            // Bestimmung der Uhrzeit
+            let d = new Date(time);
+            hourPos = d.getHours() / 12;
+            minutePos = d.getMinutes() / 60;
+            secondPos = (d.getSeconds() + d.getMilliseconds() / 1000) / 60;
+
+            // Zeichnen des Ziffernblatts
+            c.beginPath();
+            c.arc(centerX, centerY, 190, 0, 2 * Math.PI, false);
+            c.closePath();
+            c.fillStyle = "white";
+            c.strokeStyle = "black";
+            c.lineWidth = 10;
+            c.stroke();
+            c.fill();
+
+            drawMarkers(c, 60, 4, 170, 180);
+            drawMarkers(c, 12, 10, 140, 180);
+
+            // Zeichnen der Zeiger (Stunden und Minuten)
+            drawPointer(c, hourPos, 15, -40, 130);
+            drawPointer(c, minutePos, 10, -40, 170);
+
+            // Zeichnen des Sekundenzeigers
+            c.beginPath();
+            c.moveTo(polarX(-40, secondPos), polarY(-40, secondPos));
+            c.lineTo(polarX(120, secondPos), polarY(120, secondPos));
+            c.strokeStyle = "red";
+            c.lineWidth = 3;
+            c.stroke();
+
+            c.beginPath();
+            c.arc(polarX(120, secondPos), polarY(120, secondPos), 20, 0, 2 * Math.PI, false);
+            c.fillStyle = "red";
+            c.fill();
+        }
+
+        function update() {
+            // TODO: Zeit anpassen (globale Variable time)
+        }
+
+        function animate() {
+            update();
+            draw();
+
+            // TODO: animate nach 10ms wieder aufrufen
+        }
+    </script>
+</head>
+
+<body onload="animate()">
+    <canvas id="uhr" width="400" height="400"></canvas>
+</body>
+
+</html>

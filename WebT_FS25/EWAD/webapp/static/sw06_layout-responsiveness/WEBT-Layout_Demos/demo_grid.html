@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <title>Beispiel: Grid-Layout</title>
+        <link href="webt.css" rel="stylesheet">
+        <style>
+            .parent {
+                background-color: rgb(165, 165, 165);
+                height: 400px;
+                display: grid;
+                grid-template-rows: 50px 1fr 50px;
+                grid-template-columns: 25% 25% 25% 25%;
+                grid-auto-flow:row;
+				
+/*              grid-auto-flow:column; */
+
+            }
+            .child {
+                background-color: rgb(68, 114, 196);
+                border: solid 2px;
+            }
+/*
+            .parent :nth-child(1) { grid-row: 1 / 2;
+                                    grid-column: 1 / 4;}
+            .parent :nth-child(2) { grid-row: 1 / 2;
+                                    grid-column: 4 / 5; }
+            .parent :nth-child(3) { grid-row: 2 / 3;
+                                    grid-column: 1 / 4; }
+            .parent :nth-child(4) { grid-row: 2 / 3;
+                                    grid-column: 4 / 5; }
+            .parent :nth-child(5) { grid-row: 3 / 4;
+                                    grid-column: 1 / 5; }
+*/
+/*
+            .parent {
+                grid-template-areas: "header header header menu" 
+                                     "content content content sidebar"
+                                     "footer footer footer footer" ; 
+            }
+            .parent :nth-child(1) { grid-area: header; }
+            .parent :nth-child(2) { grid-area: menu; }
+            .parent :nth-child(3) { grid-area: content; }
+            .parent :nth-child(4) { grid-area: sidebar; }
+            .parent :nth-child(5) { grid-area: footer; }
+*/
+        </style>
+    </head>
+    <body>
+        <h1>Beispiel: Grid-Layout</h1>
+        <div class="parent">
+            <header  class="child">header </header>
+            <nav     class="child">nav    </nav>
+            <article class="child">article</article>
+            <aside   class="child">sidebar</aside>
+            <footer  class="child">footer </footer>
+        </div>
+    </body>
+</html>

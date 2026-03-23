@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Canvas</title>
+    <meta charset="utf8">
+    <script>
+        function drawArc(c, x, y, radius, start, end, stroke, fill, width) {
+            c.lineWidth = width;
+            c.strokeStyle = stroke;
+            c.fillStyle = fill;
+
+            c.beginPath();
+            c.arc(x, y, radius, start, end, false);
+            c.closePath();
+            c.stroke();
+            c.fill();
+        }
+
+        function draw() {
+            let canvas = document.getElementById('canvas');
+            let c = canvas.getContext('2d');
+
+            drawArc(c, 150, 150, 100, 0, 2 * Math.PI, "black", "red", 1);
+            drawArc(c, 120, 130, 20, 0, 2 * Math.PI, "black", "white", 1);
+            drawArc(c, 123, 133, 4, 0, 2 * Math.PI, "black", "blue", 1);
+            drawArc(c, 180, 130, 20, 0, 2 * Math.PI, "black", "white", 1);
+            drawArc(c, 183, 133, 4, 0, 2 * Math.PI, "black", "blue", 1);
+            drawArc(c, 155, 165, 60, 0, 3, "yellow", "white", 5);
+        }
+    </script>
+</head>
+
+<body onload="draw()">
+    <canvas id="canvas" width="300" height="300"></canvas>
+</body>
+
+</html>

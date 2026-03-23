@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Beispiel: Komplexer modaler Dialog mit W3.CSS</title>    
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="webt.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <h1>Beispiel: Komplexer modaler Dialog mit W3.CSS</h1>
+    <div class="w3-container">
+        <button onclick="document.getElementById('dialog').classList.add('w3-show');"
+            class="w3-button w3-grey">Show</button>
+
+        <div id="dialog" class="w3-modal">
+            <div class="w3-modal-content" style="max-width:600px">
+                <header class="w3-bar w3-blue">
+                    <span class="w3-bar-item"><b>System Login</b></span>
+                    <span class="w3-bar-item w3-button w3-right w3-hover-red"
+                        onclick="document.getElementById('dialog').classList.remove('w3-show');"
+                        title="Close Modal">&times;</span>
+                </header>
+                <main class="w3-container">
+                    <section class="w3-section">Please enter username and password to enter system.</section>
+                    <section class="w3-row w3-section">
+                        <label for="username" class="w3-col m3"><b>Username:</b></label>
+                        <input id="username" class="w3-col m9 w3-input w3-border">
+                    </section>
+                    <section class="w3-row w3-section">
+                        <label for="password" class="w3-col m3"><b>Password:</b></label>
+                        <input id="password" class="w3-col m9 w3-input w3-border" type="password">
+                    </section>
+                </main>
+                <footer class="w3-container">
+                    <section class="w3-row w3-section">
+                        <button class="w3-button w3-left m2 w3-red"
+                            onclick="document.getElementById('dialog').classList.remove('w3-show');">Cancel</button>
+                        <button class="w3-button w3-right m2 w3-green"
+                            onclick="document.getElementById('dialog').classList.remove('w3-show');">Login</button>
+                    </section>
+                </footer>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

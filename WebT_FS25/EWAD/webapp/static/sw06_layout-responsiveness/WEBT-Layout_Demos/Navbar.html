@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Beispiel: Demonstration verschiedener Navigationsleisten mit W3.CSS</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="webt.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <h1>Beispiel: Demonstration verschiedener Navigationsleisten mit W3.CSS</h1>
+    <h2>Einfache responsive Navigationsleiste</h2>
+    <nav class="w3-bar w3-blue">
+        <a href="#" class="w3-bar-item w3-button w3-mobile">News</a>
+        <a href="#" class="w3-bar-item w3-button w3-mobile">Functions</a>
+        <a href="#" class="w3-bar-item w3-button w3-mobile">About</a>
+    </nav>
+    <h2>Einfache responsive Navigationsleiste mit Searchinput</h2>
+    <nav class="w3-bar w3-blue">
+        <a href="#" class="w3-bar-item w3-button w3-mobile">Home</a>
+        <input class="w3-bar-item w3-input w3-border w3-mobile" placeholder="Suche...">
+        <button class="w3-bar-item w3-green w3-mobile">Go</button>
+    </nav>
+    <h2>Einfache Navigationsleiste mit Dropdown (nicht responsive)</h2>
+    <nav class="w3-bar w3-blue">
+        <a href="#" class="w3-bar-item w3-button">News</a>
+        <div class="w3-dropdown-hover">
+            <button class="w3-button">Dropdown</button>
+            <div class="w3-dropdown-content w3-bar-block">
+                <a href="#" class="w3-bar-item w3-button">Article</a>
+                <a href="#" class="w3-bar-item w3-button">Login</a>
+                <a href="#" class="w3-bar-item w3-button">About</a>
+            </div>
+        </div>
+    </nav>
+    <h2>Einfache responsive Navigationsleiste mit Hamburgerbutton</h2>
+    <nav class="w3-bar w3-blue">
+        <a href="#" class="w3-bar-item w3-button">News</a>
+        <a href="#" class="w3-bar-item w3-button w3-hide-small">Login</a>
+        <a href="#" class="w3-bar-item w3-button w3-hide-small">About</a>
+        <button class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium"
+            onclick="document.getElementById('sub').classList.toggle('w3-hide');">&#x2261;</button>
+    </nav>
+
+    <nav id="sub" class="w3-bar-block w3-blue w3-hide">
+        <a href="#" class="w3-bar-item w3-button">Login</a>
+        <a href="#" class="w3-bar-item w3-button">About</a>
+    </nav>
+
+</body>
+
+</html>

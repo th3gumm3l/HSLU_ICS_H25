@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Beispiel: Einfacher modaler Dialog mit W3.CSS</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="webt.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <h1>Beispiel: Einfacher modaler Dialog mit W3.CSS</h1>
+    <div class="w3-container">
+        <p>Auf "Show" klicken um den Dialog zu zeigen.</p>
+        <button onclick="document.getElementById('dialog').classList.add('w3-show');"
+            class="w3-button w3-grey">Show</button>
+
+        <div id="dialog" class="w3-modal">
+            <div class="w3-modal-content" style="max-width:300px">
+                <header class="w3-bar w3-blue">
+                    <span class="w3-bar-item"><b>Meldung</b></span>
+                    <span class="w3-bar-item w3-button w3-right"
+                        onclick="document.getElementById('dialog').classList.remove('w3-show');"
+                        title="Close Modal">&times;</span>
+                </header>
+                <main class="w3-container">
+                    <section class="w3-section">Dies ist eine Information.</section>
+                    <section class="w3-row w3-section">
+                        <button class="w3-button w3-right m3 w3-green"
+                            onclick="document.getElementById('dialog').classList.remove('w3-show');">Verstanden</button>
+                    </section>
+                </main>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
