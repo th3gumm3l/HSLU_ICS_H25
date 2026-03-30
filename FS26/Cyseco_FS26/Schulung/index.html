@@ -985,7 +985,7 @@ strong { color: var(--text-primary); font-weight: 600; }
         <div class="email-field">
           <span class="email-field-label">Von:</span>
           <span class="email-field-value">
-            <span class="email-hotspot" data-tip="Falsche Domain" data-detail="«hslu-luzern.org» ist nicht die echte HSLU-Domain (hslu.ch)." data-idx="1">it-sicherheit@hslu-luzern.org<span class="hotspot-badge">1</span></span>
+            <span class="email-hotspot" data-tip="Falsche Domain" data-detail="«hslu-luzern.org» ist nicht die echte HSLU-Internetadresse (hslu.ch)." data-idx="1">it-sicherheit@hslu-luzern.org<span class="hotspot-badge">1</span></span>
           </span>
         </div>
         <div class="email-field">
@@ -1192,7 +1192,7 @@ const patterns = [
 ];
 
 const anatomy = [
-  { icon: '✉️', title: 'Absender', check: 'Domain genau prüfen. Buchstabendreher, Zusatzbuchstaben?', fake: 'support@paypai.com statt support@paypal.com' },
+  { icon: '✉️', title: 'Absender', check: 'Domain (Internetadresse, z.\u00A0B. «paypal.com») genau prüfen. Buchstabendreher, Zusatzbuchstaben?', fake: 'support@paypai.com statt support@paypal.com' },
   { icon: '📋', title: 'Betreffzeile', check: 'Erzeugt sie künstlichen Druck oder Panik?', fake: '«DRINGEND: Konto gesperrt — sofort handeln!»' },
   { icon: '👤', title: 'Anrede', check: 'Unpersönlich oder generisch?', fake: '«Sehr geehrter Kunde» statt Ihres Namens' },
   { icon: '📝', title: 'Inhalt', check: 'Logik prüfen. Passt der Kontext zu Ihrer Situation?', fake: 'DHL-Benachrichtigung, obwohl kein Paket erwartet' },
@@ -1222,7 +1222,7 @@ const quizData = [
       'Nur die Absender-Domain ist verdächtig; wenn der Link tatsächlich auf postfinance.ch zeigt, ist er sicher'
     ],
     correct: 2,
-    explanation: 'Ein SSL-Zertifikat beweist nur, dass die Verbindung verschlüsselt ist, nicht dass die Seite legitim ist. Die echte Domain ist «secure-login.com», «postfinance.ch» ist nur eine Subdomain davon.'
+    explanation: 'Das Schloss-Symbol (SSL-Zertifikat) beweist nur, dass die Verbindung verschlüsselt ist — nicht, dass die Seite echt ist. Auch Betrüger können ein Schloss-Symbol erhalten. Die echte Internetadresse ist «secure-login.com». Der Teil «postfinance.ch» davor ist nur ein Vorsatz (Subdomain), den jeder frei wählen kann — ähnlich wie ein beliebiger Ordnername.'
   },
   {
     q: 'Ein Kollege erhält eine E-Mail mit dem Betreff «Vertraulich: Gehaltsanpassungen Q2 — bitte nicht weiterleiten». Er öffnet den Anhang aus Neugier. Kurz darauf wird sein Rechner langsamer. Er schliesst den Anhang und löscht die E-Mail. Was ist die korrekte Reihenfolge der Sofortmassnahmen?',
@@ -1233,7 +1233,7 @@ const quizData = [
       'Rechner neu starten, Virenscanner laufen lassen, IT bei Gelegenheit informieren'
     ],
     correct: 1,
-    explanation: 'Das Löschen der E-Mail und ein Neustart können Beweise vernichten und Malware nicht zuverlässig entfernen. Netzwerk sofort trennen verhindert die Ausbreitung.'
+    explanation: 'Das Löschen der E-Mail und ein Neustart können Beweise vernichten und Schadsoftware (Malware) nicht zuverlässig entfernen. Netzwerk sofort trennen verhindert die Ausbreitung.'
   }
 ];
 
