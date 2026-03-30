@@ -1,0 +1,1552 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phishing erkennen und abwehren — IT-Sicherheitsschulung</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   CSS VARIABLES & RESET
+   ============================================ */
+:root {
+  --bg-deep: #0a0e17;
+  --bg-card: #111827;
+  --bg-card-hover: #1a2332;
+  --bg-elevated: #1e293b;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --accent: #38bdf8;
+  --accent-glow: rgba(56, 189, 248, 0.15);
+  --accent-bright: #7dd3fc;
+  --danger: #f87171;
+  --danger-glow: rgba(248, 113, 113, 0.15);
+  --success: #4ade80;
+  --success-glow: rgba(74, 222, 128, 0.15);
+  --warning: #fbbf24;
+  --warning-glow: rgba(251, 191, 36, 0.12);
+  --border: rgba(148, 163, 184, 0.1);
+  --border-accent: rgba(56, 189, 248, 0.25);
+  --radius: 12px;
+  --radius-lg: 20px;
+  --shadow: 0 4px 24px rgba(0,0,0,0.3);
+  --font-body: 'IBM Plex Sans', sans-serif;
+  --font-display: 'Playfair Display', serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+::selection { background: var(--accent); color: var(--bg-deep); }
+
+/* ============================================
+   NAVIGATION
+   ============================================ */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: rgba(10, 14, 23, 0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  transition: transform 0.3s ease;
+}
+.nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  height: 64px;
+  gap: 1rem;
+}
+.nav-logo {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 0.85rem;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.nav-logo svg { width: 20px; height: 20px; }
+.nav-steps {
+  display: flex;
+  gap: 2px;
+  margin-left: auto;
+}
+.nav-step {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: transparent;
+}
+.nav-step:hover { border-color: var(--accent); color: var(--accent); }
+.nav-step.active { border-color: var(--accent); background: var(--accent); color: var(--bg-deep); }
+.nav-step.completed { border-color: var(--success); background: var(--success); color: var(--bg-deep); }
+.nav-progress {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-left: 1rem;
+  white-space: nowrap;
+}
+
+/* ============================================
+   LAYOUT
+   ============================================ */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+.section {
+  min-height: 100vh;
+  padding: 100px 0 60px;
+  display: none;
+  animation: fadeSlideIn 0.5s ease forwards;
+}
+.section.active { display: block; }
+
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+.section-number {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--accent);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+h1 {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+}
+h1 .accent { color: var(--accent); }
+h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  line-height: 1.25;
+  margin-bottom: 1rem;
+}
+h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+p { margin-bottom: 1rem; color: var(--text-secondary); }
+strong { color: var(--text-primary); font-weight: 600; }
+
+/* ============================================
+   HERO
+   ============================================ */
+.hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+  padding: 100px 0;
+  position: relative;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: radial-gradient(circle at 50% 60%, rgba(56,189,248,0.06) 0%, transparent 50%);
+  pointer-events: none;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-accent);
+  background: var(--accent-glow);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent);
+  margin-bottom: 2rem;
+  letter-spacing: 0.05em;
+}
+.hero h1 { margin-bottom: 1.5rem; }
+.hero p {
+  font-size: 1.15rem;
+  max-width: 560px;
+  margin-bottom: 2rem;
+}
+.hero-stats {
+  display: flex;
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+.hero-stat-num {
+  font-family: var(--font-display);
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: var(--danger);
+  line-height: 1;
+}
+.hero-stat-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+}
+.btn-start {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2.5rem;
+  background: var(--accent);
+  color: var(--bg-deep);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 30px rgba(56,189,248,0.3);
+}
+.btn-start:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 50px rgba(56,189,248,0.45);
+}
+.btn-start svg { width: 18px; height: 18px; transition: transform 0.3s ease; }
+.btn-start:hover svg { transform: translateX(4px); }
+
+/* ============================================
+   CARDS & CONTENT
+   ============================================ */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+}
+.card:hover { border-color: var(--border-accent); }
+
+.info-box {
+  border-left: 3px solid var(--accent);
+  background: var(--accent-glow);
+  padding: 1.25rem 1.5rem;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  margin: 1.5rem 0;
+}
+.info-box p { color: var(--text-primary); margin: 0; }
+.info-box.warning {
+  border-left-color: var(--warning);
+  background: var(--warning-glow);
+}
+.info-box.danger {
+  border-left-color: var(--danger);
+  background: var(--danger-glow);
+}
+.info-box.success {
+  border-left-color: var(--success);
+  background: var(--success-glow);
+}
+.info-box-title {
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.info-box.warning .info-box-title { color: var(--warning); }
+.info-box.danger .info-box-title { color: var(--danger); }
+.info-box.success .info-box-title { color: var(--success); }
+.info-box .info-box-title { color: var(--accent); }
+
+/* ============================================
+   INTERACTIVE PATTERN CARDS
+   ============================================ */
+.pattern-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+.pattern-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: all 0.35s ease;
+  position: relative;
+  overflow: hidden;
+}
+.pattern-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  border-radius: var(--radius);
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+.pattern-card:hover { transform: translateY(-4px); border-color: var(--border-accent); }
+.pattern-card:hover::after { opacity: 1; }
+.pattern-card .icon {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  background: var(--accent-glow);
+}
+.pattern-card h3 { font-size: 1rem; margin-bottom: 0.4rem; }
+.pattern-card .desc { font-size: 0.85rem; color: var(--text-muted); margin: 0; }
+.pattern-card .example {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, margin 0.4s ease;
+  margin-top: 0;
+}
+.pattern-card.open .example {
+  max-height: 200px;
+  margin-top: 1rem;
+}
+.pattern-card .example-inner {
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+.pattern-card .example-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--danger);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.25rem;
+}
+
+/* ============================================
+   ANATOMY TABLE (Interactive)
+   ============================================ */
+.anatomy-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 2rem 0;
+}
+.anatomy-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.anatomy-item:hover { border-color: var(--border-accent); }
+.anatomy-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+}
+.anatomy-icon {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  background: var(--accent-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+.anatomy-title { font-weight: 600; font-size: 0.95rem; }
+.anatomy-chevron {
+  margin-left: auto;
+  color: var(--text-muted);
+  transition: transform 0.3s ease;
+  font-size: 1.2rem;
+}
+.anatomy-item.open .anatomy-chevron { transform: rotate(180deg); }
+.anatomy-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+.anatomy-item.open .anatomy-body { max-height: 300px; }
+.anatomy-body-inner {
+  padding: 0 1.5rem 1.25rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.anatomy-detail h4 {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 0.25rem;
+}
+.anatomy-detail p { font-size: 0.85rem; margin: 0; }
+
+/* ============================================
+   EMAIL MOCKUP
+   ============================================ */
+.email-mockup {
+  background: #1a1f2e;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin: 2rem 0;
+  border: 1px solid var(--border);
+}
+.email-toolbar {
+  background: #141825;
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.email-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+}
+.email-dot.red { background: #f87171; }
+.email-dot.yellow { background: #fbbf24; }
+.email-dot.green { background: #4ade80; }
+.email-toolbar-title {
+  margin-left: 1rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+.email-content { padding: 1.5rem 2rem; }
+.email-field {
+  display: flex;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(148,163,184,0.06);
+  font-size: 0.9rem;
+  align-items: baseline;
+}
+.email-field-label {
+  font-weight: 600;
+  color: var(--text-muted);
+  min-width: 60px;
+  font-size: 0.8rem;
+}
+.email-field-value { color: var(--text-secondary); }
+.email-body {
+  margin-top: 1.25rem;
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+}
+.email-body a {
+  color: var(--accent);
+  text-decoration: underline;
+  cursor: default;
+}
+.email-hotspot {
+  position: relative;
+  cursor: pointer;
+  border-bottom: 2px dashed rgba(248,113,113,0.4);
+  transition: all 0.2s ease;
+  border-radius: 3px;
+  padding: 0 2px;
+}
+.email-hotspot:hover {
+  background: var(--danger-glow);
+  border-bottom-color: var(--danger);
+}
+.email-hotspot.revealed {
+  background: var(--danger-glow);
+  border-bottom-color: var(--danger);
+}
+.hotspot-badge {
+  display: none;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  background: var(--danger);
+  color: var(--bg-deep);
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 18px;
+  margin-left: 4px;
+  vertical-align: super;
+}
+.email-hotspot.revealed .hotspot-badge { display: inline-block; }
+.hotspot-tooltip { display: none; }
+
+/* Findings list below the email */
+.findings-list {
+  margin-top: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.finding-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.85rem 1.1rem;
+  background: var(--bg-elevated);
+  border: 1px solid rgba(248,113,113,0.2);
+  border-left: 3px solid var(--danger);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  animation: findingIn 0.35s ease forwards;
+  opacity: 0;
+  transform: translateY(8px);
+}
+@keyframes findingIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+.finding-num {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  background: var(--danger);
+  color: var(--bg-deep);
+  min-width: 22px; height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.finding-text strong { color: var(--text-primary); }
+
+.reveal-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.5rem;
+  background: var(--danger-glow);
+  color: var(--danger);
+  border: 1px solid rgba(248,113,113,0.3);
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1.5rem;
+}
+.reveal-btn:hover {
+  background: rgba(248,113,113,0.25);
+  border-color: var(--danger);
+}
+
+/* ============================================
+   STOPP METHOD
+   ============================================ */
+.stopp-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 2rem 0;
+}
+.stopp-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: all 0.3s ease;
+  cursor: default;
+}
+.stopp-item:hover { border-color: var(--border-accent); transform: translateX(4px); }
+.stopp-letter {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+  min-width: 36px;
+}
+.stopp-content h3 { margin-bottom: 0.25rem; font-size: 1rem; }
+.stopp-content p { margin: 0; font-size: 0.9rem; color: var(--text-muted); }
+
+/* ============================================
+   ACTION TABLE
+   ============================================ */
+.action-table {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 2rem 0;
+}
+.action-row {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: all 0.3s ease;
+}
+.action-row:hover { border-color: var(--border-accent); }
+.action-situation {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+.action-response {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+/* ============================================
+   QUIZ
+   ============================================ */
+.quiz-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  transition: border-color 0.3s;
+}
+.quiz-num {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.75rem;
+}
+.quiz-question {
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+.quiz-options { display: flex; flex-direction: column; gap: 0.5rem; }
+.quiz-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+}
+.quiz-option:hover:not(.disabled) { border-color: var(--accent); background: var(--accent-glow); }
+.quiz-option .letter {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--text-muted);
+  min-width: 24px;
+}
+.quiz-option.selected { border-color: var(--accent); background: var(--accent-glow); }
+.quiz-option.correct {
+  border-color: var(--success);
+  background: var(--success-glow);
+  color: var(--text-primary);
+}
+.quiz-option.correct .letter { color: var(--success); }
+.quiz-option.wrong {
+  border-color: var(--danger);
+  background: var(--danger-glow);
+}
+.quiz-option.wrong .letter { color: var(--danger); }
+.quiz-option.disabled { cursor: default; opacity: 0.6; }
+.quiz-option.disabled.correct { opacity: 1; }
+.quiz-option.disabled.wrong { opacity: 1; }
+.quiz-explanation {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, margin 0.4s ease;
+}
+.quiz-explanation.visible {
+  max-height: 300px;
+  margin-top: 1.25rem;
+}
+.quiz-explanation-inner {
+  padding: 1rem 1.25rem;
+  background: var(--success-glow);
+  border: 1px solid rgba(74,222,128,0.2);
+  border-radius: var(--radius);
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+/* ============================================
+   SCORE / RESULTS
+   ============================================ */
+.score-display {
+  text-align: center;
+  padding: 3rem 2rem;
+  margin: 2rem 0;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+.score-circle {
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 800;
+  border: 4px solid;
+}
+.score-display.perfect .score-circle { border-color: var(--success); color: var(--success); background: var(--success-glow); }
+.score-display.good .score-circle { border-color: var(--accent); color: var(--accent); background: var(--accent-glow); }
+.score-display.ok .score-circle { border-color: var(--warning); color: var(--warning); background: var(--warning-glow); }
+.score-message { font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem; font-weight: 600; }
+
+/* ============================================
+   SUMMARY SECTION
+   ============================================ */
+.summary-card {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: linear-gradient(135deg, rgba(56,189,248,0.08) 0%, rgba(74,222,128,0.05) 100%);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-lg);
+  margin: 2rem 0;
+}
+.summary-card h2 { margin-bottom: 1rem; }
+.summary-card p { max-width: 600px; margin: 0 auto 1.5rem; }
+.stopp-inline {
+  display: inline-flex;
+  gap: 0.25rem;
+  margin-top: 0.5rem;
+}
+.stopp-inline span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px; height: 40px;
+  border-radius: 8px;
+  background: var(--accent-glow);
+  border: 1px solid var(--border-accent);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: var(--accent);
+}
+
+/* ============================================
+   NAVIGATION BUTTONS
+   ============================================ */
+.section-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+.btn-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-primary);
+}
+.btn-nav:hover { border-color: var(--accent); background: var(--accent-glow); }
+.btn-nav.primary {
+  background: var(--accent);
+  color: var(--bg-deep);
+  border-color: var(--accent);
+}
+.btn-nav.primary:hover { box-shadow: 0 0 24px rgba(56,189,248,0.3); }
+.btn-nav svg { width: 16px; height: 16px; }
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+  .hero-stats { flex-direction: column; gap: 1.5rem; }
+  .pattern-grid { grid-template-columns: 1fr; }
+  .anatomy-body-inner { grid-template-columns: 1fr; }
+  .action-row { grid-template-columns: 1fr; }
+  .nav-steps { display: none; }
+  .email-content { padding: 1rem 1.25rem; }
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+.stagger > * {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: staggerIn 0.45s ease forwards;
+}
+.stagger > *:nth-child(1) { animation-delay: 0s; }
+.stagger > *:nth-child(2) { animation-delay: 0.07s; }
+.stagger > *:nth-child(3) { animation-delay: 0.14s; }
+.stagger > *:nth-child(4) { animation-delay: 0.21s; }
+.stagger > *:nth-child(5) { animation-delay: 0.28s; }
+.stagger > *:nth-child(6) { animation-delay: 0.35s; }
+
+@keyframes staggerIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* count badge */
+.found-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 1rem;
+}
+.found-count .num { color: var(--danger); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <div class="nav-logo" onclick="goTo(0)" style="cursor:pointer;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      IT-SICHERHEIT
+    </div>
+    <div class="nav-steps" id="navSteps"></div>
+    <div class="nav-progress" id="navProgress"></div>
+  </div>
+</nav>
+
+<!-- ==========================================
+     SECTION 0: HERO / INTRO
+     ========================================== -->
+<section class="section active" id="section-0">
+  <div class="container hero">
+    <div class="hero-badge">⚡ Interaktive Schulung — ca. 5 Minuten</div>
+    <h1>Phishing erkennen<br>und <span class="accent">abwehren</span></h1>
+    <p>Über 90% aller erfolgreichen Cyberangriffe beginnen mit einer Phishing-Nachricht. Lernen Sie, die Tricks zu erkennen — bevor es zu spät ist.</p>
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-num" id="counterVorfaelle">0</div>
+        <div class="hero-stat-label">Cybervorfälle in der Schweiz (2024)</div>
+      </div>
+      <div>
+        <div class="hero-stat-num" id="counterProzent">0%</div>
+        <div class="hero-stat-label">starten mit Phishing</div>
+      </div>
+    </div>
+    <button class="btn-start" onclick="goTo(1)">
+      Schulung starten
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+</section>
+
+<!-- ==========================================
+     SECTION 1: VERHALTENSMUSTER
+     ========================================== -->
+<section class="section" id="section-1">
+  <div class="container">
+    <div class="section-number">Modul 01</div>
+    <h2>Menschliche Verhaltensmuster verstehen</h2>
+    <p>Phishing nutzt Psychologie, nicht Technik. Klicken Sie auf die Karten, um zu sehen, wie Angreifer jedes Muster ausnutzen.</p>
+
+    <div class="pattern-grid stagger" id="patternGrid">
+      <!-- filled by JS -->
+    </div>
+
+    <div class="info-box success">
+      <div class="info-box-title">✦ Kernbotschaft</div>
+      <p><strong>Jeder Mensch ist anfällig.</strong> Es geht nicht darum, «schlauer» zu sein als der Angreifer, sondern die eigenen Reaktionsmuster zu kennen und bewusst innezuhalten.</p>
+    </div>
+
+    <div class="section-nav">
+      <button class="btn-nav" onclick="goTo(0)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Zurück
+      </button>
+      <button class="btn-nav primary" onclick="goTo(2)">
+        Weiter
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================
+     SECTION 2: ANATOMIE
+     ========================================== -->
+<section class="section" id="section-2">
+  <div class="container">
+    <div class="section-number">Modul 02</div>
+    <h2>Anatomie einer Phishing-Nachricht</h2>
+    <p>Jede Phishing-E-Mail besteht aus Elementen, die zusammenwirken. Klicken Sie die Elemente an, um die Details aufzuklappen.</p>
+
+    <div class="anatomy-list stagger" id="anatomyList">
+      <!-- filled by JS -->
+    </div>
+
+    <div class="info-box warning">
+      <div class="info-box-title">⚠ Achtung: KI-generiertes Phishing</div>
+      <p>Moderne Phishing-E-Mails sind dank KI oft sprachlich einwandfrei. Verlassen Sie sich <strong>nie allein</strong> auf Rechtschreibfehler als Erkennungsmerkmal!</p>
+    </div>
+
+    <div class="section-nav">
+      <button class="btn-nav" onclick="goTo(1)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Zurück
+      </button>
+      <button class="btn-nav primary" onclick="goTo(3)">
+        Weiter
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================
+     SECTION 3: PRAXISBEISPIEL
+     ========================================== -->
+<section class="section" id="section-3">
+  <div class="container">
+    <div class="section-number">Modul 03</div>
+    <h2>Praxisbeispiel: E-Mail-Analyse</h2>
+    <p>Untersuchen Sie die folgende E-Mail. Klicken Sie auf die <span style="color:var(--danger)">rot unterstrichenen</span> Stellen, um die Warnsignale aufzudecken — oder nutzen Sie den Button unten.</p>
+
+    <div class="email-mockup">
+      <div class="email-toolbar">
+        <div class="email-dot red"></div>
+        <div class="email-dot yellow"></div>
+        <div class="email-dot green"></div>
+        <div class="email-toolbar-title">Posteingang — Neue Nachricht</div>
+      </div>
+      <div class="email-content">
+        <div class="email-field">
+          <span class="email-field-label">Von:</span>
+          <span class="email-field-value">
+            <span class="email-hotspot" data-tip="Falsche Domain" data-detail="«hslu-luzern.org» ist nicht die echte HSLU-Domain (hslu.ch)." data-idx="1">it-sicherheit@hslu-luzern.org<span class="hotspot-badge">1</span></span>
+          </span>
+        </div>
+        <div class="email-field">
+          <span class="email-field-label">An:</span>
+          <span class="email-field-value">
+            <span class="email-hotspot" data-tip="Massenmailing" data-detail="«alle-mitarbeitenden» statt persönlicher Ansprache — ein Zeichen für eine breit gestreute Phishing-Kampagne." data-idx="2">alle-mitarbeitenden@hslu.ch<span class="hotspot-badge">2</span></span>
+          </span>
+        </div>
+        <div class="email-field">
+          <span class="email-field-label">Betreff:</span>
+          <span class="email-field-value">
+            <span class="email-hotspot" data-tip="Künstlicher Zeitdruck" data-detail="«Bis 17:00 Uhr» und «DRINGEND» sollen verhindern, dass man nachdenkt oder nachfragt." data-idx="3">[DRINGEND] Passwortzurücksetzung erforderlich bis 17:00<span class="hotspot-badge">3</span></span>
+          </span>
+        </div>
+        <div class="email-body">
+          Liebe Mitarbeitende,<br><br>
+          aufgrund eines <span class="email-hotspot" data-tip="Drohung mit Konsequenzen" data-detail="Kontosperrung erzeugt Angst und drängt zum schnellen Handeln, ohne die Situation zu prüfen." data-idx="4">kritischen Sicherheitsvorfalls müssen alle Passwörter bis heute 17:00 Uhr zurückgesetzt werden. Andernfalls wird Ihr Zugang automatisch gesperrt.<span class="hotspot-badge">4</span></span><br><br>
+          Klicken Sie hier, um Ihr Passwort zu ändern:<br>
+          <span class="email-hotspot" data-tip="Externer Link" data-detail="«hslu-passwort-reset.com» ist keine offizielle HSLU-Seite. Die echte Domain wäre hslu.ch." data-idx="5"><a href="#">https://hslu-passwort-reset.com/login</a><span class="hotspot-badge">5</span></span><br><br>
+          Bei Fragen wenden Sie sich an <span class="email-hotspot" data-tip="Unübliche Prozedur" data-detail="Echte IT-Abteilungen senden keine Links per E-Mail für Passwortwechsel. Auch die Kontaktadresse nutzt die falsche Domain." data-idx="6">it-support@hslu-luzern.org<span class="hotspot-badge">6</span></span>.<br><br>
+          Mit freundlichen Grüssen,<br>
+          IT-Sicherheitsteam HSLU
+        </div>
+      </div>
+    </div>
+
+    <div class="findings-list" id="findingsList"></div>
+
+    <div style="display:flex; align-items:center; gap:1rem; flex-wrap:wrap;">
+      <button class="reveal-btn" id="revealAllBtn" onclick="revealAllHotspots()">
+        🔍 Alle Warnsignale aufdecken
+      </button>
+      <div class="found-count">Gefunden: <span class="num" id="foundCount">0</span> / 6</div>
+    </div>
+
+    <div class="section-nav">
+      <button class="btn-nav" onclick="goTo(2)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Zurück
+      </button>
+      <button class="btn-nav primary" onclick="goTo(4)">
+        Weiter
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================
+     SECTION 4: CHECKLISTE & SOFORTMASSNAHMEN
+     ========================================== -->
+<section class="section" id="section-4">
+  <div class="container">
+    <div class="section-number">Modul 04</div>
+    <h2>S.T.O.P.P.-Methode &amp; Sofortmassnahmen</h2>
+    <p>Diese Methode hilft Ihnen, bei jeder verdächtigen Nachricht strukturiert zu reagieren.</p>
+
+    <div class="stopp-grid stagger">
+      <div class="stopp-item">
+        <div class="stopp-letter">S</div>
+        <div class="stopp-content">
+          <h3>Stopp!</h3>
+          <p>Nicht sofort klicken oder antworten.</p>
+        </div>
+      </div>
+      <div class="stopp-item">
+        <div class="stopp-letter">T</div>
+        <div class="stopp-content">
+          <h3>Tief durchatmen</h3>
+          <p>Zeitdruck ist fast immer künstlich erzeugt.</p>
+        </div>
+      </div>
+      <div class="stopp-item">
+        <div class="stopp-letter">O</div>
+        <div class="stopp-content">
+          <h3>Offensichtliches prüfen</h3>
+          <p>Absender, Links und Anrede genau kontrollieren.</p>
+        </div>
+      </div>
+      <div class="stopp-item">
+        <div class="stopp-letter">P</div>
+        <div class="stopp-content">
+          <h3>Plausibilität hinterfragen</h3>
+          <p>Erwarte ich diese Nachricht überhaupt?</p>
+        </div>
+      </div>
+      <div class="stopp-item">
+        <div class="stopp-letter">P</div>
+        <div class="stopp-content">
+          <h3>Partner fragen</h3>
+          <p>IT-Support oder Vorgesetzte über separaten Kanal kontaktieren.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:2.5rem; margin-bottom: 0.5rem;">Was tun, wenn…</h3>
+    <div class="action-table stagger">
+      <div class="action-row">
+        <div class="action-situation">Sie eine verdächtige E-Mail erhalten</div>
+        <div class="action-response">Nicht öffnen, nicht weiterleiten. An die IT-Abteilung melden.</div>
+      </div>
+      <div class="action-row">
+        <div class="action-situation">Sie versehentlich auf einen Link geklickt haben</div>
+        <div class="action-response">Sofort Browserfenster schliessen. Passwort ändern. IT informieren.</div>
+      </div>
+      <div class="action-row">
+        <div class="action-situation">Sie Zugangsdaten eingegeben haben</div>
+        <div class="action-response">Sofort Passwort ändern. IT-Support anrufen. Alle Konten mit gleichem Passwort ändern.</div>
+      </div>
+      <div class="action-row">
+        <div class="action-situation">Sie einen Anhang geöffnet haben</div>
+        <div class="action-response">Gerät vom Netzwerk trennen (WLAN aus, Kabel ziehen). IT-Support anrufen.</div>
+      </div>
+      <div class="action-row">
+        <div class="action-situation">Sie sich unsicher sind</div>
+        <div class="action-response">Absender über einen separaten Kanal (Telefon, persönlich) verifizieren.</div>
+      </div>
+    </div>
+
+    <div class="section-nav">
+      <button class="btn-nav" onclick="goTo(3)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Zurück
+      </button>
+      <button class="btn-nav primary" onclick="goTo(5)">
+        Zum Selbsttest
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================
+     SECTION 5: QUIZ
+     ========================================== -->
+<section class="section" id="section-5">
+  <div class="container">
+    <div class="section-number">Modul 05</div>
+    <h2>Selbsttest: 3 Fragen</h2>
+    <p>Testen Sie Ihr Wissen. Wählen Sie bei jeder Frage die beste Antwort.</p>
+
+    <div id="quizContainer"></div>
+
+    <div id="quizResult" style="display:none;"></div>
+
+    <div class="section-nav">
+      <button class="btn-nav" onclick="goTo(4)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Zurück
+      </button>
+      <button class="btn-nav primary" onclick="goTo(6)">
+        Zusammenfassung
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================
+     SECTION 6: ZUSAMMENFASSUNG
+     ========================================== -->
+<section class="section" id="section-6">
+  <div class="container">
+    <div class="section-number">Abschluss</div>
+    <h2>Zusammenfassung</h2>
+
+    <div class="summary-card">
+      <h2>Ihre Aufmerksamkeit ist die <span style="color:var(--accent)">wichtigste</span> Verteidigungslinie.</h2>
+      <p>Phishing nutzt menschliche Verhaltensmuster gezielt aus. Kein technischer Schutz ist perfekt. Wenden Sie bei jeder unerwarteten Nachricht die S.T.O.P.P.-Methode an.</p>
+      <div class="stopp-inline">
+        <span>S</span><span>T</span><span>O</span><span>P</span><span>P</span>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <div class="info-box-title">✦ Merken Sie sich</div>
+      <p>Melden Sie verdächtige Nachrichten <strong>immer</strong> an Ihre IT-Abteilung. Lieber einmal zu viel nachfragen als einmal zu wenig.</p>
+    </div>
+
+    <div class="section-nav">
+      <button class="btn-nav" onclick="goTo(5)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Zurück zum Test
+      </button>
+      <button class="btn-nav primary" onclick="goTo(0)">
+        Nochmal von vorn
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<script>
+// ============================================
+// DATA
+// ============================================
+const patterns = [
+  { icon: '👔', title: 'Autoritätshörigkeit', desc: 'Menschen folgen Anweisungen von Autoritätspersonen, ohne kritisch zu hinterfragen.', example: 'E-Mail «vom CEO» mit dringender Zahlungsanweisung.' },
+  { icon: '⏰', title: 'Zeitdruck & Stress', desc: 'Unter Druck treffen wir schlechtere Entscheidungen und prüfen weniger genau.', example: '«Ihr Konto wird in 2 Stunden gesperrt!»' },
+  { icon: '🔍', title: 'Neugier', desc: 'Interessante oder rätselhafte Inhalte verleiten zu unbedachten Klicks.', example: '«Schockierende Fotos von der Firmenfeier» als Köder.' },
+  { icon: '🤝', title: 'Hilfsbereitschaft', desc: 'Der Wunsch zu helfen überwiegt oft die Vorsicht.', example: 'Anrufer gibt sich als IT-Support aus und bittet um Passwort.' },
+  { icon: '🔄', title: 'Gewohnheit & Routine', desc: 'Wiederkehrende Aufgaben werden automatisiert abgearbeitet.', example: 'Gefälschte Rechnung, die wie die echte Vorlage aussieht.' },
+  { icon: '😨', title: 'Angst vor Konsequenzen', desc: 'Drohungen lösen Panik aus und führen zu vorschnellem Handeln.', example: '«Strafanzeige wegen Urheberrechtsverstoss» mit Anhang.' }
+];
+
+const anatomy = [
+  { icon: '✉️', title: 'Absender', check: 'Domain genau prüfen. Buchstabendreher, Zusatzbuchstaben?', fake: 'support@paypai.com statt support@paypal.com' },
+  { icon: '📋', title: 'Betreffzeile', check: 'Erzeugt sie künstlichen Druck oder Panik?', fake: '«DRINGEND: Konto gesperrt — sofort handeln!»' },
+  { icon: '👤', title: 'Anrede', check: 'Unpersönlich oder generisch?', fake: '«Sehr geehrter Kunde» statt Ihres Namens' },
+  { icon: '📝', title: 'Inhalt', check: 'Logik prüfen. Passt der Kontext zu Ihrer Situation?', fake: 'DHL-Benachrichtigung, obwohl kein Paket erwartet' },
+  { icon: '🔗', title: 'Links', check: 'Maus über Link halten (nicht klicken!). Stimmt die URL?', fake: 'Angezeigt: «postfinance.ch» / Ziel: «postfinance-login.xyz»' },
+  { icon: '📎', title: 'Anhänge', check: 'Unerwartete Dateien? Doppelte Endungen?', fake: 'Rechnung.pdf.exe oder Bewerbung.docm' },
+  { icon: '💬', title: 'Sprache', check: 'Grammatik, Rechtschreibung, ungewöhnliche Formulierungen?', fake: 'Maschinelle Übersetzungen mit seltsamen Wendungen' }
+];
+
+const quizData = [
+  {
+    q: 'Ihre Vorgesetzte schickt Ihnen eine E-Mail mit der Bitte, eine überfällige Rechnung sofort zu überweisen. Die E-Mail-Adresse stimmt exakt, der Schreibstil klingt authentisch, und die Rechnung im Anhang sieht professionell aus. Was ist Ihre beste Reaktion?',
+    options: [
+      'Die Rechnung überweisen — Absenderadresse und Stil sind korrekt, also ist die E-Mail echt',
+      'Per Antwort-Mail nachfragen, ob die Rechnung tatsächlich von ihr stammt',
+      'Die Vorgesetzte über einen separaten Kanal (Telefon, persönlich, Teams) kontaktieren und die Rechnung verifizieren',
+      'Die E-Mail an die IT-Abteilung weiterleiten und auf deren Rückmeldung warten, bevor Sie handeln'
+    ],
+    correct: 2,
+    explanation: 'Eine Antwort-Mail (b) könnte an den Angreifer gehen, falls das Konto kompromittiert ist. Nur ein separater Kanal bietet Sicherheit. Option d) ist vertretbar, verzögert aber unnötig.'
+  },
+  {
+    q: 'Sie erhalten eine E-Mail von «support@post-finance.ch» mit dem Hinweis, dass Ihre Kreditkarte wegen ungewöhnlicher Aktivitäten vorübergehend gesperrt wurde. Der Link führt zu «https://postfinance.ch.secure-login.com/verify». Die Seite sieht exakt wie PostFinance aus, inklusive gültigem SSL-Zertifikat (Schloss-Symbol). Was trifft zu?',
+    options: [
+      'Die Seite ist sicher — sie hat ein SSL-Zertifikat und sieht korrekt aus',
+      'Die Domain «post-finance.ch» mit Bindestrich ist verdächtig, aber die Zielseite mit SSL ist vertrauenswürdig',
+      'Sowohl die Absender-Domain als auch die Ziel-URL sind gefälscht — «secure-login.com» ist die tatsächliche Domain, nicht «postfinance.ch»',
+      'Nur die Absender-Domain ist verdächtig; wenn der Link tatsächlich auf postfinance.ch zeigt, ist er sicher'
+    ],
+    correct: 2,
+    explanation: 'Ein SSL-Zertifikat beweist nur, dass die Verbindung verschlüsselt ist, nicht dass die Seite legitim ist. Die echte Domain ist «secure-login.com», «postfinance.ch» ist nur eine Subdomain davon.'
+  },
+  {
+    q: 'Ein Kollege erhält eine E-Mail mit dem Betreff «Vertraulich: Gehaltsanpassungen Q2 — bitte nicht weiterleiten». Er öffnet den Anhang aus Neugier. Kurz darauf wird sein Rechner langsamer. Er schliesst den Anhang und löscht die E-Mail. Was ist die korrekte Reihenfolge der Sofortmassnahmen?',
+    options: [
+      'E-Mail löschen, Passwort ändern, IT informieren',
+      'Gerät sofort vom Netzwerk trennen, IT-Support anrufen, nicht selbst versuchen aufzuräumen',
+      'Virenscanner starten, Passwörter ändern, E-Mail endgültig löschen',
+      'Rechner neu starten, Virenscanner laufen lassen, IT bei Gelegenheit informieren'
+    ],
+    correct: 1,
+    explanation: 'Das Löschen der E-Mail und ein Neustart können Beweise vernichten und Malware nicht zuverlässig entfernen. Netzwerk sofort trennen verhindert die Ausbreitung.'
+  }
+];
+
+// ============================================
+// STATE
+// ============================================
+const TOTAL_SECTIONS = 7;
+let currentSection = 0;
+let hotspotCount = 0;
+let quizAnswers = [null, null, null];
+
+// ============================================
+// NAVIGATION
+// ============================================
+function buildNav() {
+  const c = document.getElementById('navSteps');
+  for (let i = 0; i < TOTAL_SECTIONS; i++) {
+    const btn = document.createElement('button');
+    btn.className = 'nav-step' + (i === 0 ? ' active' : '');
+    btn.textContent = i === 0 ? '⌂' : i;
+    btn.onclick = () => goTo(i);
+    c.appendChild(btn);
+  }
+  updateProgress();
+}
+
+function updateProgress() {
+  const pct = Math.round((currentSection / (TOTAL_SECTIONS - 1)) * 100);
+  document.getElementById('navProgress').textContent = pct + '%';
+}
+
+function goTo(idx) {
+  if (idx < 0 || idx >= TOTAL_SECTIONS) return;
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById('section-' + idx).classList.add('active');
+
+  const steps = document.querySelectorAll('.nav-step');
+  steps.forEach((s, i) => {
+    s.classList.remove('active');
+    if (i < idx) s.classList.add('completed');
+    if (i === idx) { s.classList.add('active'); s.classList.remove('completed'); }
+  });
+  currentSection = idx;
+  updateProgress();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  if (idx === 0) { animateCounters(); resetQuiz(); resetHotspots(); }
+}
+
+// ============================================
+// RESET QUIZ
+// ============================================
+function resetQuiz() {
+  quizAnswers = [null, null, null];
+  document.querySelectorAll('.quiz-option').forEach(o => {
+    o.classList.remove('disabled', 'selected', 'correct', 'wrong');
+  });
+  document.querySelectorAll('.quiz-explanation').forEach(e => {
+    e.classList.remove('visible');
+  });
+  const result = document.getElementById('quizResult');
+  result.style.display = 'none';
+  result.innerHTML = '';
+}
+
+// ============================================
+// RESET HOTSPOTS
+// ============================================
+function resetHotspots() {
+  hotspotCount = 0;
+  document.getElementById('foundCount').textContent = '0';
+  document.querySelectorAll('.email-hotspot').forEach(hs => {
+    hs.classList.remove('revealed');
+  });
+  document.getElementById('findingsList').innerHTML = '';
+  // re-init to reset the internal revealedSet
+  initHotspots();
+}
+
+// ============================================
+// COUNTER ANIMATION
+// ============================================
+function animateCounters() {
+  animateNum('counterVorfaelle', 0, 56000, 1800, v => v.toLocaleString('de-CH'));
+  animateNum('counterProzent', 0, 90, 1400, v => v + '%');
+}
+function animateNum(id, start, end, duration, fmt) {
+  const el = document.getElementById(id);
+  const startTime = performance.now();
+  function tick(now) {
+    const t = Math.min((now - startTime) / duration, 1);
+    const ease = 1 - Math.pow(1 - t, 3);
+    el.textContent = fmt(Math.round(start + (end - start) * ease));
+    if (t < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+// ============================================
+// PATTERN CARDS
+// ============================================
+function buildPatterns() {
+  const grid = document.getElementById('patternGrid');
+  patterns.forEach((p, i) => {
+    const card = document.createElement('div');
+    card.className = 'pattern-card';
+    card.innerHTML = `
+      <div class="icon">${p.icon}</div>
+      <h3>${p.title}</h3>
+      <p class="desc">${p.desc}</p>
+      <div class="example">
+        <div class="example-inner">
+          <div class="example-label">So nutzen Angreifer das aus:</div>
+          ${p.example}
+        </div>
+      </div>
+    `;
+    card.addEventListener('click', () => card.classList.toggle('open'));
+    grid.appendChild(card);
+  });
+}
+
+// ============================================
+// ANATOMY ACCORDION
+// ============================================
+function buildAnatomy() {
+  const list = document.getElementById('anatomyList');
+  anatomy.forEach((a, i) => {
+    const item = document.createElement('div');
+    item.className = 'anatomy-item';
+    item.innerHTML = `
+      <div class="anatomy-header">
+        <div class="anatomy-icon">${a.icon}</div>
+        <div class="anatomy-title">${a.title}</div>
+        <div class="anatomy-chevron">▾</div>
+      </div>
+      <div class="anatomy-body">
+        <div class="anatomy-body-inner">
+          <div class="anatomy-detail">
+            <h4>Worauf achten?</h4>
+            <p>${a.check}</p>
+          </div>
+          <div class="anatomy-detail">
+            <h4>Beispiel für Fälschung</h4>
+            <p style="color:var(--danger)">${a.fake}</p>
+          </div>
+        </div>
+      </div>
+    `;
+    item.querySelector('.anatomy-header').addEventListener('click', () => {
+      item.classList.toggle('open');
+    });
+    list.appendChild(item);
+  });
+}
+
+// ============================================
+// EMAIL HOTSPOTS
+// ============================================
+function initHotspots() {
+  const findingsList = document.getElementById('findingsList');
+  const revealedSet = new Set();
+
+  document.querySelectorAll('.email-hotspot').forEach(hs => {
+    hs.addEventListener('click', (e) => {
+      e.preventDefault();
+      const idx = hs.dataset.idx;
+      if (!revealedSet.has(idx)) {
+        // reveal
+        hs.classList.add('revealed');
+        revealedSet.add(idx);
+        hotspotCount = revealedSet.size;
+        document.getElementById('foundCount').textContent = hotspotCount;
+
+        const item = document.createElement('div');
+        item.className = 'finding-item';
+        item.id = 'finding-' + idx;
+        item.innerHTML = `
+          <div class="finding-num">${idx}</div>
+          <div class="finding-text"><strong>${hs.dataset.tip}:</strong> ${hs.dataset.detail}</div>
+        `;
+        const existing = findingsList.children;
+        let inserted = false;
+        for (let i = 0; i < existing.length; i++) {
+          const eIdx = parseInt(existing[i].id.split('-')[1]);
+          if (parseInt(idx) < eIdx) {
+            findingsList.insertBefore(item, existing[i]);
+            inserted = true;
+            break;
+          }
+        }
+        if (!inserted) findingsList.appendChild(item);
+      } else {
+        // hide
+        hs.classList.remove('revealed');
+        revealedSet.delete(idx);
+        hotspotCount = revealedSet.size;
+        document.getElementById('foundCount').textContent = hotspotCount;
+        const existing = document.getElementById('finding-' + idx);
+        if (existing) existing.remove();
+      }
+    });
+  });
+}
+
+function revealAllHotspots() {
+  const findingsList = document.getElementById('findingsList');
+  document.querySelectorAll('.email-hotspot').forEach(hs => {
+    const idx = hs.dataset.idx;
+    hs.classList.add('revealed');
+    if (!document.getElementById('finding-' + idx)) {
+      const item = document.createElement('div');
+      item.className = 'finding-item';
+      item.id = 'finding-' + idx;
+      item.innerHTML = `
+        <div class="finding-num">${idx}</div>
+        <div class="finding-text"><strong>${hs.dataset.tip}:</strong> ${hs.dataset.detail}</div>
+      `;
+      const existing = findingsList.children;
+      let inserted = false;
+      for (let i = 0; i < existing.length; i++) {
+        const eIdx = parseInt(existing[i].id.split('-')[1]);
+        if (parseInt(idx) < eIdx) {
+          findingsList.insertBefore(item, existing[i]);
+          inserted = true;
+          break;
+        }
+      }
+      if (!inserted) findingsList.appendChild(item);
+    }
+  });
+  hotspotCount = 6;
+  document.getElementById('foundCount').textContent = 6;
+}
+
+// ============================================
+// QUIZ
+// ============================================
+function buildQuiz() {
+  const container = document.getElementById('quizContainer');
+  quizData.forEach((q, qi) => {
+    const card = document.createElement('div');
+    card.className = 'quiz-card';
+    card.id = 'quiz-' + qi;
+    let optionsHtml = q.options.map((o, oi) => `
+      <div class="quiz-option" data-q="${qi}" data-o="${oi}">
+        <span class="letter">${String.fromCharCode(97 + oi)})</span>
+        <span>${o}</span>
+      </div>
+    `).join('');
+    card.innerHTML = `
+      <div class="quiz-num">FRAGE ${qi + 1} / 3</div>
+      <div class="quiz-question">${q.q}</div>
+      <div class="quiz-options">${optionsHtml}</div>
+      <div class="quiz-explanation" id="quiz-exp-${qi}">
+        <div class="quiz-explanation-inner">
+          <strong>Richtige Antwort: ${String.fromCharCode(97 + q.correct)})</strong><br>${q.explanation}
+        </div>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+
+  container.addEventListener('click', (e) => {
+    const opt = e.target.closest('.quiz-option');
+    if (!opt || opt.classList.contains('disabled')) return;
+    const qi = parseInt(opt.dataset.q);
+    const oi = parseInt(opt.dataset.o);
+    quizAnswers[qi] = oi;
+
+    // disable all options for this question
+    document.querySelectorAll(`.quiz-option[data-q="${qi}"]`).forEach(o => {
+      o.classList.add('disabled');
+      const idx = parseInt(o.dataset.o);
+      if (idx === quizData[qi].correct) o.classList.add('correct');
+      if (idx === oi && oi !== quizData[qi].correct) o.classList.add('wrong');
+    });
+
+    // show explanation
+    document.getElementById('quiz-exp-' + qi).classList.add('visible');
+
+    // check if all answered
+    if (quizAnswers.every(a => a !== null)) showQuizResult();
+  });
+}
+
+function showQuizResult() {
+  const score = quizAnswers.filter((a, i) => a === quizData[i].correct).length;
+  const result = document.getElementById('quizResult');
+  let cls, msg;
+  if (score === 3) { cls = 'perfect'; msg = 'Ausgezeichnet! Sie haben alle Fragen richtig beantwortet.'; }
+  else if (score === 2) { cls = 'good'; msg = 'Gut gemacht! Fast alles richtig.'; }
+  else { cls = 'ok'; msg = 'Schauen Sie sich die Erklärungen nochmal an — Übung macht den Meister.'; }
+  result.innerHTML = `
+    <div class="score-display ${cls}">
+      <div class="score-circle">${score}/3</div>
+      <div class="score-message">${msg}</div>
+    </div>
+  `;
+  result.style.display = 'block';
+}
+
+// ============================================
+// INIT
+// ============================================
+document.addEventListener('DOMContentLoaded', () => {
+  buildNav();
+  buildPatterns();
+  buildAnatomy();
+  initHotspots();
+  buildQuiz();
+  animateCounters();
+});
+</script>
+</body>
+</html>

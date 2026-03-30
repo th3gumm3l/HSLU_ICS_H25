@@ -1,8 +1,0 @@
-/target/
-/build/
-/nbproject/
-/.idea/
-/.gradle/
-*.txt
-/nbactions.xml
-*.log
