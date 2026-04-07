@@ -4,11 +4,12 @@ const router = express.Router();
 router.get('/', function(req, res) {
     res.type('text/html');
 
-    // TODO: Implement error handling in case of 
-    // missing 'name'-parameter
-    let name = req.query.name;
-    // TODO: Implement the reply using a Template literal
-    res.send("Hallo "+name+"!");
+    if ('name' in req.query) {
+        let name = req.query.name;
+        res.send(`Hallo ${name}!`);   // TODO 2: Template literal
+    } else {
+        res.status(400).send("Hallo unbekannte Person");  // TODO 1: Fehlerbehandlung
+    }
 });
 
 export default router;
