@@ -1,14 +1,29 @@
 import express from 'express';
 const router = express.Router();
 
-// TODO: Insert calculateResistance function from "Einführung in Javascript"
+function calculateResistance(r1, r2, wiring) {
+    let result = 0;
+    if (wiring === "serial") {
+        result = r1 + r2;
+    } else if (wiring === "parallel") {
+        result = (r1 * r2) / (r1 + r2);
+    }
+    return result;
+}
 
 router.all('/', function (req, res) {
     res.type('application/json');
 
     let error = null;
-    // TODO: Check request parameters r1, r2 and wiring from req.query for 
-    // existence and validate for correct data
+    const { r1, r2, wiring } = req.query;
+
+    if (r1 === undefined || r2 === undefined || wiring === undefined) {
+        error = { error: "Parameters r1, r2 and wiring are required." };
+    } else if (isNaN(parseFloat(r1)) || isNaN(parseFloat(r2))) {
+        error = { error: "r1 and r2 must be valid numbers." };
+    } else if (wiring !== "serial" && wiring !== "parallel") {
+        error = { error: "wiring must be 'serial' or 'parallel'." };
+    }
 
     if (error) {
         res.status(400);
@@ -16,8 +31,7 @@ router.all('/', function (req, res) {
         return;
     }
 
-    // TODO: replace the -1 with the correct call of the funktion calculateResistance()
-    let resistance = -1;
+    let resistance = calculateResistance(parseFloat(r1), parseFloat(r2), wiring);
     let response = { resistance: resistance };
 
     res.send(JSON.stringify(response));

@@ -4,11 +4,11 @@ const router = express.Router();
 router.all('/', function (req, res) {
     res.type('application/json');
 
-    let random = Math.random() * 100;
+    let random = Math.round(Math.random() * 100);
 
-    // TODO: determine the color based on the random number
+    let color = random < 50 ? 'green' : 'red';
 
-    // TODO: return the answer according to the slides as JSON object
+    res.send(JSON.stringify({ random: random, color: color }));
 });
 
 export default router;
