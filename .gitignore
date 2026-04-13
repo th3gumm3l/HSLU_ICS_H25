@@ -1,1 +1,157 @@
-.idea/workspace.xml
+# =========================
+# OS-specific
+# =========================
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# =========================
+# IDEs & Editors
+# =========================
+
+# IntelliJ IDEA / JetBrains
+.idea/
+*.iml
+
+# Visual Studio Code
+.vscode/
+
+# Visual Studio
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+.vs/
+
+# Eclipse
+.classpath
+.project
+.settings/
+/eclipse/
+
+# NetBeans
+nb-configuration.xml
+nbactions.xml
+/nbproject/
+
+# BlueJ
+*.ctxt
+
+# Fleet
+.fleet/
+
+# =========================
+# Java
+# =========================
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+hs_err_pid*
+replay_pid*
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/wrapper/maven-wrapper.jar
+mvnw
+mvnw.cmd
+
+# Gradle
+.gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# =========================
+# C# / .NET
+# =========================
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+bld/
+[Ll]og/
+*.dll
+*.exe
+*.pdb
+*.ilk
+*.meta
+*.obj
+*.rsp
+*.nupkg
+*.snupkg
+packages/
+project.lock.json
+*.GeneratedMSBuildEditorConfig.editorconfig
+*.AssemblyInfo.cs
+*.GlobalUsings.g.cs
+
+# =========================
+# C / CMake
+# =========================
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+*.o
+*.out
+*.a
+*.so
+*.dylib
+
+# =========================
+# JavaScript / Node.js
+# =========================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+dist/
+
+# =========================
+# MongoDB
+# =========================
+*.wt
+mongod.lock
+WiredTiger
+WiredTiger.lock
+WiredTiger.turtle
+WiredTigerHS.wt
+WiredTigerLAS.wt
+_mdb_catalog.wt
+sizeStorer.wt
+storage.bson
+diagnostic.data/
+
+# =========================
+# Environment & Secrets
+# =========================
+.env
+.env.local
+.env.*.local
+
+# =========================
+# Logs & Temp
+# =========================
+*.log
+*.tmp
+*.swp
+*.swo
+*~
+
+# =========================
+# Misc
+# =========================
+.dccache
