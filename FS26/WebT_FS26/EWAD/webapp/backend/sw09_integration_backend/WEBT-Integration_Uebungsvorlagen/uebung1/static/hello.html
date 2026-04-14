@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf8">
+    <title>Übung 1: Hello World mit Fetch und JSON</title>
+</head>
+
+<body>
+    <h1>Übung 1: Hello World mit Fetch und JSON</h1>
+    
+    <p>Mitteilung: <span id="message"></span></p>
+    <button onclick="doRequest()">Zeige Mitteilung</button>
+    <script>
+        async function doRequest() {            
+            try {
+                // TODO: Issue fetch request (GET) from URL 'hello.json' and wait for reply
+
+                // TODO: On success, get response.text() and parse into an object
+
+                // TODO: Insert content of message from object into HTML element with ID 'message'
+
+                // TODO: on failure, throw exception with http status code    
+
+            } catch (error) {
+                alert(`fetch failed: ${error}`); 
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Übung 4: Ressourcen-API für Attraktionen</title>
+</head>
+
+<body onload="loadAttractions()">
+    <h1>Übung 4: Ressourcen-API für Attraktionen</h1>
+
+    <label for="list">Attraktion:</label>
+    <select id="list" oninput="loadAttraction()">
+    </select>
+
+    <h3>Kurzinfos</h3>
+    <p id="info"></p>
+    <h3>Bild</h3>
+    <img id="image" src=""/>
+
+    <script>
+    async function loadAttractions() {
+        try {
+            const response = await fetch('attractions/', {
+                method: 'GET',
+                signal: AbortSignal.timeout(5000)
+            });
+
+            if (response.ok) {
+                const attractions = JSON.parse(await response.text());
+                // construct option list based on response
+                let options = '';
+                for(let i = 0; i < attractions.length; ++i) {
+                    options += '<option value="' + attractions[i].id + '">' + attractions[i].name + '</option>';
+                }
+                const list = document.getElementById('list');
+                list.innerHTML = options;
+
+                // load first attraction
+                await loadAttraction();
+            } else {
+                throw(`request failed with status: ${response.status}`);
+            }
+        } catch (error) {
+            alert(`fetch failed: ${error}`); 
+        }
+    }
+
+    async function loadAttraction() {
+        const list = document.getElementById('list');
+        try {
+            const response = await fetch(`attractions/${list.value}`, {
+                method: 'GET',
+                signal: AbortSignal.timeout(5000) 
+            });
+
+            if (response.ok) {
+                const attraction = JSON.parse(await response.text());
+
+                // update attraction
+                const info = document.getElementById('info');
+                info.innerText = attraction.text;
+                const image = document.getElementById('image');
+                image.src = attraction.imageUrl;
+
+            } else {
+                throw(`request failed with status: ${response.status}`);
+            }
+        } catch (error) {
+            alert(`fetch failed: ${error}`); 
+        }
+    }
+    </script>
+</body>
+</html>

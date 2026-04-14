@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Beispiel: Multiple-Choice Abstimmung</title>
+    <meta charset="utf8">
+    <link href="webt.css" rel="stylesheet">
+    <style>
+        .hide { display: none; }
+    </style>
+    <script type="module">
+        async function vote() {
+            try {
+                // create request content
+                const value = document.querySelector('input[name="vote"]:checked').value;
+                const body = { 
+                    option : value
+                };
+                const response = await fetch('/vote', {
+                    method: 'POST',
+                    body: JSON.stringify(body),
+                    // expect answer from backend within 5000 (milliseconds) or fail
+                    signal: AbortSignal.timeout(5000)
+                });
+                    
+                if (response.ok) {
+                    const res = JSON.parse(await response.text());                
+                    showResults(res);
+                } else {
+                    alert('fetch failed with status: ' + response.status);
+                }
+            } catch (error) {
+                alert('fetch failed: ' + error);
+            }
+        }
+
+        function showResults(results) {
+            document.getElementById('vote').classList.toggle('hide');
+            document.getElementById('result').classList.toggle('hide');
+            for (let i = 0; i < 4; ++i) {
+                let element = document.getElementById('result' + i);
+                element.innerText = results['option' + i];
+            }
+        }
+
+        document.getElementById('voteButton').onclick = vote;
+    </script>
+</head>
+<body>
+    <h1>Beispiel: Multiple-Choice Abstimmung</h1>
+    <section>
+        <h2>Abstimmung</h2>
+        <p>Wie finden Sie das Wetter Heute?</p>
+
+        <div id="vote">
+            <input type="radio" id="option0" name="vote" value="0">
+            <label for="option0">spitze</label><br>
+            <input type="radio" id="option1" name="vote" value="1">
+            <label for="option1">sensationell</label><br>
+            <input type="radio" id="option2" name="vote" value="2">
+            <label for="option2">fantastisch</label><br>
+            <input type="radio" id="option3" name="vote" value="3">
+            <label for="option3">super</label><br>
+            <button id="voteButton">Abstimmen</button>
+        </div>
+        <div id="result" class="hide">
+            <p>spitze: <span id="result0"></span></p> 
+            <p>sensationell: <span id="result1"></span></p>
+            <p>fantastisch: <span id="result2"></span></p>
+            <p>super: <span id="result3"></span></p>
+        </div>
+    </section>
+</body>
+</html>

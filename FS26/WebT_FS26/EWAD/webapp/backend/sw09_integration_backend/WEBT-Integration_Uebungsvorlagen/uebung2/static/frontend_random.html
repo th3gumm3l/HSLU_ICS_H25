@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Übung 2: Zufallszahl: Integration in Backend</title>
+    <meta charset="utf8">
+    <style>
+        .red { color:red; }
+        .green { color:green; }
+    </style>
+
+    <script>        
+    async function showRandomNumber(min, max) {	  
+        // TODO: (1) Use fetch to obtain JSON-document containg random number and its color from backend
+        // TODO: (2) Parse JSON-document into a JavaScript-object
+        // TODO: (3) Update the HTML-Document by passing the parsed JavaScript-object
+        // TODO: (4) Handle errors: wrong HTTP status code, timeout, and JSON-parsing errors
+    }
+
+    function updateDocument(response) {
+        let random = document.getElementById('random');
+        random.innerText = response.random;
+        if (response.color == 'green') {
+            random.classList.remove('red');
+            random.classList.add('green');
+        } else {
+            random.classList.remove('green');
+            random.classList.add('red');
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <p id="random">bisher noch keine Zufallszahl vorliegend.</p>
+    <button onclick="showRandomNumber(1, 100)">Berechne Zufallszahl</button>
+</body>
+
+</html>

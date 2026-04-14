@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf8">
+    <title>Beispiel: Hello World with Fetch</title>
+    <link href="webt.css" rel="stylesheet">
+</head>
+
+<body>
+    <h1>Beispiel: Hello World with Fetch</h1>
+    <p id="output"></p>
+    <script type="module">
+        const output = document.getElementById('output');
+        try {
+            const response = await fetch('hello.txt', {
+                method: 'GET',
+                 // expect answer from backend within 5000 (milliseconds) or fail
+                signal: AbortSignal.timeout(5000)
+            });
+            
+            if (response.ok) {
+                output.innerText = await response.text();                
+            } else {
+                output.innerText = 'fetch failed with status: ' + response.status;
+            }
+        } catch (error) {
+            output.innerText = 'fetch failed: ' + error;
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf8">
+        <title>Beispiel: Hello World</title>
+        <link rel="stylesheet" href="webt.css">
+        <script type="module">
+            async function send() {
+                const message = document.getElementById('message');
+                try {
+                    const queryString = 'name=' + document.getElementById('name').value;
+                    const response = await fetch('/hello?' + queryString, {
+                        method: 'GET',
+                        // expect answer from backend within 5000 (milliseconds) or fail
+                        signal: AbortSignal.timeout(5000)
+                    });
+                    
+                    if (response.ok) {
+                        const res = JSON.parse(await response.text());                
+                        updateName(res);
+                    } else {
+                        message.innerText = 'fetch failed with status: ' + response.status;
+                    }
+                } catch (error) {
+                    message.innerText = 'fetch failed: ' + error;
+                }
+            }
+
+            function updateName(response) {
+                let message = document.getElementById('message');
+                message.innerText = response.message;
+            }
+
+            document.getElementById('sendButton').onclick = send;
+        </script>
+    </head>
+    <body>
+        <header>
+            <h1>Beispiel: Hello World</h1>
+        </header>
+        <main>
+            <label for="name">Name:</label>
+            <input id="name" required>
+            <p>Message: <span id="message"></span></p>
+            <button id="sendButton">Send</button>
+        </main>
+    </body>
+</html>
