@@ -14,14 +14,17 @@
     <script>
         async function doRequest() {            
             try {
-                // TODO: Issue fetch request (GET) from URL 'hello.json' and wait for reply
+                const response = await fetch('hello.json', {
+                    method: 'GET',
+                    signal: AbortSignal.timeout(5000)
+                });
 
-                // TODO: On success, get response.text() and parse into an object
-
-                // TODO: Insert content of message from object into HTML element with ID 'message'
-
-                // TODO: on failure, throw exception with http status code    
-
+                if (response.ok) {
+                    const obj = JSON.parse(await response.text());
+                    document.getElementById('message').innerText = obj.message;
+                } else {
+                    throw(`HTTP status code: ${response.status}`);
+                }
             } catch (error) {
                 alert(`fetch failed: ${error}`); 
             }

@@ -28,9 +28,21 @@ const attractions = {
     }
 };
 
-// TODO: return full attraction list, upon access with URL 'attractions/'
+// return full attraction list
+router.get('/', function (req, res) {
+    res.type('application/json');
+    res.send(JSON.stringify(attractionList));
+});
 
-
-// TODO: return complete attraction <id>, upon access with URL 'attractions/<id>'
+// return complete attraction by id
+router.get('/:id', function (req, res) {
+    res.type('application/json');
+    const id = req.params.id;
+    if (id in attractions) {
+        res.send(JSON.stringify(attractions[id]));
+    } else {
+        res.status(404).send({ error: `Attraction with id ${id} not found` });
+    }
+});
 
 export default router;

@@ -20,11 +20,11 @@
 		}
 
 		try {
-			// TODO: Change to POST request
-			// TODO: Send data as JSON document instead of query parameters
-			const queryString = "r1=" + r1 + "&r2=" + r2 + "&wiring=" + wiring;
-			const response = await fetch('backend_resistance?' + queryString, {
-				method: 'GET',
+			const body = JSON.stringify({ r1: r1, r2: r2, wiring: wiring });
+			const response = await fetch('backend_resistance', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: body,
 				signal: AbortSignal.timeout(5000)
 			});
 

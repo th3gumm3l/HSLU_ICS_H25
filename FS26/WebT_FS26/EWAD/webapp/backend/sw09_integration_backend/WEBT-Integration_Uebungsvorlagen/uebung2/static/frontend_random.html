@@ -10,11 +10,22 @@
     </style>
 
     <script>        
-    async function showRandomNumber(min, max) {	  
-        // TODO: (1) Use fetch to obtain JSON-document containg random number and its color from backend
-        // TODO: (2) Parse JSON-document into a JavaScript-object
-        // TODO: (3) Update the HTML-Document by passing the parsed JavaScript-object
-        // TODO: (4) Handle errors: wrong HTTP status code, timeout, and JSON-parsing errors
+    async function showRandomNumber(min, max) {
+        try {
+            const response = await fetch(`backend_random?min=${min}&max=${max}`, {
+                method: 'GET',
+                signal: AbortSignal.timeout(5000)
+            });
+
+            if (response.ok) {
+                const obj = JSON.parse(await response.text());
+                updateDocument(obj);
+            } else {
+                throw(`HTTP status code: ${response.status}`);
+            }
+        } catch (error) {
+            alert(`fetch failed: ${error}`);
+        }
     }
 
     function updateDocument(response) {
