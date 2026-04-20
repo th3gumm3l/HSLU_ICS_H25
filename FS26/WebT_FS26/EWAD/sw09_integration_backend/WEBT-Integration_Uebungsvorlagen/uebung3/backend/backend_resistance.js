@@ -16,8 +16,16 @@ function calculateResistance(r1, r2, wiring) {
 router.post('/', function (req, res) {
     res.type('application/json');
 
+    let body;
+    try {
+        body = JSON.parse(req.body.toString('utf-8'));
+    } catch (e) {
+        res.status(400);
+        res.send(JSON.stringify({ error: 'Invalid JSON document' }));
+        return;
+    }
+
     let error = null;
-    const body = req.body;
 
     if (!('r1' in body)) {
         error = { error: "Parameter 'r1' not set" };
