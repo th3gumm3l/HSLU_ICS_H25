@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <title>Beispiel: Invited-Vote | Einladung</title>
+    <meta charset="utf-8">
+    <link href="webt.css" rel="stylesheet">
+    <script>
+        async function send() {
+            // extract information from formular into request body
+            const requestBody = JSON.stringify({
+                email : document.getElementById('email').value
+            });
+
+            try {
+                const response = await fetch('/vote_backend/invite', {
+                    method: 'POST',
+                    headers: new Headers({'content-type': 'application/json'}),
+                    body: requestBody,
+                    signal: AbortSignal.timeout(5000)
+                });
+
+                if (!response.ok) {
+                    throw new Error('request failed with status: ' + response.status);
+                }
+                const responseBody = JSON.parse(await response.text());
+                if (responseBody == null) {
+                    throw new Error('request failed: received empty body');
+                }
+
+                updateResponse(responseBody);
+            } catch(error) {
+                alert('We are sorry, a programm error occured.');
+                console.error('Error during request: ' + error);
+            }
+        }
+
+        function updateResponse(response) {
+            const message = document.getElementById('message');
+            message.innerText = response.message;
+        }
+
+        async function validateAndSend() {
+            const errorElement = document.getElementById('errorEmail');
+            const emailInput = document.getElementById('email');
+            errorElement.innerText = '';
+
+            if (!emailInput.checkValidity()) {
+                const errorElement = document.getElementById('errorEmail');
+                errorElement.innerText = emailInput.validationMessage;
+            } else {
+                send();
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Beispiel: Invited-Vote</h1>
+    <h2>Neuen Benutzer einladen</h2>
+    <label for="email">Email:</label>
+    <input id="email" type="email" required>
+    <div id="errorEmail"></div>
+    <button type="button" onclick="validateAndSend()">Einladen</button>
+    <div id="message"></div>
+</body>
+
+</html>

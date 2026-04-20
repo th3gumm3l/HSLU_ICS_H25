@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Übung 1b: Anmeldung zum Newsletter</title>
+    <meta charset="utf8">
+    <script>
+        ///////////////////////////////////////////////////////////////////////
+        // BACKEND INTEGRATION
+        ///////////////////////////////////////////////////////////////////////
+        async function register() {
+            try {
+                let body = { 
+                    email : document.getElementById('email').value,
+                    category : document.getElementById('category').value,
+                };
+
+                let response = await fetch('/backend_mailing/register', {
+                    method: 'POST',
+                    body: JSON.stringify(body),
+                    signal: AbortSignal.timeout(5000)
+                });
+
+                if (response.ok) {
+                    const res = JSON.parse(await response.text());
+                    showMessage(res);
+                } else {
+                    let responseText = "";
+                    try {
+                        responseText = await response.text();
+                    } catch (e) {
+                        // Ignore failures while trying to get the response text in the case of response failures;
+                        // we just assume an emtpy responseText in that case.
+                    }
+                    alert('We are sorry, a programm error occured. Please contact support.');
+                    console.error(`Error during request: HTTP status = '${response.status}' / responseText = '${responseText}'`);
+                }
+            } catch (e) {
+                alert('We are sorry, a programm error occured. Please contact support.');
+            }
+        }
+
+        function showMessage(results) {
+            document.getElementById('output').innerText = results.message;
+        }
+
+        ///////////////////////////////////////////////////////////////////////
+        // VALIDATION
+        ///////////////////////////////////////////////////////////////////////
+        function validateEmail() {
+            let email = document.getElementById('email');
+            let errorEmail = document.getElementById('errorEmail');
+            if (!email.checkValidity()) {
+                errorEmail.innerText = email.validationMessage;
+            }
+        }
+
+        function clearValidationErrors() {
+            document.getElementById('errorEmail').innerText = '';
+        }
+
+        function hasValidationErrors() {            
+            return document.getElementById('errorEmail').innerText != ''
+        }
+
+        function validateAndRegister() {
+            clearValidationErrors();
+            validateEmail();
+            if (!hasValidationErrors()) {                
+                register();             
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <main>
+        <p>Bitte geben Sie Ihre Email und die gewünschte Kategorie ein:</p>
+
+        <label for="email">Email:</label>
+        <input id="email" type="email" required><br>
+        <p id="errorEmail"></p>
+
+        <label for="category">Kategorie:</label>
+        <select id="category" required>
+            <option value="1">Wichtige News</option>
+            <option value="2">Werbung</option>
+            <option value="3">Mehr Werbung</option>
+        </select><br>
+        
+        <button onclick="validateAndRegister()">Anmelden</button>        
+        <p id="output"></p>
+    </main>
+</body>
+
+</html>

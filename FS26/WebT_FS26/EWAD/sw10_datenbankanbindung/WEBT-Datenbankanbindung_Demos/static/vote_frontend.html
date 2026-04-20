@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <title>Beispiel: Multiple-Choice Abstimmung</title>
+    <meta charset="utf-8">
+    <link href="webt.css" rel="stylesheet">
+    <script>
+         async function vote() {
+            // extract information from formular into request body
+            const value = document.querySelector('input[name="vote"]:checked').value;
+            const urlParams = new URLSearchParams(window.location.search);
+            const token = urlParams.get('token');
+            const email = urlParams.get('email');
+            const requestBody = JSON.stringify({ 
+                option : value,
+                token: token,
+                email: email
+            });
+
+            try {
+                console.log(requestBody);
+                const response = await fetch('/vote_backend/vote', {
+                    method: 'POST',
+                    headers: new Headers({'content-type': 'application/json'}),
+                    body: requestBody,
+                    signal: AbortSignal.timeout(5000)
+                });
+
+                if (!response.ok) {
+                    throw new Error('request failed with status: ' + response.status);
+                }
+                const responseBody = JSON.parse(await response.text());
+                if (responseBody == null) {
+                    throw new Error('request failed: received empty body');
+                }
+                showResults(responseBody);
+            } catch(error) {
+                alert('We are sorry, a programm error occured.');
+                console.error('Error during request: ' + error);
+            }
+        }
+
+        async function showResults(results) {            
+            const resultElement = document.getElementById('result');
+            resultElement.innerHTML = '<h2>Resultate:</h2><ul>';
+            for (let entry of results) {
+                result.innerHTML += '<li>' + entry.email + ': ' + entry.vote + '</li>';
+            }
+            resultElement.innerHTML += '</ul>';
+        }
+    </script>
+</head>
+<body>
+    <h1>Beispiel: Multiple-Choice Abstimmung</h1>
+    <section>
+        <h2>Abstimmung</h2>
+        <p>Wie finden Sie das Wetter Heute?</p>
+
+        <div id="vote">
+            <input name="vote" type="radio" id="option1" value="0"><label for="option1">spitze</label><br>
+            <input name="vote" type="radio" id="option2" value="1"><label for="option2">sensationell</label><br>
+            <input name="vote" type="radio" id="option3" value="2"><label for="option3">fantastisch</label><br>
+            <input name="vote" type="radio" id="option4" value="3"><label for="option4">super</label><br>
+            <button type="button" onclick="vote()">Abstimmen</button>
+        </div>
+        <div id="result">
+        </div>
+    </section>
+</body>
+</html>

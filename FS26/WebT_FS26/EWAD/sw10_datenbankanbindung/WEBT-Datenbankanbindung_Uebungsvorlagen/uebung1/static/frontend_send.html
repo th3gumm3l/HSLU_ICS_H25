@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Übung 1c: Newsletter versenden</title>
+    <meta charset="utf8">
+    <script>
+        ///////////////////////////////////////////////////////////////////////
+        // BACKEND INTEGRATION
+        ///////////////////////////////////////////////////////////////////////
+        async function send() {
+            try {
+                let body = {
+                    subject: document.getElementById('subject').value,
+                    text: document.getElementById('text').value,
+                    category: document.getElementById('category').value,
+                };
+
+                let response = await fetch('/backend_mailing/send', {
+                    method: 'POST',
+                    body: JSON.stringify(body),
+                    signal: AbortSignal.timeout(5000)
+                });
+
+                if (response.ok) {
+                    const res = JSON.parse(await response.text());
+                    showEmails(res);
+                } else {
+                    let responseText = "";
+                    try {
+                        responseText = await response.text();
+                    } catch (e) {
+                        // Ignore failures while trying to get the response text in the case of response failures;
+                        // we just assume an emtpy responseText in that case.
+                    }
+                    alert('We are sorry, a programm error occured. Please contact support.');
+                    console.error(`Error during request: HTTP status = '${response.status}' / responseText = '${responseText}'`);
+                }
+            } catch (e) {
+                console.log(e);
+                alert('We are sorry, a programm error occured. Please contact support.');
+            }
+        }
+
+        function showEmails(results) {
+            document.getElementById('output').innerHTML = '<p>Sent emails to:<p/>';
+            document.getElementById('output').innerHTML += '<ul>';
+            for (let i = 0; i < results.sentEmails.length; ++i) {
+                document.getElementById('output').innerHTML += '<li>' + results.sentEmails[i] + '</li>';
+            }
+            document.getElementById('output').innerHTML += '</ul>';
+        }
+
+        ///////////////////////////////////////////////////////////////////////
+        // VALIDATION
+        ///////////////////////////////////////////////////////////////////////
+        function validateSubject() {
+            let subject = document.getElementById('subject');
+            let errorSubject = document.getElementById('errorSubject');
+            if (!subject.checkValidity()) {
+                errorSubject.innerText = subject.validationMessage;
+            }
+        }
+
+        function validateText() {
+            let text = document.getElementById('text');
+            let errorText = document.getElementById('errorText');
+            if (!text.checkValidity()) {
+                errorText.innerText = text.validationMessage;
+            }
+        }
+
+        function clearValidationErrors() {
+            document.getElementById('errorText').innerText = '';
+            document.getElementById('errorSubject').innerText = '';
+        }
+
+        function hasValidationErrors() {
+            return document.getElementById('errorText').innerText != ''
+                && document.getElementById('errorSubject').innerText != '';
+        }
+
+        function validateAndSend() {
+            clearValidationErrors();
+            validateSubject();
+            validateText();
+            if (!hasValidationErrors()) {
+                send();
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <main>
+        <p>Bitte Formulieren Sie Ihren Newsletter mittels den untenstehenden Feldern:</p>
+
+        <label for="subject">Betreff:</label><br>
+        <input id="subject" required><br>
+        <p id="errorSubject"></p>
+
+        <label for="text">Mitteilung:</label></br>
+        <textarea id="text" required></textarea></br>
+        <p id="errorText"></p>
+
+        <label for="category">Kategorie:</label></br>
+        <select id="category" required>
+            <option value="1">Wichtige News</option>
+            <option value="2">Werbung</option>
+            <option value="3">Mehr werbung</option>
+        </select><br>
+
+        <button onclick="validateAndSend()">Emails senden</button>
+        <div id="output"></div>
+    </main>
+</body>
+
+</html>
