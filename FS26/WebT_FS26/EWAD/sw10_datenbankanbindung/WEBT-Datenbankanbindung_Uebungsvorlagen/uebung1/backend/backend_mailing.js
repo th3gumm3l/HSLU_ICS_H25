@@ -1,13 +1,15 @@
 import express from 'express';
 // TODO (1a): Add the correct import to access the MongoDb
-
+import { MongoClient } from 'mongodb';
 const router = express.Router();
 
 // TODO (1a): Create a MongoDB client object
 //const client = ...
+const client = new MongoClient('mongodb://localhost:27017');
 // TODO (1a): get the 'newsletter' database
 // TODO (1a): get the 'mailing_list' collection
-
+const db = client.db('newsletter');
+const mailing_list = db.collection('mailing_list');
 //const mailingList = ...
 
 function setResponseAndStatus(res, data, status) {
@@ -42,6 +44,10 @@ router.post('/register', async function (req, res) {
             return;
         }
 
+        await mailing_list.insertOne({
+            email: body.email,
+            category: Number(body.category),
+        });
         // TODO (1b): insert a document containing the new subscription
 
         setResponseAndStatus(res, { message: 'email successfully added to category' }, 200);
@@ -78,6 +84,9 @@ router.post('/send', async function (req, res) {
         const category = Number(body.category);
         // TODO (1c): get a list of all emails for the given category
         //const emailObjects = ...
+        const emailObjects = await mailing_list
+            .find({ category: category }, { projection: { email: 1, _id: 0 } })
+            .toArray();
 
         let emails = [];
         for (let i = 0; i < emailObjects.length; ++i) {
