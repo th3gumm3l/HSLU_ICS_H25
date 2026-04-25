@@ -1,3 +1,6 @@
 add_executable(sw10_CallByReference  Pointer_CallByReference.cpp)
 add_executable(sw10_CallByValue  Pointer_CallByValue.cpp)
 add_executable(sw10_Aufgabe  Pointer_Aufgabe.cpp)
+add_executable(sw10_A1_Ceasar-Cipher A1_ceasar-cipher.cpp)
+add_executable(sw10_A2_TwoResultsPointer A2_TwoResultsPointer.cpp)
+add_executable(sw10_A3_malloc A3_malloc.cpp)
