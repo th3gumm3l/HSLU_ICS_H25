@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="utf-8">
+    <title>Beispiel: Sessions</title>
+    <link rel="stylesheet" href="webt.css">
+    <style>
+        .input { margin: 10pt; }
+    </style>
+    <script>
+        function getSessionId() {
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET', "/session/id", true);
+            xhr.onload = function () {
+                let response = JSON.parse(xhr.responseText);                
+                let resultElement = document.getElementById("result");
+                resultElement.innerText = response.message;
+            }
+
+            // Fehlerbehandlung
+            xhr.onerror = function() { alert("Fehler beim Absenden der Anfrage"); }
+            xhr.ontimeout = function() { alert("Zeitüberschreitung beim Warten auf die Antwort"); }
+
+            xhr.send();
+        }
+
+        function closeSession() {
+            let xhr = new XMLHttpRequest();
+            xhr.open('DELETE', "/session/id", true);
+            xhr.onload = function () {
+                let response = JSON.parse(xhr.responseText);                
+                let resultElement = document.getElementById("result");
+                resultElement.innerText = response.message;
+            }
+
+            // Fehlerbehandlung
+            xhr.onerror = function() { alert("Fehler beim Absenden der Anfrage"); }
+            xhr.ontimeout = function() { alert("Zeitüberschreitung beim Warten auf die Antwort"); }
+
+            xhr.send();
+        }
+
+        function getSession() {
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET', "/session/value", true);
+            xhr.onload = function () {
+                let response = JSON.parse(xhr.responseText);                
+                let resultElement = document.getElementById("result");
+                resultElement.innerText = response.message;
+            }
+
+            // Fehlerbehandlung
+            xhr.onerror = function() { alert("Fehler beim Absenden der Anfrage"); }
+            xhr.ontimeout = function() { alert("Zeitüberschreitung beim Warten auf die Antwort"); }
+
+            xhr.send();
+        }
+
+        function setSession() {
+            let xhr = new XMLHttpRequest();
+            xhr.open('POST', "/session/value", true);
+            xhr.onload = function () {
+                let response = JSON.parse(xhr.responseText);                
+                let resultElement = document.getElementById("result");
+                resultElement.innerText = response.message;
+            }
+
+            // Fehlerbehandlung
+            xhr.onerror = function() { alert("Fehler beim Absenden der Anfrage"); }
+            xhr.ontimeout = function() { alert("Zeitüberschreitung beim Warten auf die Antwort"); }
+
+            xhr.send();
+        }
+
+
+    </script>
+</head>
+
+<body>
+    <h1>Beispiel: Session</h1>
+    <button type="button" onclick="getSessionId()">Session ID abrufen</button>
+    <button type="button" onclick="setSession()">Sessiondaten setzen</button>
+    <button type="button" onclick="getSession()">Sessiondaten abrufen</button>
+    <button type="button" onclick="closeSession()">Session schliessen</button>
+    <p>Output: <span id="result"></span></p>
+</body>
+
+</html>

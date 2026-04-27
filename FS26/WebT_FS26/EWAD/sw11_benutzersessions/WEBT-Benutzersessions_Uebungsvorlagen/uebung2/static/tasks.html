@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Übung 2: Aufgabenverwaltung</title>
+    <meta charset="utf8">
+    <style>
+        .hide { display: none; }
+        .error { color: red; }
+    </style>
+    <script>
+        async function getTasks() {
+            try {
+                const response = await fetch('/tasks', {
+                    method: 'GET',
+                    signal: AbortSignal.timeout(5000)
+                });
+                if (!response.ok) {
+                    throw new Error(`request failed with status: ${response.status}`);
+                }
+                updateTasks(JSON.parse(await response.text()));
+            } catch (error) {
+                document.getElementById('tasks').innerText = 'fetch failed: ' + error;
+            }
+        }
+
+        function updateTasks(tasks) {
+            let html = '<tr><th>Description</th><th>Due Date</th></tr>';
+            for (task of tasks) {
+                html += `<tr><td>${task.description}</td><td>${new Date(task.due).toISOString().slice(0, 10)}</td></tr>`;
+            }
+            document.getElementById('tasks').innerHTML = html;
+        }
+
+        async function addTask() {
+            if (validate(['description', 'due'])) {
+                const task = {
+                    description: document.getElementById('description').value,
+                    due: document.getElementById('due').value
+                };            
+                try {
+                    const response = await fetch( '/tasks', {
+                        method: 'POST',
+                        body: JSON.stringify(task),
+                        signal: AbortSignal.timeout(5000)
+                    });
+                    if (!response.ok) {
+                        throw new Error(`request failed with status: ${response.status}`);
+                    }
+                    document.getElementById('errorMessageTask').innerText = '';
+                    getTasks();
+                } catch (error) {
+                    document.getElementById('errorMessageTask').innerText = error;
+                }
+            }
+        }
+
+        async function performUserAction(action) {
+            if (action == 'logout' || validate(['username', 'password'])) {
+                const userdata = {
+                    username: document.getElementById('username').value,
+                    password: document.getElementById('password').value
+                };
+                try {
+                    const response = await fetch('/users/' + action, {
+                        method: 'POST',
+                        body: JSON.stringify(userdata),
+                        signal: AbortSignal.timeout(5000)
+                    });
+                    if (!response.ok) {
+                        const error = JSON.parse(await response.text());
+                        throw new Error(error.message);
+                    }
+                    updateOutput(action, userdata.username);
+                } catch (error) {                                        
+                    document.getElementById('errorMessageLogin').innerText = error;
+                }
+            }
+        }
+
+        function updateOutput(action, username) {
+            if (action == 'login') {
+                document.getElementById('login').classList.add('hide');
+                document.getElementById('logout').classList.remove('hide');
+                document.getElementById('tasksSection').classList.remove('hide');
+                document.getElementById('user').innerText = username + ' is logged in';
+                getTasks();
+            } if (action == 'logout') {
+                document.getElementById('login').classList.remove('hide');
+                document.getElementById('logout').classList.add('hide');
+                document.getElementById('tasksSection').classList.add('hide');
+                document.getElementById('user').innerText = '';
+                updateTasks([]);
+            }
+
+            username: document.getElementById('username').value = '';
+            password: document.getElementById('password').value = '';
+            document.getElementById('errorMessageLogin').innerText = '';
+        }
+
+        function validate(inputIds) {
+            let hasError = false;
+            for (const inputId of inputIds) {
+                const input = document.getElementById(inputId);
+                const error = document.getElementById(inputId + 'Error');
+                if (!input.checkValidity()) {
+                    error.innerText = input.validationMessage;
+                    hasError = true;
+                } else {
+                    error.innerText = '';
+                }                
+            }
+            return !hasError;
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Aufgabenverwaltung</h1>
+    <section id="login">
+        <label for="username">Username:</label>
+        <input id="username" required minlength="1" maxlength="50"><br>
+        <p id="usernameError" class="error"></p>
+
+        <label for="password">Passwort:</label>
+        <input id="password" type="password" required minlength="1" maxlength="50"><br>
+        <p id="passwordError" class="error"></p>
+
+        <button onclick="performUserAction('login')">Login</button>
+        <button onclick="performUserAction('register')">Register</button>
+        <p id="errorMessageLogin" class="error"></p>
+    </section>
+
+    <section id="logout" class="hide">
+        <span id="user"></span>
+        <button onclick="performUserAction('logout')">Logout</button>
+    </section>
+
+    <section id="tasksSection" class="hide">
+        <h2>Neue Aufgabe einstellen:</h2>
+        <label for="description">Beschreibung:</label>
+        <input id="description" required minlength="1" maxlength="100"><br>
+        <p id="descriptionError" class="error"></p>
+
+        <label for="due">Due Date:</label>
+        <input id="due" type="date" required><br>
+        <p id="dueError" class="error"></p>
+        <p id="errorMessageTask" class="error"></p>
+        <button onclick="addTask()">Add New Task</button>
+        <h2>Meine Aufgaben:</h2>
+        <table id="tasks"></table>
+    </section>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Übung 1: Pizzabestellung mit Warenkorb</title>
+    <meta charset="utf8">
+    <link href="webt.css" rel="stylesheet">   
+    <style>
+        .error { color: red; }
+    </style>
+    <script>
+        async function updateBasket(pizza, update) {
+            try {
+                const response = await fetch('/pizzas', {
+                    method: 'POST',
+                    body: JSON.stringify({ pizza: pizza, update: update }),
+                    signal: AbortSignal.timeout(5000)
+                });
+                if (!response.ok) {
+                    throw new Error(`request failed with status: ${response.status}`);
+                }
+                getBasket();
+            } catch (error) {
+                document.getElementById('errorMessage').innerText = 'fetch failed (update): ' + error;
+            }
+        }
+
+        async function getBasket() {
+            try {
+                const response = await fetch('/pizzas', {
+                    method: 'GET',
+                    signal: AbortSignal.timeout(5000)
+                });
+                if (!response.ok) {
+                    throw new Error(`request failed with status: ${response.status}`);
+                }                
+                showBasket(JSON.parse(await response.text()));   
+            } catch (error) {
+                document.getElementById('errorMessage').innerText = 'fetch failed (get): ' + error;
+            }
+        }
+
+        function showBasket(basket) {
+            for(let i = 0; i < basket.pizzas.length; ++i) {
+                document.getElementById('name' + i).innerText = basket.pizzas[i].name;
+                document.getElementById('quantity' + i).innerText = basket.pizzas[i].quantity;
+                document.getElementById('price' + i).innerText = basket.pizzas[i].price;
+                document.getElementById('total' + i).innerText = basket.pizzas[i].total;
+            }
+            document.getElementById('grandtotal').innerText = basket.grandtotal;
+        }
+    </script>
+</head>
+
+<body onload="getBasket()">
+    <h1>Übung 1: Pizzabestellung mit Cookie-Warenkorb</h1>
+    <main>        
+        <table>
+            <tr>
+                <th></th>
+                <th>Anzahl</th>
+                <th>Pizza</th>
+                <th>Preis</th>
+                <th>Total</th>
+            </tr>
+            <tr>
+                <td><button onclick="updateBasket('Margherita', 1)">+</button><button onclick="updateBasket('Margherita', -1)">-</button></td>
+                <td id="quantity0"></td>
+                <td id="name0"></td>
+                <td id="price0"></td>
+                <td id="total0"></td>
+            </tr>
+            <tr>
+                <td><button onclick="updateBasket('Fantasia', 1)">+</button><button onclick="updateBasket('Fantasia', -1)">-</button></td>
+                <td id="quantity1"></td>
+                <td id="name1"></td>
+                <td id="price1"></td>
+                <td id="total1"></td>
+            </tr>
+            <tr>
+                <td><button onclick="updateBasket('Tonno', 1)">+</button><button onclick="updateBasket('Tonno', -1)">-</button></td>
+                <td id="quantity2"></td>
+                <td id="name2"></td>
+                <td id="price2"></td>
+                <td id="total2"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <th>Total</th>
+                <td></td>
+                <td></td>
+                <td id="grandtotal"></td>
+            </tr>
+        </table>
+        <p id="errorMessage" class="error"></p>
+        <button>Bestellen (not implemented)</button>
+    </main>
+</body>
+</html>

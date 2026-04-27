@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="utf-8">
+    <title>Beispiel: Cookie</title>
+    <link rel="stylesheet" href="webt.css">
+    <style>
+        .input { margin: 10pt; }
+    </style>
+    <script>
+        function getCookie() {
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET', "/cookie", true);
+            xhr.onload = function () {
+                let response = JSON.parse(xhr.responseText);                
+                let resultElement = document.getElementById("result");
+                resultElement.innerText = response.message;
+            }
+
+            // Fehlerbehandlung
+            xhr.onerror = function() { alert("Fehler beim Absenden der Anfrage"); }
+            xhr.ontimeout = function() { alert("Zeitüberschreitung beim Warten auf die Antwort"); }
+
+            xhr.send();
+        }
+
+        function setCookie() {
+            let xhr = new XMLHttpRequest();
+            xhr.open('POST', "/cookie", true);
+            xhr.onload = function () {
+                let response = JSON.parse(xhr.responseText);                
+                let resultElement = document.getElementById("result");
+                resultElement.innerText = response.message;
+            }
+
+            // Fehlerbehandlung
+            xhr.onerror = function() { alert("Fehler beim Absenden der Anfrage"); }
+            xhr.ontimeout = function() { alert("Zeitüberschreitung beim Warten auf die Antwort"); }
+
+            xhr.send();
+        }
+
+        function deleteCookie() {
+            let xhr = new XMLHttpRequest();
+            xhr.open('DELETE', "/cookie", true);
+            xhr.onload = function () {
+                let response = JSON.parse(xhr.responseText);                
+                let resultElement = document.getElementById("result");
+                resultElement.innerText = response.message;
+            }
+
+            // Fehlerbehandlung
+            xhr.onerror = function() { alert("Fehler beim Absenden der Anfrage"); }
+            xhr.ontimeout = function() { alert("Zeitüberschreitung beim Warten auf die Antwort"); }
+
+            xhr.send();
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Beispiel: Cookie</h1>
+    <button type="button" onclick="setCookie()">Cookie erstellen</button>
+    <button type="button" onclick="deleteCookie()">Cookie löschen</button>
+    <button type="button" onclick="getCookie()">Cookieinhalt abrufen</button>
+    <p>Output: <span id="result"></span></p>
+</body>
+
+</html>
