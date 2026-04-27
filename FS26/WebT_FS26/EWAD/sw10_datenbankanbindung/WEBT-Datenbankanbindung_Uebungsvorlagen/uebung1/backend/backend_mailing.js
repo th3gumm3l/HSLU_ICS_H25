@@ -46,7 +46,7 @@ router.post('/register', async function (req, res) {
 
         await mailing_list.insertOne({
             email: body.email,
-            category: Number(body.category),
+            category: parseInt(body.category),
         });
         // TODO (1b): insert a document containing the new subscription
 
@@ -85,7 +85,7 @@ router.post('/send', async function (req, res) {
         // TODO (1c): get a list of all emails for the given category
         //const emailObjects = ...
         const emailObjects = await mailing_list
-            .find({ category: category }, { projection: { email: 1, _id: 0 } })
+            .find({ category: { $eq: category} }, { projection: { email: 1 } })
             .toArray();
 
         let emails = [];
