@@ -7,16 +7,19 @@ const pizzas = [ {name: 'Margherita', price: 17.5}, {name: 'Fantasia', price: 19
 
 // updates basket (increment or decrement quantity for pizza)
 function updateBasket(req, res, pizza, update) {
-    // TODO: query the current value for the pizza type in the shopping cart
-    //       pizza contains the cookie name.
-    //       update contains the value to increment or decrement.
+    let quantity = 0;
+    if (pizza in req.cookies && parseInt(req.cookies[pizza]) > 0) {
+        quantity = parseInt(req.cookies[pizza]);
+    }
 
-    // TODO: update current quantity by update.
+    quantity += update;
+    if (quantity < 0) quantity = 0;
 
-
-    // TODO: save the new number in the cookie
-    //       one cookie per pizza type: name=pizza type, value=quantity
-    //       for example key=Margherita, value=3
+    if (quantity === 0) {
+        res.clearCookie(pizza);
+    } else {
+        res.cookie(pizza, quantity);
+    }
 }
 
 // merges values from cookies (quantities in basket) and static data 
