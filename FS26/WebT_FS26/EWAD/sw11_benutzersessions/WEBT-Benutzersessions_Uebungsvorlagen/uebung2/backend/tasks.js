@@ -9,14 +9,15 @@ const tasks = db.collection('tasks');
 router.get('/', async function(req, res) {
     res.type('application/json');
 
-    // TODO: Check that a user is logged in or abort with proper HTTP status code
-    
-
+    if (!isUserLoggedIn(req)) {
+        res.status(401);
+        res.send({ message: 'not logged in' });
+        return;
+    }
 
     try {
-        // TODO: Restrict search to currently logged in user
         const result = await tasks.find({
-        
+            user: getUser(req)
         }, { projection: { _id: 0, 'description': 1, 'due': 1}}).toArray();
         res.send(JSON.stringify(result));
     } catch (error) {
@@ -38,15 +39,18 @@ router.post('/', async function(req, res) {
         return;
     }
 
-    // TODO: Check that a user is logged in or abort with proper HTTP status code
-    
+    if (!isUserLoggedIn(req)) {
+        res.status(401);
+        res.send({ message: 'not logged in' });
+        return;
+    }
 
     // insert and return of data (insert operation adds _id property)
     try {
-        // TODO: add a property containing the username of the currently logged in user
         const data = {
             description: body.description,
-            due: new Date(body.due)
+            due: new Date(body.due),
+            user: getUser(req)
         };
         await tasks.insertOne(data);
         res.send(JSON.stringify(data));
