@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Beispiel: Templates mit Vue.js</title>
+    <meta charset="utf8">
+    <link href="webt.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
+</head>
+
+<body>
+    <h1>Beispiel: Templates mit Vue.js</h1>
+    <div id="app">
+        <p>Hallo {{ vorname + " " + name }}</p>
+        <p>{{ "Anzahl Artikel: " + warenkorb.length }}</p>
+    </div>
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    vorname:   "Fritz",
+                    name:      "Müller",
+                    warenkorb: [ "Art1", "Art2", "Art3" ]
+                };
+            }
+        }).mount('#app');
+    </script>
+</body>
+
+</html>

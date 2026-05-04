@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Beispiel: Input mit Vue.js (Zwei-Wege Bindung)</title>
+    <meta charset="utf8">
+    <link href="webt.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
+</head>
+
+<body>
+    <h1>Beispiel: Input mit Vus.js (Zwei-Wege Bindung)</h1>
+    <div id="app">
+        <input v-model="name">
+        <button v-on:click="name = ''">Reset</button>
+        <p>Hallo {{ name }}</p>
+    </div>
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    name: ''
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+
+</html>

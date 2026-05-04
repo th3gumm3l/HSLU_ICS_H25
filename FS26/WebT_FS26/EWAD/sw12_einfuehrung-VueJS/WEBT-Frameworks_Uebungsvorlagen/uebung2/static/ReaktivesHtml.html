@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf8">
+    <title>Übung 2: Reaktives HTML mit vue.js</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
+</head>
+
+<body>
+    <main id="main">
+        <label for="name">Bitte Namen eingaben:</label>
+
+        <!-- TODO Verbindung mit obj.name -->
+        <input id="name">
+
+        <!-- TODO: Ausgabe von Hallo gefolgt von obj.name -->
+        <p id="output"></p>
+
+    </main>
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    name: ''
+                }
+            }
+        }).mount('#main');
+    </script>
+</body>
+
+</html>

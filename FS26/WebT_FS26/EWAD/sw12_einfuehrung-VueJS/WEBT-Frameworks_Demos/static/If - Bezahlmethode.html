@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Beispiel: Bezahlmethode (Bedingte Anzeige mit vue.js)</title>
+    <meta charset="utf8">
+    <link href="webt.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
+</head>
+
+<body>
+    <header>
+        <h1>Beispiel: Bezahlmethode (Bedingte Anzeige mit vue.js)</h1>
+    </header>    
+    <main id="app">
+        <label for="payment">Wählen Sie eine Bezahlmethode:</label>
+        <select v-model="payment" id="payment">
+            <option value="vk">Vorauskasse</option>
+            <option value="kk">Kreditkarte</option>
+        </select>
+        <div v-if="payment == 'kk'">
+            <label for="kknumber">Nummer</label>
+            <input id="kknumber" name="kknumber">
+        </div>
+        <div v-else>Betrag auf Konto 123456 überweisen</div>
+    </main>
+    <script>
+        Vue.createApp({
+            data() {
+                return { 
+                    payment: 'vk'
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+
+</html>

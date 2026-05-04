@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Beispiel: Pizzashop mit Vue.js</title>
+    <meta charset="utf8">
+    <link href="webt.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
+</head>
+
+<body>
+    <header>
+        <h1>Beispiel: Pizzashop mit Vue.js</h1>
+    </header>
+    <main>
+    <h3>Bestellformular</h3>
+    <label for="mailto">Ihre email-Adresse:</label><br/>
+    <input type="email" id="mailto" name="email" size=32 />
+    <table id="liste">
+        <tr>
+            <th>Anzahl</th>
+            <th>Pizza</th>
+            <th>Einzel</th>
+            <th>Preis</th>
+        </tr>
+        <tr v-for="item in items">
+            <td>
+                <input v-model="item.anzahl" type="number" size="2" min="0"></td>
+            <td>{{ item.name }}</td>
+            <td>{{item.preis.toFixed(2)}}</td>
+            <td>{{ (item.anzahl * item.preis).toFixed(2) }}</td>
+        </tr>
+        <tr>
+            <td>
+            <td>Total</td>
+            <td></td>
+            <td>{{sum().toFixed(2)}}</td>
+        </tr>
+    </table>
+    <button>Bestellen</button>
+    </main>
+    <script>
+        Vue.createApp({
+            data() {
+                return { 
+                    items: [
+                      { anzahl: 0, name: 'Pizza Margherita', preis: 7.50 },
+                      { anzahl: 0, name: 'Pizza 4 Stagione', preis: 9.50 },
+                      { anzahl: 0, name: 'Pizza Fantasia',   preis: 11 }
+                    ]
+                }
+            },
+            methods: {
+                sum: function () {
+                    let total = 0;
+                    for (let i = 0; i < this.items.length; ++i) {
+                        total += this.items[i].preis * this.items[i].anzahl;
+                    }
+                    return total;
+                }
+            }
+        }).mount('#liste');    
+    </script>
+</body>
+
+</html>

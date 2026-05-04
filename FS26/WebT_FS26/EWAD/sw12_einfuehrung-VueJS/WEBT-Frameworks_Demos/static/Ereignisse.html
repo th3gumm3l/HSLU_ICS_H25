@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Beispiel: Ereignisse mit Vue.js</title>
+    <meta charset="utf8">
+    <link href="webt.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
+</head>
+
+<body>
+    <h1>Beispiel: Ereignisse mit Vue.js</h1>
+    <div id="count">
+        <button v-on:click = "counter += 1"> Add</button>
+        <p>Clicked {{ counter }} times.</p>
+    </div>
+    <script>
+        Vue.createApp({
+            data() {
+                return { 
+                    counter: 0
+                }
+            }
+        }).mount('#count');
+    </script>  
+</body>
+
+</html>

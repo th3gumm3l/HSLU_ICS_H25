@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Beispiel: Hello World mit Vue.js</title>
+    <meta charset="utf8">
+    <link href="webt.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
+</head>
+
+<body>
+    <h1>Beispiel: Hello World mit Vue.js</h1>
+    <div id="msg">
+        <p> {{ message }}</p>
+    </div>
+    <script>
+        Vue.createApp({
+            data() {
+                return { 
+                    message: "Hello World"
+                }
+            }
+        }).mount('#msg');
+    </script>
+</body>
+
+</html>
+

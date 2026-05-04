@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Beispiel: Reaktive Inputs mit JavaScript</title>
+    <meta charset="utf8">
+    <link href="webt.css" rel="stylesheet">
+</head>
+
+<body>
+    <h1>Beispiel: Reaktive Inputs mit JavaScript</h1>
+    <div id="app">
+        <label for="input">Name: </label>
+        <input oninput="update()" id="input">
+        <p>Hallo <span id="output"></span></p>
+    </div>
+    <script>
+        function update() {
+            let input = document.getElementById('input');
+            let name = input.value;
+            let element = document.getElementById('output');
+            element.innerHTML = name;
+        }
+    </script>
+</body>
+
+</html>

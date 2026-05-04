@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Beispiel: Pythagoras (Methoden mit Vue.js)</title>
+    <meta charset="utf8">
+    <link href="webt.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
+</head>
+
+<body>
+    <h1>Beispiel: Pythagoras (Methoden mit Vue.js)</h1>
+    <div id="val">
+        <label for="a">a = </label><input v-model="a" size="4" id="a">
+        <label for="b">b = </label><input v-model="b" size="4" id="b">
+        <p>c = {{ c() }}</p>
+    </div>
+    <script>
+        Vue.createApp({
+            data() {
+                return { 
+                    a: 3,
+                    b: 4 
+                }
+            },
+            methods: {
+                c: function () { return Math.sqrt(this.a ** 2 + this.b ** 2); }
+            }
+        }).mount('#val');
+    </script>
+</body>
+
+</html>

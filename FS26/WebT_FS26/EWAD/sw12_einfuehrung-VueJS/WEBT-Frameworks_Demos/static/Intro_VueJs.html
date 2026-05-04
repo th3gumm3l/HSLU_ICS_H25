@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Beispiel: Reaktive Inputs mit Vue.js</title>
+    <meta charset="utf8">
+    <link href="webt.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
+</head>
+
+<body>
+    <h1>Beispiel: Reaktive Inputs mit Vue.js</h1>
+    <div id="app">
+        <label for="input">Name: </label>
+        <input v-model="name" id="input">
+        <p>Hallo {{ name }}</p>
+    </div>
+    <script>
+        Vue.createApp({
+            data() {
+                return { 
+                    name: ''
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+
+</html>

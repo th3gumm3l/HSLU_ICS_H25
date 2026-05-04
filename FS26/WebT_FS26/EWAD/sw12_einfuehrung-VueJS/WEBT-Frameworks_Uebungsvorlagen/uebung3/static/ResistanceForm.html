@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf8">
+    <title>Übung 3: Formular für Gesamtwiderstandsberechnung</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
+</head>
+
+<body>
+    <!-- TODO: Setzen der ID "resistanceForm" auf dem korrekten HTML-Element -->
+    <h2>Berechnung Gesamtwiderstand</h2>
+    <main>
+        <fieldset>
+            <legend><strong>Widerstände</strong></legend>
+
+			<label for="r1">R1:</label>
+			<br/>
+			<input id="r1" type="number" size="10"/>
+			<br/>
+			<label for="r2">R2:</label>
+			<br/>
+			<input id="r2" type="number" size="10"/>
+        </fieldset>
+
+        <fieldset>
+            <legend><strong>Schaltung</strong></legend>
+
+			<label for="serial">Seriell:</label><br />
+			<input name="wiring" id="serial" type="radio" value="serial"/>
+			<br/>
+			<label for="parallel">Parallel:</label><br />
+			<input name="wiring" id="parallel" type="radio" value="parallel"/>
+        </fieldset>
+
+        <fieldset>
+            <legend><strong>Berechnung</strong></legend>
+            <!-- TODO: Gesamtwiderstand ausgeben (untenstehende Methode verwenden) -->
+            <p>Gesamtwiderstand: </p>
+
+        </fieldset>
+
+    </main>
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    r1: 50,
+                    r2: 10,
+                    wiring: 'serial',
+                }
+            },
+            methods: {
+                calculateResistance: function() {
+                    let totalResistance;
+                    if (this.wiring == 'serial') {
+                        totalResistance = parseFloat(this.r1) + parseFloat(this.r2);
+                    } else if (this.wiring == 'parallel') {
+                        totalResistance = this.r1 * this.r2 / (this.r1 + this.r2);
+                    }
+                    return totalResistance;
+		        }
+            }
+        }).mount('#resistanceForm');
+    </script>
+</body>
+
+</html>
