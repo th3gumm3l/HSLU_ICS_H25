@@ -8,35 +8,33 @@
 </head>
 
 <body>
-    <!-- TODO: Setzen der ID "resistanceForm" auf dem korrekten HTML-Element -->
     <h2>Berechnung Gesamtwiderstand</h2>
-    <main>
+    <main id="resistanceForm">
         <fieldset>
             <legend><strong>Widerstände</strong></legend>
 
 			<label for="r1">R1:</label>
 			<br/>
-			<input id="r1" type="number" size="10"/>
+			<input id="r1" type="number" size="10" v-model="r1"/>
 			<br/>
 			<label for="r2">R2:</label>
 			<br/>
-			<input id="r2" type="number" size="10"/>
+			<input id="r2" type="number" size="10" v-model="r2"/>
         </fieldset>
 
         <fieldset>
             <legend><strong>Schaltung</strong></legend>
 
 			<label for="serial">Seriell:</label><br />
-			<input name="wiring" id="serial" type="radio" value="serial"/>
+			<input name="wiring" id="serial" type="radio" value="serial" v-model="wiring"/>
 			<br/>
 			<label for="parallel">Parallel:</label><br />
-			<input name="wiring" id="parallel" type="radio" value="parallel"/>
+			<input name="wiring" id="parallel" type="radio" value="parallel" v-model="wiring"/>
         </fieldset>
 
         <fieldset>
             <legend><strong>Berechnung</strong></legend>
-            <!-- TODO: Gesamtwiderstand ausgeben (untenstehende Methode verwenden) -->
-            <p>Gesamtwiderstand: </p>
+            <p>Gesamtwiderstand: {{ calculateResistance() }}</p>
 
         </fieldset>
 
