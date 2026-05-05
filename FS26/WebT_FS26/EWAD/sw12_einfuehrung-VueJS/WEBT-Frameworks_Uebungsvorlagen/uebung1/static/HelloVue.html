@@ -11,11 +11,16 @@
     <main id="app">
         <button v-on:click="message='Hello Vue!'">Show greetings</button>
 
-        <!-- TODO: Mitteilung "message" im <p> Element darstellen -->
-        <p></p>
+        <p id="output">{{ message }}</p>
     </main>
-    <script>        
-        // TODO: Verbindung zwischen <main> und Object { message: '' } mittels Vue herstellen
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    message: ''
+                }
+            }
+        }).mount('#app');
     </script>
 </body>
 
