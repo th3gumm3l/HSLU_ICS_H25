@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf8">
+    <title>Beispiel: XML JavaScript Demo</title>
+    <link href="webt.css" rel="stylesheet">
+    <script>
+        parser = new DOMParser();
+
+        let xmlText = "<person>" +
+            "  <name>Muster</name>" +
+            "  <vorname>Hans</vorname>" +
+            "  <adresse>Musterstr. 23</adresse>" +
+            "</person>";
+
+        // lese XML-Datei ein
+        let xmlDoc = parser.parseFromString(xmlText, "text/xml");
+
+        // finde Element "name"
+        let nodesName = xmlDoc.getElementsByTagName("name");
+        let name = nodesName[0].childNodes[0].nodeValue;
+
+        // finde Element "vorname"
+        let nodesVorname = xmlDoc.getElementsByTagName("vorname");
+        let vorname = nodesVorname[0].childNodes[0].nodeValue;
+
+        // Ausgabe
+        console.log("Name: " + name + " / Vorname: " + vorname);
+    </script>
+</head>
+
+<body>
+    <h1>Beispiel: XML JavaScript Demo</h1>
+    <p>(Siehe Ausgabe in der Konsole)</p>
+</body>
+
+</html>

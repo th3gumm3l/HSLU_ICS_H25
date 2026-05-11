@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Beispiel: Stationssuche</title>
+    <meta charset="utf8">
+    <link href="webt.css" rel="stylesheet">
+    <script>
+        async function getStations() {
+            const url = '/backend_stations?' + 'station=' + document.getElementById('station').value;
+
+            try {
+                const response = await fetch(url, {
+                    method: 'GET',
+                    signal: AbortSignal.timeout(30000)
+                });
+                if (response.ok) {
+                    const result = JSON.parse(await response.text());
+                    updateStations(result);
+                } else {
+                    throw Error('fetch failed with status: ' + response.status);
+                }
+            } catch (error) {
+                alert('fetch failed: ' + error);
+            }            
+        }
+
+        function updateStations(response) {
+            let results = document.getElementById('results');
+            results.innerHTML = '<';
+            results.innerHTML = '<ul>';
+            for(station of response) {
+                results.innerHTML += '<li>' + station + '</li>';
+            }
+            results.innerHTML += '</ul>';
+        }
+    </script>
+</head>
+
+<body>
+    <header>
+        <h1>Beispiel: Stationssuche</h1>
+    </header>
+    <main>
+        <label for="station">Station:</label>
+        <input id="station" required>
+        <button onclick="getStations()">Anfrage</button>
+        <h2>Stationen:</h2>
+        <div id="results">noch keine Resultate</div>
+    </main>
+</body>
+
+</html>

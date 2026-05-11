@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Stationboard Example - Transport API</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="webt.css" />
+    <script type="text/javascript" src="autocomplete.js"></script>
+    <script type="text/javascript" src="stationboard.js"></script>
+    <script type="text/javascript" src="stationsearch.js"></script>
+  </head>
+  <body>
+    <main class="w3-container">
+      <section class="w3-row w3-col">
+        <header>
+          <h1><a href="../">Transport</a></h1>
+          <p>Swiss public transport API</p>
+        </header>
+
+        <article>
+          <h3>Stationboard Example</h3>
+          <form>
+            <div class="autocomplete">
+                <input
+                  class="w3-input"
+                  autocomplete="off"
+                  id="station"
+                  value="Zürich"
+                  placeholder="Station"                  
+                />
+              </div>
+          </form>  
+
+          <div class="media"></div>
+
+          <table id="stationboard" class="w3-table w3-striped">
+            <colgroup>
+              <col width="120" />
+              <col width="140" />
+              <col width="230" />
+            </colgroup>
+            <thead>
+              <tr>
+                <th align="left">Zeit</th>
+                <th align="left">Zugnummer</th>
+                <th align="left">Nach</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </article>
+
+        <footer class="footer">
+          <hr />
+          <p>API powered by <a href="https://transport.opendata.ch/">TransportOpendata.ch</a></p>
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>

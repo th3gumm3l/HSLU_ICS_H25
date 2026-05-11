@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf8">
+    <title>Beispiel: JSON JavaScript Demo</title>
+    <link href="webt.css" rel="stylesheet">
+    <script>
+        // JSON: von Objekt zu JSON-String
+        let person = {
+            name: "Muster",
+            vorname: "Hans",
+            adresse: "Musterstr. 23"
+        };
+
+        let personJSON = JSON.stringify(person);
+
+        console.log("as JSON string: " + personJSON);
+
+
+        // JSON: von JSON-String zu Objekt
+        personJSON = '{'
+            + '  "name" : "Muster", '
+            + '  "vorname" : "Hans", '
+            + '  "adresse" : "Musterstr. 23" '
+            + '}';
+
+        // lese JSON-Dokument ein
+        person = JSON.parse(personJSON);
+
+        console.log("Name: " + person.name + " / Vorname: " + person.vorname);
+    </script>
+</head>
+
+<body>
+    <h1>Beispiel: JSON JavaScript Demo</h1>
+    <p>(Siehe Ausgabe in der Konsole)</p>
+</body>
+
+</html>

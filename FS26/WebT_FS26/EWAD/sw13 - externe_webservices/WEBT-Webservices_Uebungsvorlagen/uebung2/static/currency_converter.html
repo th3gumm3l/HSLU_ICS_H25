@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf8">
+    <title>Übung 2: Währungsumrechnung</title>
+    <style>
+        .input { margin: 10pt; }
+    </style>
+    <script>
+        async function convert() {
+            // TODO: obtain access key (free plan) from https://www.exchangeratesapi.io
+            const accessKey = "...";
+
+            // Extract amount and currency from HTML
+            const toCurrency = document.getElementById("to").value;
+            const number = document.getElementById('number').value;
+
+            // TODO: Create URL to external web service
+            const url = "";
+            try {
+                const response = await fetch(url, {
+                    method: 'GET',
+                    signal: AbortSignal.timeout(10000)
+                });
+
+                if (response.ok) {
+                    const responseText = await response.text();
+                    const body = JSON.parse(responseText);
+                    // TODO: obtain rate, calculate new amount (rate * amount) and display in HTML
+
+                } else {
+                    throw Error(`request did not error success code ${response.status}`);
+                }
+            } catch (error) {
+                alert('Request failed: ' + error.message);
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Übung 2: Währungsumrechnung</h1>
+    <label for="amount">Betrag:</label> <input class="input" id="number" name="amount" type="number" /><br>
+    <p>Quellwährung: EUR</p>
+    <label name="to">Zielwährung:</label> <select class="input" id="to" name="to">
+        <option value="GBP">British Pound</option>
+        <option value="USD">Dollar</option>
+        <option value="EUR">Euro</option>
+        <option value="CHF">Swiss Franc</option>
+    </select><br>
+    <button onclick="convert()">Umrechnen</button>
+    <p>Umgerechneter Betrag: <span id="result"></span></p>
+</body>
+
+</html>
