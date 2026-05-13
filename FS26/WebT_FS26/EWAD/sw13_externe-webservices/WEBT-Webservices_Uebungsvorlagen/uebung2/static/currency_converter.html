@@ -10,14 +10,15 @@
     <script>
         async function convert() {
             // TODO: obtain access key (free plan) from https://www.exchangeratesapi.io
-            const accessKey = "...";
+            const accessKey = "YOUR_ACCESS_KEY_HERE";
 
             // Extract amount and currency from HTML
             const toCurrency = document.getElementById("to").value;
             const number = document.getElementById('number').value;
 
-            // TODO: Create URL to external web service
-            const url = "";
+            // Create URL to external web service
+            // Note: the free plan only supports HTTP (not HTTPS) and the base currency is locked to EUR.
+            const url = `http://api.exchangeratesapi.io/v1/latest?access_key=${accessKey}&symbols=${toCurrency}&base=EUR`;
             try {
                 const response = await fetch(url, {
                     method: 'GET',
@@ -27,8 +28,14 @@
                 if (response.ok) {
                     const responseText = await response.text();
                     const body = JSON.parse(responseText);
-                    // TODO: obtain rate, calculate new amount (rate * amount) and display in HTML
-
+                    // Obtain rate, calculate new amount (rate * amount) and display in HTML
+                    if (body.success === false) {
+                        throw Error(body.error?.info || 'API returned an error');
+                    }
+                    const rate = body.rates[toCurrency];
+                    const converted = rate * Number(number);
+                    document.getElementById('result').textContent =
+                        `${converted.toFixed(2)} ${toCurrency} (Kurs: 1 EUR = ${rate} ${toCurrency})`;
                 } else {
                     throw Error(`request did not error success code ${response.status}`);
                 }
