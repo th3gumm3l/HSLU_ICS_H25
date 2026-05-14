@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <title>Rundenzeit-Tracker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+<header>
+    <nav class="w3-bar w3-light-grey">
+        <a href="#info" class="w3-bar-item w3-button w3-mobile">Information</a>
+        <a href="#eingabe" class="w3-bar-item w3-button w3-mobile">Eingabebereich</a>
+        <a href="#ausgabe" class="w3-bar-item w3-button w3-mobile">Ausgabebereich</a>
+    </nav>
+</header>
+
+<main>
+    <section id="info" class="w3-container">
+        <p>Willkommen beim Rundenzeit-Tracker. Gib deinen Namen, die Streckenbedingung und deine Rundenzeit ein und klicke auf Absenden, um deine Runde zu speichern.</p>
+        <img src="img/img.png" alt="Nürburgring" class="w3-image">
+    </section>
+
+    <div class="w3-row">
+        <div class="w3-col s12 m12 l6 col-pad">
+            <section id="eingabe" class="w3-container">
+                <form>
+                    <label for="fahrer">Fahrer</label>
+                    <input type="text" class="w3-input" id="fahrer" required
+                           oninput="onInputFahrer()"/>
+                    <p id="errorFahrer" class="w3-text-red"></p>
+
+                    <label for="streckenbedingung">Wähle die Streckenbedingung</label>
+                    <select class="w3-select" id="streckenbedingung" required
+                            oninput="onInputStreckenbedingung()">
+                        <option value="">-- Bitte wählen --</option>
+                        <option value="1">Trocken</option>
+                        <option value="2">Feucht</option>
+                        <option value="3">Nass</option>
+                    </select>
+                    <p id="errorStreckenbedingung" class="w3-text-red"></p>
+
+                    <label for="rundenzeit">Rundenzeit in Min</label>
+                    <input type="number" class="w3-input" id="rundenzeit" required min="0"
+                           oninput="onInputRundenzeit()"/>
+                    <p id="errorRundenzeit" class="w3-text-red"></p>
+
+                    <button type="button" onclick="absenden()" class="w3-button w3-light-grey">Absenden</button>
+                </form>
+            </section>
+        </div>
+
+        <div class="w3-col s12 m12 l6 col-pad">
+            <section id="ausgabe" class="w3-container">
+                <p id="durchschnittAnzeige"></p>
+                <canvas id="rundenCanvas" width="800" height="250"></canvas>
+                <table class="w3-table w3-striped w3-bordered w3-hoverable">
+                    <thead class="w3-light-grey">
+                    <tr>
+                        <th>Fahrer</th>
+                        <th>Streckenbedingung</th>
+                        <th>Rundenzeit (Min)</th>
+                        <th>Aktion</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tabelleBody">
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </div>
+</main>
+
+<script src="js/canvas.js"></script>
+<script src="js/formular.js"></script>
+</body>
+</html>
