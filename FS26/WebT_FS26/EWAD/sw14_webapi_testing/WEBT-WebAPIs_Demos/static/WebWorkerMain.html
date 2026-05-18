@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Fibonacci - WebWorker</title>
+        <link href="webt.css" rel="stylesheet">
+    </html>
+    <body>
+        <label>Berechne Fib(n) mit n = </label><input id="n">
+        <button onclick="fib()">Start</button>
+        <p id="output"><p>
+        <script>
+            function fib() {
+                // create new Web Worker
+                const w = new Worker("WebWorkerChild.js");
+
+                // assign Web Worker to calculate fib(n)
+                const work = document.getElementById("n").value;                
+                w.postMessage(work);
+
+                // output the result
+                w.onmessage = function(event) {
+                    const output = document.getElementById("output");
+                    output.innerHTML += event.data + "<br>";
+                    event.currentTarget.terminate();
+                }
+            }
+        </script>
+    </body>
+</html>

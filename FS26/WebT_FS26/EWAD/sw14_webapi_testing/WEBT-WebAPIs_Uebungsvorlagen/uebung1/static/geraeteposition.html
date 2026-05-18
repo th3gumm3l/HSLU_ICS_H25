@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Übung 1: Geräteposition</title>
+    <meta charset="utf8">
+    <script>
+        function zeigePosition(position) {
+            // TODO: Zeigen Sie die Position in den entsprechenden Feldern
+
+
+            // TODO: Passen Sie den Link zu Google Maps an
+
+        }
+
+        function zeigeFehler(error) {
+            let text;
+            switch (error.code) {
+                case error.PERMISSION_DENIED: text = "Benutzer verweigert Zugriff"; break;
+                case error.TIMEOUT: text = "Wartezeit überschritten"; break;
+                case error.POSITION_UNAVAILABLE: text = "Position nicht verfügbar"; break;
+                default: text = "Unbekannter Fehler aufgetreten";
+            }
+            document.getElementById("latitude").innerHTML = text;
+        }
+
+        function show() {
+            // TODO: Übergeben Sie die Funktionen zeigePosition und zeigeFehler als Parameter
+            navigator.geolocation.getCurrentPosition();
+        }
+    </script>
+</head>
+
+<body>
+    <h2>Die aktuelle Geräteposition</h2>
+    <p>Breite:<span id="latitude"></span></p>
+    <p>Länge:<span id="longitude"></span></p>
+    <p>
+        <a id="maps" href="https://google.ch/maps">Zeige Position auf Google Maps</a>
+    </p>
+    <button onclick="show()">Abfragen der aktuellen Geräteposition</button>
+</body>
+
+</html>

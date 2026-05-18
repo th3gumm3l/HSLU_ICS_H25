@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Beispiel: Einmalige Positionsbestimmung</title>
+    <meta charset="utf8">
+    <link href="webt.css" rel="stylesheet">
+</head>
+
+<body>
+    <h1>Beispiel: Einmalige Positionsbestimmung</h1>
+    <p id="output"></p>
+    <script>
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, handleError);
+            } else {
+                let output = document.getElementById('output');
+                output.innerHTML = 'Geolocation-Funktionalität nicht unterstützt';
+            }
+        }
+
+        function showPosition(position) {
+            let output = document.getElementById('output');
+            output.innerHTML += 'Aktuelle Position:<br>Breite: ' + position.coords.latitude + ' / Länge: ' + position.coords.longitude;
+        }
+
+        function handleError(error) {
+            let text;
+            if (error.code == error.PERMISSION_DENIED) {
+                text = "Benutzer verweigert Zugriff";
+            } else if (error.code == error.TIMEOUT) {
+                text = "Wartezeit überschritten";
+            } else if (error.code == error.POSITION_UNAVAILABLE) {
+                text = "Position nicht verfügbar";
+            } else {
+                text = "Unbekannter Fehler";
+            }
+            document.getElementById("output").innerHTML = text;
+        }
+
+
+        getLocation();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Web Storage - DEMO</title>
+    <meta charset="utf8">
+    <link href="webt.css" rel="stylesheet">
+</head>
+
+<body>
+    <label for="getKey">Key:</label>
+    <input id="getKey" name="key">
+    <label for="getValue">Wert:</label>
+    <output id="getValue" name="wert"></output><br>
+    
+    <button onclick="abfragen()">Abfragen</button>
+
+    <hr />
+
+    <label for="setKey">Key:</label>
+    <input id="setKey" name="key">
+    <label for="setValue">Wert:</label>
+    <input id="setValue" name="wert"><br>
+
+    <button onclick="setzen()">Setzen</button>
+
+    <script>
+        function setzen() {
+            let key = document.getElementById("setKey").value;
+            let wert = document.getElementById("setValue").value;
+            localStorage.setItem(key, wert);
+        }
+
+        function abfragen() {
+            let key = document.getElementById("getKey").value;
+            let wert = localStorage.getItem(key);
+            document.getElementById("getValue").value = wert;
+        }
+    </script>
+</body>
+
+</html>

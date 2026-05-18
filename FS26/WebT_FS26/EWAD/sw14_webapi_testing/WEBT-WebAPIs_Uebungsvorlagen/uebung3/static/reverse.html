@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Reverse</title>
+        <meta charset="utf8">
+    <head>    
+    <body>
+        <p id="output"></p>
+        <script>
+            let w = new Worker("reverse.js");
+            w.postMessage("Web Technologies");
+            w.onmessage = function(event) {
+                let output = document.getElementById("output");
+                output.innerHTML += event.data + "<br>";
+            }
+        </script>
+    </body>
+</html>

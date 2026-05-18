@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Web Storage - Limits</title>
+    <meta charset="utf8">
+    <link href="webt.css" rel="stylesheet">
+</head>
+
+<body>
+    <p>Approximate memory usage: <span id="usage">0</span></p>
+    <script>
+        // delete all entries
+        localStorage.clear();
+
+        // generate large string (10000 bytes)
+        let i = 0;
+        largeString = "";
+        for (let i = 0; i < 10000; ++i) {
+            largeString += "1";
+        }
+
+        // generate new entries until error occurs
+        let j = 0;
+        while (true) {
+            localStorage.setItem('w' + j, largeString);
+            document.getElementById('usage').innerHTML = Math.round((j * 10000) / 1024, 0) + " kb";
+            j++;
+        }
+    </script>
+</body>
+
+</html>

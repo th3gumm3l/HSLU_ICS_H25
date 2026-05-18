@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>WebSocket - Echo Client</title>
+    <meta charset="utf8">
+    <link href="webt.css" rel="stylesheet">
+</head>
+
+<body>
+    <label for="text">Mitteilung:</label>
+    <input id="text" name="text">
+
+    <button onclick="openSocket()">Öffnen</button>
+    <button onclick="send()">Senden</button>
+    <button onclick="closeSocket()">Schliessen</button>
+    
+    <p id="output"></p>
+
+    <script>
+        let socket = null;  // reference to WebSocket object
+        let init = false;   // true, if socket is ready
+
+        function openSocket() {
+            // connect socket to address
+            socket = new WebSocket("ws://localhost:8082");
+
+            // define event handlers
+            socket.onerror = error;      // called when an error occurs
+            socket.onopen = ready;       // called when socket is ready
+            socket.onmessage = receive;  // called when a message is received
+        }
+
+        function error() {
+            alert("An error occurred");
+        }
+
+        function ready(event) {
+            init = true;
+        }
+
+        function closeSocket() {
+            init = false;
+            socket.close();
+            socket = null;
+        }
+
+        function receive(event) {
+            let message = event.data;
+
+            // append message to output
+            let output = document.getElementById("output");
+            output.innerHTML += "Server response: " + event.data + "<br>";
+        }
+
+        function send() {
+            // check if initialized
+            if (!init) {
+                alert("Socket nicht initialisiert");
+                return;
+            }
+
+            // get message from input and send
+            let message = document.getElementById("text").value;
+            socket.send(message);
+        }
+    </script>
+
+</body>
+
+</html>

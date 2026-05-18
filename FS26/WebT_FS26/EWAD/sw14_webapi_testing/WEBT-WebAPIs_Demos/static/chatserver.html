@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>WebSocket - Chatserver</title>
+    <meta charset="utf8">
+    <link href="webt.css" rel="stylesheet">
+</head>
+
+<body>
+    <label for="username">Benutzername:</label>
+    <input id="username" name="username"><br/>
+    <label for="text">Mitteilung:</label>
+    <input id="text" name="text">
+
+    <button onclick="openSocket()">Öffnen</button>
+    <button onclick="send()">Senden</button>
+    <button onclick="closeSocket()">Schliessen</button>
+    
+    <p id="output"></p>
+
+    <script>
+        let socket = null;  // Referenz auf Socket-Objekt
+        let init = false;   // true, falls Socket bereit
+
+        function openSocket() {
+            let output = document.getElementById("output");
+            output.innerHTML = "";
+
+            // Socket mit Addresse verbinden
+            socket = new WebSocket("ws://localhost:8081");
+
+            // Definiere Eventhandler (Funktionen in nachfolgenden Slides) 
+            socket.onerror = error;      // Aufgerufen, wenn Fehler auftritt
+            socket.onopen = ready;       // Aufgerufen, sobald Socket bereit
+            socket.onmessage = receive;  // Aufgerufen, bei Nachrichtenempfang
+        }
+
+        function error() {
+            alert("Fehler aufgetreten");
+        }
+
+        function ready(event) {
+            init = true;
+            let username = document.getElementById("username").value;
+            if (username) {
+                // Sofort wenn wir verbunden sind, schicke eine Nachricht mit
+                // dem Namen des Nutzers. Die Nachricht wird als JSON-codiertes
+                // Objekt verschickt
+                socket.send(JSON.stringify({username: username}));
+            }
+        }
+
+        function closeSocket() {
+            init = false;
+            socket.close();
+            socket = null;
+        }
+
+        function receive(event) {
+            // Der WebSocket chatserver schickt die Nachrichten von anderen
+            // Benutzern als Plaintext, der direkt dargestellt werden kann
+            let message = event.data;
+
+            // Ausgabe
+            let output = document.getElementById("output");
+            output.innerHTML += event.data + "<br>";
+        }
+
+        function send() {
+            // Überprüfe, ob initialisiert
+            if (!init) {
+                alert("Socket nicht initialisiert");
+                return;
+            }
+
+            // Nachricht des Benutzers auslesen
+            let message = document.getElementById("text").value;
+            // Nachrichten werden als JSON-codierte Objekte mit dem Attribut
+            // 'message' an den Chatserver geschickt.
+            socket.send(JSON.stringify({message: message}));
+        }
+    </script>
+
+</body>
+
+</html>
